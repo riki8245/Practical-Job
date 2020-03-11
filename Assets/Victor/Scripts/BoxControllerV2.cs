@@ -13,7 +13,7 @@ public class BoxControllerV2 : MonoBehaviour
     [SerializeField] Transform b_rayCastLeft;
     [SerializeField] Transform b_rayCastFront;
     [SerializeField] Transform b_rayCastBack;
-    [Range(0.0f, 10.0f)] public float b_speed;
+    [Range(0.0f, 100.0f)] public float b_speed;
 
 
     RaycastHit b_hitFirstPoint;
@@ -22,8 +22,8 @@ public class BoxControllerV2 : MonoBehaviour
     Vector3 b_desiredRotation;
 
     [SerializeField] bool b_onSlope;
-    private bool b_rotating;
-    float timer = 0f;
+    private bool b_rotationInProgress;
+    float lerpTime;
 
     // Start is called before the first frame update
 
@@ -34,13 +34,14 @@ public class BoxControllerV2 : MonoBehaviour
     void Start()
     {
         b_onSlope = false;
+        b_rotationInProgress = false;
+        lerpTime = 0f;
     }
 
     // Update is called once per frame
     void Update()
     {
     
-        RotationByPlane();
         /*if (b_rotating)
         {
             timer += Time.deltaTime;
@@ -61,6 +62,8 @@ public class BoxControllerV2 : MonoBehaviour
         b_Movement = -transform.forward * 5f * Time.deltaTime;
       
         SetGravity();
+        RotationByPlane();
+
 
         b_Controller.Move(b_Movement);
     }
@@ -71,70 +74,92 @@ public class BoxControllerV2 : MonoBehaviour
         {
             if (Physics.Raycast(b_rayCastRight.position, -transform.up, out b_hitFirstPoint))
             {
-                //normalHitFirst = hitFirstPoint.normal;
                 Debug.DrawRay(b_rayCastRight.position, transform.up);
+                //normalHitFirst = hitFirstPoint.normal;
                 //transform.rotation = Quaternion.FromToRotation(Vector3.up, hitFirstPoint.normal);
             }
             if (Physics.Raycast(b_rayCastLeft.position, -transform.up, out b_hitSecondPoint))
             {
-                //normalHitSecond = hitFirstPoint.normal;
                 Debug.DrawRay(b_rayCastLeft.position, transform.up);
+                //normalHitSecond = hitFirstPoint.normal;
                 //transform.rotation = Quaternion.FromToRotation(Vector3.up, hitSecondPoint.normal);
             }
         }
 
         else if (Mathf.Abs(b_Controller.velocity.z) >= 1f)
         {
-            if (Physics.Raycast(b_rayCastBack.position, -transform.up, out b_hitFirstPoint))
+            if (Physics.Raycast(b_rayCastBack.position, -transform.up, out b_hitFirstPoint)) //Return normal of plane
             {
-                //normalHitFirst = hitFirstPoint.normal;
                 Debug.DrawRay(b_rayCastBack.position, transform.up);
+                //normalHitFirst = hitFirstPoint.normal;
                 //transform.rotation = Quaternion.FromToRotation(Vector3.up, hitFirstPoint.normal);
             }
-            if (Physics.Raycast(b_rayCastFront.position, -transform.up, out b_hitSecondPoint))
+            if (Physics.Raycast(b_rayCastFront.position, -transform.up, out b_hitSecondPoint)) //Return normal of plane
             {
-                //normalHitSecond = hitFirstPoint.normal;
                 Debug.DrawRay(b_rayCastFront.position, transform.up);
+                //normalHitSecond = hitFirstPoint.normal;
                 //transform.rotation = Quaternion.FromToRotation(Vector3.up, hitSecondPoint.normal);
             }
         }
 
-        if (b_hitFirstPoint.normal != b_hitSecondPoint.normal && !b_onSlope)
+
+        if (b_hitFirstPoint.normal != b_hitSecondPoint.normal && !b_onSlope) //Both plane normal != 
         {
+            print("Normal Changed");
             b_onSlope = true;
-            b_rotating = true;
+            b_rotationInProgress = true;
+            lerpTime = 0f;
 
-            if(b_hitFirstPoint.normal != Vector3.left && b_hitFirstPoint.normal != Vector3.right
-                && b_hitSecondPoint.normal != Vector3.left && b_hitSecondPoint.normal != Vector3.right)
+            //if (b_hitFirstPoint.normal != Vector3.up)
+            //{
+            //    transform.rotation = Quaternion.FromToRotation(transform.up, b_hitFirstPoint.normal,);
+            //    //transform.rotation = Quaternion.Lerp(Quaternion.Euler(this.transform.up), Quaternion.Euler(b_hitFirstPoint.normal), 0.2f);
+            //    //transform.rotation = Quaternion.RotateTowards(Quaternion.Euler(transform.up), Quaternion.Euler(b_hitFirstPoint.normal), b_speed);
+            //    //b_desiredRotation = b_hitFirstPoint.normal;
+            //}
+            //else
+            //{
+            //    transform.rotation = Quaternion.FromToRotation(transform.up, b_hitSecondPoint.normal);
+            //    //transform.rotation = Quaternion.Lerp(Quaternion.Euler(transform.up), Quaternion.Euler(b_hitSecondPoint.normal), Time.deltaTime* b_speed);
+            //    //transform.rotation = Quaternion.RotateTowards(Quaternion.Euler(transform.up), Quaternion.Euler(b_hitSecondPoint.normal), b_speed);
+            //    //b_desiredRotation = b_hitSecondPoint.normal;
+            //}
+            if (b_hitFirstPoint.normal != Vector3.up)
             {
-                if (b_hitFirstPoint.normal != new Vector3(0f, 1f, 0f))
-                {
-                    transform.rotation = Quaternion.FromToRotation(transform.up, b_hitFirstPoint.normal);
-                    //transform.rotation = Quaternion.Lerp(Quaternion.Euler(transform.up), Quaternion.Euler(b_hitFirstPoint.normal), Time.deltaTime * b_speed);
-                    //transform.rotation = Quaternion.RotateTowards(Quaternion.Euler(transform.up), Quaternion.Euler(b_hitFirstPoint.normal), b_speed);
-                    //b_desiredRotation = b_hitFirstPoint.normal;
-                }
-                else
-                {
-                    transform.rotation = Quaternion.FromToRotation(transform.up, b_hitSecondPoint.normal);
-                    //transform.rotation = Quaternion.Lerp(Quaternion.Euler(transform.up), Quaternion.Euler(b_hitSecondPoint.normal), Time.deltaTime* b_speed);
-                    //transform.rotation = Quaternion.RotateTowards(Quaternion.Euler(transform.up), Quaternion.Euler(b_hitSecondPoint.normal), b_speed);
-                    //b_desiredRotation = b_hitSecondPoint.normal;
-
-                }
+                Debug.Log("Entra 1");
+                //transform.rotation = Quaternion.FromToRotation(this.transform.rotation,Quaternion.Euler(Vector3.Lerp(transform.up, b_hitFirstPoint.normal, Time.deltaTime));
+                //transform.rotation.SetEulerAngles(Vector3.Lerp(transform.up, b_hitFirstPoint.normal, b_speed * Time.deltaTime));
+                //transform.rotation = Quaternion.Slerp(Quaternion.Euler(this.transform.up), Quaternion.Euler(b_hitFirstPoint.normal), Time.deltaTime);
+                transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.FromToRotation(transform.up, b_hitFirstPoint.normal),
+                    Time.deltaTime * Mathf.Abs(b_Controller.velocity.sqrMagnitude) * b_speed);
+                //transform.rotation = Quaternion.FromToRotation(transform.up, b_hitFirstPoint.normal);
+                //transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.Euler(b_hitFirstPoint.normal), lerpTime);
+                //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(b_hitFirstPoint.normal), Time.deltaTime * b_speed);
+                //b_desiredRotation = b_hitFirstPoint.normal;
             }
-            
+            else
+            {
+                Debug.Log("Entra 2");
+
+                transform.rotation = Quaternion.Euler(Vector3.Lerp(transform.up, b_hitSecondPoint.normal, Time.deltaTime));
+
+                //transform.rotation = Quaternion.FromToRotation(transform.up, b_hitSecondPoint.normal);
+                //transform.rotation = Quaternion.RotateTowards(Quaternion.Euler(transform.up), Quaternion.Euler(b_hitSecondPoint.normal), b_speed);
+                //b_desiredRotation = b_hitSecondPoint.normal;
+
+            }
 
         }
+
         else if (b_hitFirstPoint.normal == b_hitSecondPoint.normal)
         {
             if (b_hitFirstPoint.normal == Vector3.up)
             {
                 b_onSlope = false;
-                b_rotating = false;
-                //transform.rotation = Quaternion.FromToRotation(Vector3.up, b_hitFirstPoint.normal);
+                transform.rotation = Quaternion.Slerp(this.transform.rotation,Quaternion.FromToRotation(Vector3.up, b_hitFirstPoint.normal),
+                    Time.deltaTime * Mathf.Abs(b_Controller.velocity.sqrMagnitude)* .1f);
                 //this.transform.rotation = Quaternion.RotateTowards(Quaternion.Euler(transform.up), Quaternion.Euler(b_hitFirstPoint.normal),b_speed);
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(b_hitFirstPoint.normal), Time.deltaTime * b_speed);
+                //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(b_hitFirstPoint.normal), Time.deltaTime * b_speed);
 
                 //StartCoroutine("FlyRotation");
                 //b_desiredRotation = b_hitFirstPoint.normal;
@@ -157,12 +182,14 @@ public class BoxControllerV2 : MonoBehaviour
 
     private void OnGUI()
     {
-        GUI.Label(new Rect(10, 30, 500, 100), "Normal" + b_hitFirstPoint.normal + " Normal2: " + b_hitSecondPoint.normal);
-        GUI.Label(new Rect(10, 30, 500, 100), "Normal del cubo" + -transform.up);
+        GUI.Label(new Rect(10, 10, 500, 100), "Normal" + b_hitFirstPoint.normal + " Normal2: " + b_hitSecondPoint.normal);
+        GUI.Label(new Rect(10, 40, 500, 100), "Normal del cubo" + -transform.up);
+        GUI.Label(new Rect(10, 70, 500, 100), "Rotating " + b_rotationInProgress);
+        GUI.Label(new Rect(10, 100, 500, 100), "OnSlope " + b_onSlope);
 
-        GUI.Label(new Rect(60, 100, 500, 100), "Velocity X: " + Mathf.Abs(b_Controller.velocity.x));
-        GUI.Label(new Rect(60, 120, 500, 100), "Velocity Z: " + Mathf.Abs(b_Controller.velocity.z));
-        GUI.Label(new Rect(60, 140, 500, 100), "On slope: " + b_onSlope);
+
+        GUI.Label(new Rect(10, 130, 500, 100), "Velocity X: " + Mathf.Abs(b_Controller.velocity.x));
+        GUI.Label(new Rect(10, 160, 500, 100), "Velocity Z: " + Mathf.Abs(b_Controller.velocity.z));
 
 
 
