@@ -11,7 +11,9 @@ public class BoxController : MonoBehaviour
     [SerializeField]float b_timeHold;
     private Vector3 b_Direction;
     private float b_SpeedTimeCounter = 0f;
-    bool b_PushedOrPulled;
+    bool b_pushedOrPulled;
+    bool p_grabableObject;
+
     Vector3 normalhit;
 
 
@@ -21,6 +23,7 @@ public class BoxController : MonoBehaviour
         b_RigidBody = this.GetComponent<Rigidbody>();
         b_timeHold = 0f;
         b_Direction = new Vector3();
+
     }
     // Start is called before the first frame update
     void Start()
@@ -28,6 +31,7 @@ public class BoxController : MonoBehaviour
         b_RigidBody.constraints = RigidbodyConstraints.FreezeRotationY;
         b_RigidBody.constraints = RigidbodyConstraints.FreezeRotationX;
         b_RigidBody.constraints = RigidbodyConstraints.FreezeRotationZ;
+
 
     }
 
@@ -58,9 +62,15 @@ public class BoxController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (b_pushedOrPulled)
+        {
+            transform.Translate(transform.right * Time.deltaTime);
+        }
+        
+
+
         //b_RigidBody.MovePosition(transform.position + Vector3.left * Time.deltaTime);
         //b_RigidBody.velocity = Vector3.left * Time.deltaTime * 100;
-        transform.Translate(transform.right * Time.deltaTime);
         //Vector3.ProjectOnPlane()
 
         //RaycastHit hit;
@@ -150,24 +160,18 @@ public class BoxController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    */
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if(other.tag == "Player")
+        if (hit.collider.CompareTag("Player"))
         {
-            b_activePlayer = other.gameObject;
-            b_Movable = true;
+            if (Input.GetButtonDown("Fire1") && p_grabableObject)
+            {
+                p_grabableObject = false;
+            }
         }
     }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            if (!other.GetComponent<PlayerController>().p_PushingOrPulling) {
-                b_Movable = false;
-            }
-
-        }
-    }*/
 
     private void OnGUI()
     {

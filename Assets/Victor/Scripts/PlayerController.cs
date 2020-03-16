@@ -6,168 +6,139 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    [SerializeField]
-    float p_Speed;
-    [SerializeField] float p_Gravity;
-    [SerializeField] float p_AxisXMove;
-    [SerializeField] float p_AxisZMove;
-    [SerializeField] float p_fallVelocity;
+    float p_horizontalMove;
+    float p_verticalMove;
+    float p_timeMovingObject;
+    float p_fallVelocity;
 
+    public int axisToUseWhileBox = 0;
 
-    public bool p_CanGrabObject;
+    public float p_gravity;
+    public float p_Speed;
+
     public bool p_PushingOrPulling;
-    public Vector3 b_ForceDirection;
-    public Vector3 p_PositionOffset;
+    public bool p_CanMoveBox;
+
 
     CharacterController p_Controller;
+    Camera mainCamera;
+    RaycastHit hit;
+    Animator p_animator;
 
-    public Vector3 p_Move;
-    public bool p_AxisXMoveEnable;
-    public bool p_AxisZMoveEnable;
+    public Vector3 p_moveDirection;
+    private Vector3 p_input;
+    private Vector3 camForward;
+    private Vector3 camRight;
 
     private void Awake()
     {
         p_Controller = this.GetComponent<CharacterController>();
+        //p_animator = this.GetComponent<Animator>();
         p_Speed = 3.5f;
-        p_Gravity = 1f;
-        p_AxisXMove = 0f;
-        p_AxisZMove = 0f;
-        p_Move = new Vector3();
-        b_ForceDirection = new Vector3();
-        p_PositionOffset = new Vector3();
-        p_AxisXMoveEnable = true;
-        p_AxisZMoveEnable = true;
+        p_gravity = 35f;
+        p_moveDirection = Vector3.zero;
+        mainCamera = Camera.main;
     }
     void Start()
     {
+        p_CanMoveBox = false;
+        p_horizontalMove = 0f;
+        p_verticalMove = 0f;
+        p_timeMovingObject = 0f;
+        CamDirection();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        p_horizontalMove = Input.GetAxis("Horizontal");
+        p_verticalMove = Input.GetAxis("Vertical");
+        CheckIfCanMoveBox();
+        MovePlayer();
     }
 
-    private void FixedUpdate()
+    private void CheckIfCanMoveBox()
     {
-        p_AxisXMove = 0f;
-        p_AxisZMove = 0f;
-        if (p_AxisXMoveEnable) { p_AxisXMove = Input.GetAxisRaw("Horizontal"); }
-        if (p_AxisZMoveEnable) { p_AxisZMove = Input.GetAxisRaw("Vertical"); }
-        
-        CheckIfMovableBox();
-        MovePlayer();        
-
-    }
-
-    private void CheckIfMovableBox()
-    {
-      
-        //Ray Cast
-
-        int layerMask = LayerMask.GetMask("Boxes");       
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, .5f, layerMask) &&
-            GetCharacterDirectionFace())
+        //Ray Cast which provides info of what it is in front player
+        int layerMask = LayerMask.GetMask("Boxes");
+        Debug.DrawRay(transform.position, transform.forward * 1000, Color.yellow);
+        if (Physics.Raycast(transform.position, transform.forward, out hit, .1f, layerMask))
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-            Debug.Log("Box Hit");
-            p_CanGrabObject = true;
+            p_CanMoveBox = (Vector3.Angle(hit.normal, -transform.forward)) <= 45f ? true : false;
         }
         else
-        {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
-            Debug.Log("Box not Hit");
-            p_CanGrabObject = false;
+            p_CanMoveBox = false;
+                
 
-        }
     }
 
     private void MovePlayer()
     {
-        p_Move = new Vector3(p_AxisXMove, 0f, p_AxisZMove);
-        p_Move = p_Move.normalized * p_Speed * Time.deltaTime;
-        if (p_Move != Vector3.zero && !p_PushingOrPulling)
-        {
-            transform.rotation = Quaternion.LookRotation(p_Move);
-        }
-        SetGravity();
+        p_input = new Vector3(p_horizontalMove, 0f, p_verticalMove);
+        p_input = p_input.normalized;
 
-        p_Controller.Move(p_Move);
+
+        p_moveDirection = p_input.x * camRight + p_input.z * camForward;
+        p_moveDirection *= p_Speed;
+
+        if (p_moveDirection != Vector3.zero && !p_PushingOrPulling)
+            p_Controller.transform.LookAt(p_Controller.transform.position + p_moveDirection);
+        else if(p_PushingOrPulling)
+            MovingObject();
+
+        SetGravity();
+        p_Controller.Move(p_moveDirection * Time.deltaTime);
+        //p_animator.SetFloat("velocity", Mathf.Abs(p_horizontalMove) + Mathf.Abs(p_verticalMove));
+        
+
     }
 
     private void SetGravity()
     {
         if (p_Controller.isGrounded)
         {
-            p_fallVelocity = -p_Gravity * Time.deltaTime;
-            p_Move.y = p_fallVelocity;
+            p_fallVelocity = -p_gravity * Time.deltaTime;
+            p_moveDirection.y = p_fallVelocity;
         }
+
         else
         {
-            p_fallVelocity -= p_Gravity * Time.deltaTime;
-            p_Move.y = p_fallVelocity;
+            p_fallVelocity -= p_gravity * Time.deltaTime;
+            p_moveDirection.y = p_fallVelocity;
         }
     }
 
-    private void LateUpdate()
+    private void CamDirection() // Direction where camera looks
     {
-        p_PositionOffset = transform.position;   
+        camForward = mainCamera.transform.forward;
+        camRight = mainCamera.transform.right;
+        camForward.y = 0;
+        camRight.y = 0;
+        camForward = camForward.normalized;
+        camRight = camRight.normalized; ;
     }
-    public bool GetCharacterDirectionFace()
+
+    private void MovingObject()
     {
-        Vector3 p_FaceDirection = transform.forward;
-        p_FaceDirection.y = 0;
-        p_FaceDirection.Normalize();
+        if (p_PushingOrPulling)
+        {
+            if (axisToUseWhileBox == 1)
+                p_moveDirection = Vector3.right * (p_horizontalMove > 0f ? 1 : p_horizontalMove < 0f? -1 :  0) * p_Speed;
+            else
+                p_moveDirection = Vector3.forward * (p_verticalMove > 0f ? 1 : p_verticalMove < 0f ? -1 : 0) * p_Speed;
 
-
-        if (Vector3.Angle(p_FaceDirection, Vector3.forward) <= 3f)
-        {
-            b_ForceDirection = new Vector3(0, 0, 1);
-            return true;
         }
-        if (Vector3.Angle(p_FaceDirection, Vector3.back) <= 3f)
-        {
-            b_ForceDirection = new Vector3(0, 0, -1);
-            return true;
-        }
-        if (Vector3.Angle(p_FaceDirection, Vector3.right) <= 3f)
-        {
-            b_ForceDirection = new Vector3(1, 0, 0);
-            return true;
-        }
-        if (Vector3.Angle(p_FaceDirection, Vector3.left) <= 3f)
-        {
-            b_ForceDirection = new Vector3(-1, 0, 0);
-            return true;
-        }
-
-        b_ForceDirection = Vector3.zero;
-        return false;
     }
-
-    void OnControllerColliderHit(ControllerColliderHit hit)
+    private void OnGUI()
     {
-        Rigidbody body = hit.collider.attachedRigidbody;
+        GUIStyle guiStyle = new GUIStyle(); //create a new variable
+        guiStyle.fontSize = 30;
+        //GUI.Label(new Rect(10, 100, 500, 100), "Direccion jugador" + transform.forward, guiStyle);
+        //GUI.Label(new Rect(10, 150, 500, 100), "Direccion cámara" + camForward, guiStyle);
+        GUI.Label(new Rect(10, 200, 500, 100), "Pushing" + p_PushingOrPulling, guiStyle);
 
-        // no rigidbody
-        if (body == null || body.isKinematic)
-            return;
 
-        // We dont want to push objects below us
-        if (hit.moveDirection.y < -0.3f)
-            return;
 
-        // Calculate push direction from move direction,
-        // we only push objects to the sides never up and down
-        Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
-
-        // If you know how fast your character is trying to move,
-        // then you can also multiply the push velocity by that.
-
-        // Apply the push
-        body.velocity = pushDir * 2f;
     }
-
 }
