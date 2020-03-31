@@ -5,6 +5,7 @@ public class BoxController : MonoBehaviour
     CharacterController b_Controller;
     Vector3 b_moveDirection;
     PlayerController playerController;
+    CameraAdjust cameraAdjust;
 
     private float b_horizontalMove;
     private const float b_Speed = 3.5f;
@@ -77,6 +78,9 @@ public class BoxController : MonoBehaviour
                     b_moveDirection = Vector3.right * (b_horizontalMove > 0f ? 1 : b_horizontalMove < 0f ? -1 : 0) * b_Speed;
                 else if (playerController.axisToUseWhileBox == 2)
                     b_moveDirection = Vector3.forward * (b_verticalMove > 0f ? 1 : b_verticalMove < 0f ? -1 : 0) * b_Speed;
+
+
+                
             }
             if(Input.GetButtonUp("Fire1"))
             {

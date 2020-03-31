@@ -21,14 +21,13 @@ public class PlayerController : MonoBehaviour
 
 
     CharacterController p_Controller;
-    Camera mainCamera;
     RaycastHit hit;
     Animator p_animator;
+    public CameraAdjust cameraAdjust;
 
     public Vector3 p_moveDirection;
     private Vector3 p_input;
-    private Vector3 camForward;
-    private Vector3 camRight;
+    
 
     private void Awake()
     {
@@ -37,7 +36,6 @@ public class PlayerController : MonoBehaviour
         p_Speed = 3.5f;
         p_gravity = 35f;
         p_moveDirection = Vector3.zero;
-        mainCamera = Camera.main;
     }
     void Start()
     {
@@ -45,7 +43,6 @@ public class PlayerController : MonoBehaviour
         p_horizontalMove = 0f;
         p_verticalMove = 0f;
         p_timeMovingObject = 0f;
-        CamDirection();
 
     }
     void Update()
@@ -77,13 +74,20 @@ public class PlayerController : MonoBehaviour
         p_input = p_input.normalized;
 
 
-        p_moveDirection = p_input.x * camRight + p_input.z * camForward;
-        p_moveDirection *= p_Speed;
+       
+
+        //p_moveDirection = p_input.x * cameraAdjust.camRight + p_input.z * cameraAdjust.camForward;
+        p_input = Camera.main.transform.TransformDirection(p_input);
+        p_input.y = 0.0f;
+        p_moveDirection = p_input * p_Speed;
 
         if (p_moveDirection != Vector3.zero && !p_PushingOrPulling)
             p_Controller.transform.LookAt(p_Controller.transform.position + p_moveDirection);
-        else if(p_PushingOrPulling)
-            MovingObject();
+        else if (p_PushingOrPulling)
+            if (axisToUseWhileBox == 1)
+                p_moveDirection.z = 0f;
+            else if (axisToUseWhileBox == 2)
+                p_moveDirection.x = 0f;
 
         SetGravity();
         p_Controller.Move(p_moveDirection * Time.deltaTime);
@@ -107,23 +111,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void CamDirection() // Direction where camera looks
-    {
-        camForward = mainCamera.transform.forward;
-        camRight = mainCamera.transform.right;
-        camForward.y = 0;
-        camRight.y = 0;
-        camForward = camForward.normalized;
-        camRight = camRight.normalized; ;
-    }
+    
 
     private void MovingObject()
     {
         if (p_PushingOrPulling)
         {
             if (axisToUseWhileBox == 1)
-                p_moveDirection = Vector3.right * (p_horizontalMove > 0f ? 1 : p_horizontalMove < 0f? -1 :  0) * p_Speed;
-            else
+                p_moveDirection = (Vector3.right) * (p_horizontalMove > 0f ? 1 : p_verticalMove < 0f ? -1 : 0) * cameraAdjust.camRight.magnitude * p_Speed;
+
+            else if(axisToUseWhileBox == 2)
                 p_moveDirection = Vector3.forward * (p_verticalMove > 0f ? 1 : p_verticalMove < 0f ? -1 : 0) * p_Speed;
 
         }

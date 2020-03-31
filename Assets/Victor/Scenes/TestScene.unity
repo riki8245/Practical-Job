@@ -315,6 +315,7 @@ GameObject:
   - component: {fileID: 523265388}
   - component: {fileID: 523265387}
   - component: {fileID: 523265390}
+  - component: {fileID: 523265391}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -380,8 +381,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 523265386}
-  m_LocalRotation: {x: 0.111709766, y: 0.84828967, z: -0.19817425, w: 0.47817636}
-  m_LocalPosition: {x: -11.036863, y: 8.852968, z: 6.768334}
+  m_LocalRotation: {x: 0.08725434, y: 0.90299004, z: -0.21954182, w: 0.35888317}
+  m_LocalPosition: {x: -16.728216, y: 12.055936, z: 13.955858}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -418,6 +419,20 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &523265391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523265386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05a2e9cfe3e9c467aa79956cce206131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camForward: {x: 0, y: 0, z: 0}
+  camRight: {x: 0, y: 0, z: 0}
 --- !u!64 &570209692
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1250,6 +1265,7 @@ MonoBehaviour:
   p_Speed: 0
   p_PushingOrPulling: 0
   p_CanMoveBox: 0
+  cameraAdjust: {fileID: 523265391}
   p_moveDirection: {x: 0, y: 0, z: 0}
 --- !u!23 &1842022602
 MeshRenderer:
@@ -1331,7 +1347,7 @@ CharacterController:
   m_SlopeLimit: 45
   m_StepOffset: 0
   m_SkinWidth: 0.005
-  m_MinMoveDistance: 1
+  m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1852236818
 GameObject:
