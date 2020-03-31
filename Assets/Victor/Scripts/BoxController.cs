@@ -1,183 +1,114 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BoxController : MonoBehaviour
 {
-    Rigidbody b_RigidBody;
-    [SerializeField]bool b_Movable;
-    GameObject b_activePlayer;
+    CharacterController b_Controller;
+    Vector3 b_moveDirection;
+    PlayerController playerController;
 
-    [SerializeField]float b_timeHold;
-    private Vector3 b_Direction;
-    private float b_SpeedTimeCounter = 0f;
-    bool b_pushedOrPulled;
-    bool p_grabableObject;
-
-    Vector3 normalhit;
-
+    private float b_horizontalMove;
+    private const float b_Speed = 3.5f;
+    private float b_verticalMove;
+    private float b_fallVelocity;
+    private const float b_gravity = 10f;
 
     private void Awake()
     {
-        b_Movable = false;
-        b_RigidBody = this.GetComponent<Rigidbody>();
-        b_timeHold = 0f;
-        b_Direction = new Vector3();
-
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        b_RigidBody.constraints = RigidbodyConstraints.FreezeRotationY;
-        b_RigidBody.constraints = RigidbodyConstraints.FreezeRotationX;
-        b_RigidBody.constraints = RigidbodyConstraints.FreezeRotationZ;
-
-
+        b_Controller = this.GetComponent<CharacterController>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void RotateBox(float slopeAngle, Vector3 slopeNormalV)
     {
-        //Quaternion quaternion = this.transform.rotation;
-        //quaternion.y = 0f;
-        //this.transform.rotation = quaternion;
-        //this.transform.rotation.SetFromToRotation(new Vector3(this.transform.rotation.x, this.transform.rotation.y, this.transform.rotation.z), new Vector3(this.transform.rotation.x, 0f, this.transform.rotation.z));
-        
-    }
-
-    public static Vector3 ProjectOnPlane(Vector3 vector, Vector3 planeNormal)
-    {
-        return vector - Vector3.Project(vector, planeNormal);
-    }
-
-    public static Vector3 Project(Vector3 vector, Vector3 onNormal)
-    {
-        float num = Vector3.Dot(onNormal, onNormal);
-        if (num < Mathf.Epsilon)
+        if (slopeNormalV.x != 0)
         {
-            return Vector3.zero;
+            if (slopeNormalV.x < 0)
+                iTween.RotateTo(this.gameObject, new Vector3(0f, 0f, slopeAngle), 1f);
+            else
+                iTween.RotateTo(this.gameObject, new Vector3(0f, 0f, -slopeAngle), 1f);
         }
-        return onNormal * Vector3.Dot(vector, onNormal) / num;
-    }
-
-    private void FixedUpdate()
-    {
-        if (b_pushedOrPulled)
+        else if (slopeNormalV.z != 0)
         {
-            transform.Translate(transform.right * Time.deltaTime);
+            if (slopeNormalV.z < 0)
+                iTween.RotateTo(this.gameObject, new Vector3(-slopeAngle, 0f, 0f), 1f);
+            else
+                iTween.RotateTo(this.gameObject, new Vector3(slopeAngle, 0f, 0f), 1f);
         }
-        
-
-
-        //b_RigidBody.MovePosition(transform.position + Vector3.left * Time.deltaTime);
-        //b_RigidBody.velocity = Vector3.left * Time.deltaTime * 100;
-        //Vector3.ProjectOnPlane()
-
-        //RaycastHit hit;
-
-
-        //if (Physics.Raycast(transform.position, -transform.up, out hit))
-        //{
-        //    normalhit = hit.normal;
-        //    Debug.DrawRay(transform.position, -transform.up);
-        //}
-
-        //transform.Translate(ProjectOnPlane(-transform.right, normalhit) * Time.deltaTime);
-
-
-        //float lerpVelocity = 1f;
-        //Vector3.Lerp(this.transform.up, normalhit, Time.deltaTime * lerpVelocity);
-
-
-        //b_RigidBody.AddForce(Vector3.left,ForceMode.VelocityChange);
-        //transform.position += Vector3.left * Time.deltaTime;
-
-        //if (b_activePlayer != null)
-        //{
-        //    PlayerController activePlayer = b_activePlayer.GetComponent<PlayerController>();
-        //    b_Direction = activePlayer.b_ForceDirection;
-
-        //    if (b_Movable && activePlayer.p_CanGrabObject && Input.GetButton("Fire1"))
-        //    {
-        //        activePlayer.p_PushingOrPulling = true;
-        //        b_timeHold += 0.02f;
-        //        b_timeHold = Mathf.Clamp(b_timeHold, 0f, 3f);
-
-        //        //b_RigidBody.MovePosition(transform.position + b_Direction * Time.deltaTime * (b_timeHold+1));
-        //        //b_RigidBody.AddForce(Vector3.forward);
-        //        //print(activePlayer.b_ForceDirection);
-        //        //ApplyForceToReachVelocity(b_RigidBody, Vector3.forward);
-        //        transform.position += b_Direction * Time.deltaTime * (b_timeHold+1f);
-        //        //transform.Translate(activePlayer.b_ForceDirection * Time.deltaTime * b_timeHold);
-        //        //b_RigidBody.AddForceAtPosition(activePlayer.b_ForceDirection * 1000 * Time.deltaTime * (b_timeHold + 1), this.GetComponentInChildren<Transform>().position);
-        //        //b_RigidBody.velocity = activePlayer.b_ForceDirection * 10 * Time.deltaTime * (b_timeHold + 1);
-        //        print(b_RigidBody.velocity);
-        //        print(activePlayer.b_ForceDirection);
-        //        b_SpeedTimeCounter = 3f;
-        //    }
-        //    else
-        //    {
-        //        activePlayer.p_PushingOrPulling = false;
-
-        //        while (b_SpeedTimeCounter >= 0f)
-        //        {
-        //            print("Deja de pulsar" + b_RigidBody.velocity);
-
-        //            b_SpeedTimeCounter -= Time.deltaTime;
-        //            b_RigidBody.velocity = b_Direction * 10 * Time.deltaTime * b_SpeedTimeCounter;
-        //            b_PushedOrPulled = false;
-
-
-        //        }
-        //    }
-
-
-        //}
-
-
-
-
-
-
-        //else
-        //{
-        //    Invoke("SlowDownObject",0.1f);
-        //    activePlayer.p_PushingOrPulling = false;
-        //    //b_RigidBody.velocity = 0f;
-        //}
+        else
+            iTween.RotateTo(this.gameObject, slopeNormalV, 1.5f);
     }
 
-    /*private void SlowDownObject ()
+    private void Update()
     {
-        print("entra en slowDown");
-        while(b_timeHold >= 0f)
-        {
-            b_timeHold -= Time.deltaTime;
-            b_timeHold = Mathf.Floor(b_timeHold);
-            print(b_timeHold);
-            b_RigidBody.velocity = b_Direction * 1000 * Time.deltaTime * b_timeHold;
-
-        }
+        b_horizontalMove = Input.GetAxis("Horizontal");
+        b_verticalMove = Input.GetAxis("Vertical");
+        MoveBox();
+        SetGravity();
+        b_Controller.Move(b_moveDirection * Time.deltaTime);
     }
 
-    */
-
-    private void OnControllerColliderHit(ControllerColliderHit hit)
+    private void SetGravity()
     {
-        if (hit.collider.CompareTag("Player"))
+        if (b_Controller.isGrounded)
+            b_fallVelocity = -b_gravity * Time.deltaTime;
+
+        else
+            b_fallVelocity -= b_gravity * Time.deltaTime;
+
+        b_moveDirection.y = b_fallVelocity;
+
+    }
+
+    private void MoveBox()
+    {
+        if (playerController != null)
         {
-            if (Input.GetButtonDown("Fire1") && p_grabableObject)
+            if (Input.GetButtonDown("Fire1"))
             {
-                p_grabableObject = false;
+                if (Mathf.Abs(playerController.transform.position.x - transform.position.x) >= .5f &&
+                    Mathf.Abs(playerController.transform.position.z - transform.position.z) <= .5f)
+                    playerController.axisToUseWhileBox = 1;
+                else
+                    playerController.axisToUseWhileBox = 2;
+            }
+            if (Input.GetButton("Fire1"))
+            {
+                playerController.p_PushingOrPulling = true;
+                if (playerController.axisToUseWhileBox == 1)
+                    b_moveDirection = Vector3.right * (b_horizontalMove > 0f ? 1 : b_horizontalMove < 0f ? -1 : 0) * b_Speed;
+                else if (playerController.axisToUseWhileBox == 2)
+                    b_moveDirection = Vector3.forward * (b_verticalMove > 0f ? 1 : b_verticalMove < 0f ? -1 : 0) * b_Speed;
+            }
+            if(Input.GetButtonUp("Fire1"))
+            {
+                playerController.p_PushingOrPulling = false;
+                playerController.axisToUseWhileBox = 0;
             }
         }
+        else
+            b_moveDirection = Vector3.zero;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerController = other.GetComponent<PlayerController>();
+            
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerController.p_PushingOrPulling = false;
+            playerController = null;
+        }
+    }
     private void OnGUI()
     {
-        GUI.Label(new Rect(10, 10, 500, 100), "Euler" + transform.rotation.eulerAngles);
-        GUI.Label(new Rect(10, 30, 500, 100), "Normal" + transform.rotation);
+        GUIStyle guiStyle = new GUIStyle(); //create a new variable
+        guiStyle.fontSize = 30;
+        GUI.Label(new Rect(10, 130, 500, 100), "B_Grounded: " + b_Controller.isGrounded, guiStyle);
     }
-
-    
 }

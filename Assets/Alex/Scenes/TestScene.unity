@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -477,13 +477,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cddeb72a1682e4ca29db43b976940e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  axisToUseWhileBox: 0
+  p_gravity: 0
   p_Speed: 0
-  p_Gravity: 0
-  p_AxisXMove: 0
-  p_AxisZMove: 0
-  p_fallVelocity: 0
   p_PushingOrPulling: 0
-  p_Move: {x: 0, y: 0, z: 0}
+  p_CanMoveBox: 0
+  p_moveDirection: {x: 0, y: 0, z: 0}
 --- !u!4 &419410024 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4896766679314654687, guid: 2a45b8180543dbb459f46e88fb38953a,
@@ -603,7 +602,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &523265390
 MonoBehaviour:
@@ -1196,7 +1195,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc37b29d1b4d24304854e64d9f2ff00f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  p_Force: 0
 --- !u!65 &1698507321
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1313,7 +1311,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1842022599
 GameObject:
@@ -1347,13 +1345,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cddeb72a1682e4ca29db43b976940e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  axisToUseWhileBox: 0
+  p_gravity: 0
   p_Speed: 0
-  p_Gravity: 0
-  p_AxisXMove: 0
-  p_AxisZMove: 0
-  p_fallVelocity: 0
   p_PushingOrPulling: 0
-  p_Move: {x: 0, y: 0, z: 0}
+  p_CanMoveBox: 0
+  p_moveDirection: {x: 0, y: 0, z: 0}
 --- !u!136 &1842022601
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1389,7 +1386,7 @@ Transform:
   m_Children:
   - {fileID: 1464437618}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &1842022605
 CharacterController:
@@ -1501,7 +1498,7 @@ Transform:
   m_LocalScale: {x: 100, y: 1, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1854656650
 GameObject:
@@ -1678,6 +1675,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Cajita
+      objectReference: {fileID: 0}
+    - target: {fileID: 7970102048203986234, guid: 32b9ed888a9980044b94cfc04ac13ed2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32b9ed888a9980044b94cfc04ac13ed2, type: 3}

@@ -48,8 +48,6 @@ public class PlayerController : MonoBehaviour
         CamDirection();
 
     }
-
-    // Update is called once per frame
     void Update()
     {
         p_horizontalMove = Input.GetAxis("Horizontal");
@@ -62,7 +60,7 @@ public class PlayerController : MonoBehaviour
     {
         //Ray Cast which provides info of what it is in front player
         int layerMask = LayerMask.GetMask("Boxes");
-        Debug.DrawRay(transform.position, transform.forward * 1000, Color.yellow);
+        //Debug.DrawRay(transform.position, transform.forward * 1000, Color.yellow);
         if (Physics.Raycast(transform.position, transform.forward, out hit, .1f, layerMask))
         {
             p_CanMoveBox = (Vector3.Angle(hit.normal, -transform.forward)) <= 45f ? true : false;
@@ -134,11 +132,6 @@ public class PlayerController : MonoBehaviour
     {
         GUIStyle guiStyle = new GUIStyle(); //create a new variable
         guiStyle.fontSize = 30;
-        //GUI.Label(new Rect(10, 100, 500, 100), "Direccion jugador" + transform.forward, guiStyle);
-        //GUI.Label(new Rect(10, 150, 500, 100), "Direccion cámara" + camForward, guiStyle);
-        GUI.Label(new Rect(10, 200, 500, 100), "Pushing" + p_PushingOrPulling, guiStyle);
-
-
-
+        GUI.Label(new Rect(10, 90, 500, 100), "p_PushingOrPulling: " + p_PushingOrPulling, guiStyle);
     }
 }
