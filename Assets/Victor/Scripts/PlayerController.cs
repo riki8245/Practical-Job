@@ -8,11 +8,11 @@ public class PlayerController : MonoBehaviour
 
     float p_horizontalMove;
     float p_verticalMove;
-    float p_timeMovingObject;
     float p_fallVelocity;
 
     public int axisToUseWhileBox = 0;
 
+    public float p_timeMovingObject;
     public float p_gravity;
     public float p_Speed;
 
@@ -49,45 +49,48 @@ public class PlayerController : MonoBehaviour
     {
         p_horizontalMove = Input.GetAxis("Horizontal");
         p_verticalMove = Input.GetAxis("Vertical");
-        CheckIfCanMoveBox();
+        //CheckIfCanMoveBox();
         MovePlayer();
     }
 
-    private void CheckIfCanMoveBox()
-    {
-        //Ray Cast which provides info of what it is in front player
-        int layerMask = LayerMask.GetMask("Boxes");
-        //Debug.DrawRay(transform.position, transform.forward * 1000, Color.yellow);
-        if (Physics.Raycast(transform.position, transform.forward, out hit, .1f, layerMask))
-        {
-            p_CanMoveBox = (Vector3.Angle(hit.normal, -transform.forward)) <= 45f ? true : false;
-        }
-        else
-            p_CanMoveBox = false;
+    //private void CheckIfCanMoveBox()
+    //{
+    //    //Ray Cast which provides info of what it is in front player
+    //    int layerMask = LayerMask.GetMask("Boxes");
+    //    //Debug.DrawRay(transform.position, transform.forward * 1000, Color.yellow);
+    //    if (Physics.Raycast(transform.position, transform.forward, out hit, .1f, layerMask))
+    //    {
+    //        p_CanMoveBox = (Vector3.Angle(hit.normal, -transform.forward)) <= 10f ? true : false;
+    //    }
+       
                 
 
-    }
+    //}
 
     private void MovePlayer()
     {
         p_input = new Vector3(p_horizontalMove, 0f, p_verticalMove);
         p_input = p_input.normalized;
-
-
-       
-
         //p_moveDirection = p_input.x * cameraAdjust.camRight + p_input.z * cameraAdjust.camForward;
         p_input = Camera.main.transform.TransformDirection(p_input);
         p_input.y = 0.0f;
-        p_moveDirection = p_input * p_Speed;
+        p_moveDirection = p_input;
 
         if (p_moveDirection != Vector3.zero && !p_PushingOrPulling)
+        {
             p_Controller.transform.LookAt(p_Controller.transform.position + p_moveDirection);
+            p_moveDirection *= p_Speed;
+        }
+           
         else if (p_PushingOrPulling)
+        {
             if (axisToUseWhileBox == 1)
                 p_moveDirection.z = 0f;
             else if (axisToUseWhileBox == 2)
                 p_moveDirection.x = 0f;
+            p_moveDirection *= Mathf.Clamp(p_timeMovingObject * p_Speed, .1f, p_Speed);
+        }          
+
 
         SetGravity();
         p_Controller.Move(p_moveDirection * Time.deltaTime);
@@ -111,24 +114,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    
-
-    private void MovingObject()
-    {
-        if (p_PushingOrPulling)
-        {
-            if (axisToUseWhileBox == 1)
-                p_moveDirection = (Vector3.right) * (p_horizontalMove > 0f ? 1 : p_verticalMove < 0f ? -1 : 0) * cameraAdjust.camRight.magnitude * p_Speed;
-
-            else if(axisToUseWhileBox == 2)
-                p_moveDirection = Vector3.forward * (p_verticalMove > 0f ? 1 : p_verticalMove < 0f ? -1 : 0) * p_Speed;
-
-        }
-    }
     private void OnGUI()
     {
         GUIStyle guiStyle = new GUIStyle(); //create a new variable
         guiStyle.fontSize = 30;
-        GUI.Label(new Rect(10, 90, 500, 100), "p_PushingOrPulling: " + p_PushingOrPulling, guiStyle);
+        //GUI.Label(new Rect(10, 90, 500, 100), "p_PushingOrPulling: " + p_PushingOrPulling, guiStyle);
     }
 }
