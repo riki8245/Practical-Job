@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     {
         p_Controller = this.GetComponent<CharacterController>();
         //p_animator = this.GetComponent<Animator>();
-        p_Speed = 3.5f;
+        p_Speed = 5f;
         p_gravity = 35f;
         p_moveDirection = Vector3.zero;
     }

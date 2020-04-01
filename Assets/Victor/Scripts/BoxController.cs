@@ -8,14 +8,16 @@ public class BoxController : MonoBehaviour
     PlayerController playerController;
 
     private float b_horizontalMove;
-    private const float b_Speed = 3.5f;
+    private const float b_Speed = 5f;
     private float b_verticalMove;
     private float b_fallVelocity;
     private Vector3 b_input;
     private const float b_gravity = 10f;
     private string p_RelativePos;
-    public float b_timePushed;
+    private float b_timePushed;
     bool b_AutoMove;
+    private bool b_playerIsMoving;
+    private float b_SpeedOverTime;
 
     private void Awake()
     {
@@ -27,6 +29,7 @@ public class BoxController : MonoBehaviour
         p_RelativePos = "";
         b_timePushed = 0f;
         b_AutoMove = false;
+        b_SpeedOverTime = 0f;
     }
     public void RotateBox(float slopeAngle, Vector3 slopeNormalV)
     {
@@ -55,11 +58,19 @@ public class BoxController : MonoBehaviour
         MoveBox();
         if (b_AutoMove)
         {
-            b_moveDirection *= Mathf.Clamp(b_Speed * b_timePushed, 0f, 1f);
-            b_timePushed -= Time.deltaTime;
+            b_moveDirection.x = (b_moveDirection.x > 0f) ? Mathf.Clamp(b_moveDirection.x * (b_timePushed / b_SpeedOverTime),0f,b_Speed): (b_moveDirection.x < 0f) ? Mathf.Clamp(b_moveDirection.x * b_timePushed / b_SpeedOverTime, -b_Speed, 0f) : b_moveDirection.x ;
+            b_moveDirection.z = (b_moveDirection.z > 0f) ? Mathf.Clamp(b_moveDirection.z * (b_timePushed / b_SpeedOverTime), 0f, b_Speed) : (b_moveDirection.z < 0f) ? Mathf.Clamp(b_moveDirection.z * b_timePushed / b_SpeedOverTime, -b_Speed, 0f) : b_moveDirection.z;
 
-            if (b_timePushed <= 0f)
+            //b_moveDirection *= Mathf.Clamp(b_Speed * b_timePushed, 0, 1f);
+            b_timePushed -= Time.deltaTime * 0.01f;
+            if (b_timePushed <= 0f || (b_moveDirection.x ==0 && b_moveDirection.z == 0))
+            {
                 b_AutoMove = false;
+                b_moveDirection = Vector3.zero;
+                b_timePushed = 0f;
+                b_SpeedOverTime = 0f;
+            }
+                
         }
         SetGravity();
         b_Controller.Move(b_moveDirection * Time.deltaTime);
@@ -101,8 +112,9 @@ public class BoxController : MonoBehaviour
 
                 b_timePushed = 0f;
                 playerController.axisToUseWhileBox = (p_RelativePos.Equals("LeftSide") || p_RelativePos.Equals("RightSide") ? 1 : p_RelativePos.Equals("UpSide") || p_RelativePos.Equals("DownSide") ? 2 : 0);
+                b_playerIsMoving = true;
             }
-            if (Input.GetButton("Fire1"))
+            if (Input.GetButton("Fire1") && b_playerIsMoving)
             {
                 playerController.p_PushingOrPulling = true;
                 if (b_input == Vector3.zero)
@@ -117,39 +129,50 @@ public class BoxController : MonoBehaviour
                 else
                     b_moveDirection = Vector3.zero;
                 if (b_moveDirection != Vector3.zero)
-                    b_timePushed += Time.deltaTime;
+                    b_timePushed += Time.deltaTime * 0.5f;
             }
             if (Input.GetButtonUp("Fire1"))
             {
                 playerController.p_PushingOrPulling = false;
                 playerController.axisToUseWhileBox = 0;
+                b_playerIsMoving = false;
+                b_SpeedOverTime = b_timePushed;
                 switch (p_RelativePos)
                 {
                     case "LeftSide":
                         if (b_moveDirection.x < 0f)
                             b_moveDirection = Vector3.zero;
-                        else
+                        else if (b_Controller.velocity.magnitude > 3.5f)
                             b_AutoMove = true;
+                        else
+                            b_moveDirection = Vector3.zero;
                         break;
                     case "RightSide":
                         if (b_moveDirection.x > 0f)
                             b_moveDirection = Vector3.zero;
-                        else
+                        else if(b_Controller.velocity.magnitude >3.5f)
                             b_AutoMove = true;
+                        else
+                            b_moveDirection = Vector3.zero;
                         break;
                     case "DownSide":
                         if (b_moveDirection.z < 0f)
                             b_moveDirection = Vector3.zero;
-                        else
+                        else if (b_Controller.velocity.magnitude > 3.5f)
                             b_AutoMove = true;
+                        else
+                            b_moveDirection = Vector3.zero;
                         break;
                     case "UpSide":
                         if (b_moveDirection.z > 0f)
                             b_moveDirection = Vector3.zero;
-                        else
+                        else if (b_Controller.velocity.magnitude > 3.5f)
                             b_AutoMove = true;
+                        else
+                            b_moveDirection = Vector3.zero;
                         break;
                     default:
+                        b_AutoMove = false;
                         break;
 
                 }
@@ -185,6 +208,7 @@ public class BoxController : MonoBehaviour
         guiStyle.fontSize = 30;
         
         GUI.Label(new Rect(10, 130, 500, 100), "B_Velocity: " + b_moveDirection, guiStyle);
+        GUI.Label(new Rect(10, 200, 500, 100), "B_VelocityMag: " + b_Controller.velocity.magnitude, guiStyle);
         GUI.Label(new Rect(10, 320, 500, 100), "b_AutoMove: " + (b_AutoMove), guiStyle);
 
 
