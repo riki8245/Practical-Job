@@ -2,17 +2,29 @@
 
 public class SlopeInfo : MonoBehaviour
 {
-    private float slopeAngle;
-    private Transform childPos;
-    private Vector3 slopeNormalV;
+    [SerializeField]private float slopeAngle;
+    [SerializeField]private Transform childPos;
+    [SerializeField]private Vector3 slopeNormalV;
+    [SerializeField] private float ry;
 
+    private void Awake()
+    {
+        childPos = this.gameObject.GetComponentsInChildren<Transform>()[1];
+    }
     void Start()
     {
-        childPos = GetComponentInChildren<Transform>();
+        
+        Debug.Log("Child pos : " + childPos.position);
         RaycastHit outRay;
         if (Physics.Raycast(this.childPos.position, -Vector3.up * 10, out outRay))
             slopeNormalV = outRay.normal;
         getAngle(slopeNormalV);
+    }
+    private void Update()
+    {
+        Debug.DrawRay(this.childPos.position, -Vector3.up,Color.red);
+        Debug.DrawRay(this.childPos.position, slopeNormalV,Color.green);
+        ry = this.transform.rotation.y;
     }
     private void getAngle(Vector3 normal)
     {
@@ -26,11 +38,11 @@ public class SlopeInfo : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Box"))
-            other.GetComponent<BoxController>().RotateBox(this.slopeAngle,slopeNormalV);
+            other.GetComponent<BoxController>().RotateBox(this.slopeAngle,ry);
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Box"))
-            other.GetComponent<BoxController>().RotateBox(0f, Vector3.up);
+            other.GetComponent<BoxController>().RotateBox(0f,-1);
     }
 }

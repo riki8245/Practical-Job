@@ -6,6 +6,7 @@ using UnityEngine;
 public class PortalTest1 : MonoBehaviour
 {
     private BoxCollider[] b_Colliders;
+    private bool isGrounded;
 
     // Start is called before the first frame update
     void Start()
@@ -33,8 +34,20 @@ public class PortalTest1 : MonoBehaviour
         foreach(BoxCollider boxCollider in b_Colliders){
             boxCollider.enabled = false;
         }
-        other.gameObject.GetComponent<CharacterController>().isTrigger = true;
+        //other.gameObject.GetComponent<CharacterController>().attachedRigidbody.detectCollisions = false;
+        isGrounded = other.GetComponent<CharacterController>().isGrounded;
+        int F = LayerMask.GetMask("Floor");
+        int B = LayerMask.GetMask("Boxes");
+        print(F + B);
+        Physics.IgnoreLayerCollision(8,9 ,true);
+        //other.GetComponent<CharacterController>().attachedRigidbody;
 
-        other.gameObject.GetComponent<CharacterController>().detectCollisions = false;
+    }
+    private void OnGUI()
+    {
+        GUIStyle guiStyle = new GUIStyle(); //create a new variable
+        guiStyle.fontSize = 30;
+        GUI.Label(new Rect(10, 400, 500, 100), "BoxGrounded + portal : " + isGrounded, guiStyle);
+
     }
 }

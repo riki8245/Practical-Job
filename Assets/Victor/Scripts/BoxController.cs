@@ -9,10 +9,11 @@ public class BoxController : MonoBehaviour
 
     private float b_horizontalMove;
     private const float b_Speed = 5f;
+    private const float b_gravity = 10f;
+    private const float b_timeToRotate = .5f;
     private float b_verticalMove;
     private float b_fallVelocity;
     private Vector3 b_input;
-    private const float b_gravity = 10f;
     private string p_RelativePos;
     private float b_timePushed;
     bool b_AutoMove;
@@ -31,24 +32,19 @@ public class BoxController : MonoBehaviour
         b_AutoMove = false;
         b_SpeedOverTime = 0f;
     }
-    public void RotateBox(float slopeAngle, Vector3 slopeNormalV)
+    public void RotateBox(float slopeAngle, float orientation)
     {
-        if (slopeNormalV.x != 0)
-        {
-            if (slopeNormalV.x < 0)
-                iTween.RotateTo(this.gameObject, new Vector3(0f, 0f, slopeAngle), 1f);
-            else
-                iTween.RotateTo(this.gameObject, new Vector3(0f, 0f, -slopeAngle), 1f);
-        }
-        else if (slopeNormalV.z != 0)
-        {
-            if (slopeNormalV.z < 0)
-                iTween.RotateTo(this.gameObject, new Vector3(-slopeAngle, 0f, 0f), 1f);
-            else
-                iTween.RotateTo(this.gameObject, new Vector3(slopeAngle, 0f, 0f), 1f);
-        }
+        if (orientation == 1f)
+            iTween.RotateTo(this.gameObject, new Vector3(slopeAngle, 0f, 0f), b_timeToRotate);
+        else if (orientation == 0f)
+            iTween.RotateTo(this.gameObject, new Vector3(-slopeAngle, 0f, 0f), b_timeToRotate);
+        else if (orientation < 0f)
+            iTween.RotateTo(this.gameObject, new Vector3(0f, 0f, -slopeAngle), b_timeToRotate);
+        else if (orientation > 0f && orientation < 1f)
+            iTween.RotateTo(this.gameObject, new Vector3(0f, 0f, slopeAngle), b_timeToRotate);
         else
-            iTween.RotateTo(this.gameObject, slopeNormalV, 1.5f);
+            iTween.RotateTo(this.gameObject, Vector3.up, 1.5f);
+
     }
 
     private void Update()
