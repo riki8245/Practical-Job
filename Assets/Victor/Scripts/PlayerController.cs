@@ -31,14 +31,15 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        p_Controller = this.GetComponent<CharacterController>();
         //p_animator = this.GetComponent<Animator>();
         p_Speed = 5f;
         p_gravity = 35f;
         p_moveDirection = Vector3.zero;
+        
     }
     void Start()
     {
+        p_Controller = this.GetComponent<CharacterController>();
         p_CanMoveBox = false;
         p_horizontalMove = 0f;
         p_verticalMove = 0f;
