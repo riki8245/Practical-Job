@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Box
   - Platform
+  - Portal_1
+  - Portal_2
   layers:
   - Default
   - TransparentFX
