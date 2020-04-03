@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
         }          
 
 
-        SetGravity();
+        //SetGravity();
         p_Controller.Move(p_moveDirection * Time.deltaTime);
         //p_animator.SetFloat("velocity", Mathf.Abs(p_horizontalMove) + Mathf.Abs(p_verticalMove));
         
