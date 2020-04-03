@@ -10,7 +10,7 @@ public class BoxController : MonoBehaviour
     private float b_horizontalMove;
     private const float b_Speed = 5f;
     private const float b_gravity = 10f;
-    private const float b_timeToRotate = .5f;
+    private const float b_timeToRotate = .1f;
     private float b_verticalMove;
     private float b_fallVelocity;
     private Vector3 b_input;
@@ -34,13 +34,13 @@ public class BoxController : MonoBehaviour
     }
     public void RotateBox(float slopeAngle, float orientation)
     {
-        if (orientation == 1f)
+        if (orientation < 0f)
             iTween.RotateTo(this.gameObject, new Vector3(slopeAngle, 0f, 0f), b_timeToRotate);
-        else if (orientation == 0f)
-            iTween.RotateTo(this.gameObject, new Vector3(-slopeAngle, 0f, 0f), b_timeToRotate);
-        else if (orientation < 0f)
-            iTween.RotateTo(this.gameObject, new Vector3(0f, 0f, -slopeAngle), b_timeToRotate);
         else if (orientation > 0f && orientation < 1f)
+            iTween.RotateTo(this.gameObject, new Vector3(-slopeAngle, 0f, 0f), b_timeToRotate);
+        else if (orientation == 1f)
+            iTween.RotateTo(this.gameObject, new Vector3(0f, 0f, -slopeAngle), b_timeToRotate);
+        else if (orientation == 0f)
             iTween.RotateTo(this.gameObject, new Vector3(0f, 0f, slopeAngle), b_timeToRotate);
         else
             iTween.RotateTo(this.gameObject, Vector3.up, 1.5f);
