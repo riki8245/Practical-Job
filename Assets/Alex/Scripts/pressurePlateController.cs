@@ -7,6 +7,7 @@ public class pressurePlateController : MonoBehaviour
     private bool pressed = false;
     private Vector3 scaleNotPressed = new Vector3(0.67f, 0.07f, 0.67f);
     private Vector3 scalePressed = new Vector3(0.67f, 0.01f, 0.67f);
+    public GameObject canvas;
 
     public Animator door;
 
@@ -37,6 +38,12 @@ public class pressurePlateController : MonoBehaviour
             door.SetBool("open",true);
             if(other.gameObject.CompareTag("Box"))
                 other.GetComponent<BoxController>().b_moveDirection = Vector3.zero;
+            if (other.gameObject.CompareTag("Player"))
+            {
+                canvas.SetActive(true);
+                canvas.GetComponent<Animator>().SetTrigger("Play");
+            }
+
         }
     }
 
