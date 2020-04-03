@@ -14930,6 +14930,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FinalBox
       objectReference: {fileID: 0}
+    - target: {fileID: 3394904855348975177, guid: 0c46227b8d78b4aaab9a5fadcbe8d46a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c46227b8d78b4aaab9a5fadcbe8d46a, type: 3}
 --- !u!4 &3845888403957718516
