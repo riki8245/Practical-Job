@@ -43,11 +43,5 @@ public class PortalTest1 : MonoBehaviour
         //other.GetComponent<CharacterController>().attachedRigidbody;
 
     }
-    private void OnGUI()
-    {
-        GUIStyle guiStyle = new GUIStyle(); //create a new variable
-        guiStyle.fontSize = 30;
-        GUI.Label(new Rect(10, 400, 500, 100), "BoxGrounded + portal : " + isGrounded, guiStyle);
-
-    }
+    
 }

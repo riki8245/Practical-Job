@@ -14,7 +14,12 @@ public class Portal : MonoBehaviour
     private GameObject boxcopy;
     public float distance;
     public float dis_to_reset_col;
-
+    public int layerBoxes;
+    public int layerPassable;
+    public int layerFloor;
+    Vector3 originalBoxtransformPos;
+    Quaternion originalBoxrotation;
+    Vector3 auxDir;
 
 
     public bool isPortal_1;
@@ -23,17 +28,12 @@ public class Portal : MonoBehaviour
     void Start()
     {
         dis_to_reset_col = 0.2f;
-        distance = 0.15f;
         passingTrough = false;
         teleported = false;
         if (!isPortal_1)
-        {
             destination = GameObject.FindGameObjectWithTag("Portal_1").GetComponent<Transform>();
-        }
         else
-        {
             destination = GameObject.FindGameObjectWithTag("Portal_2").GetComponent<Transform>();
-        }
     }
 
     // Update is called once per frame
@@ -41,39 +41,54 @@ public class Portal : MonoBehaviour
     {
         if (passingTrough)
         {
-            newVelocity = box.GetComponent<Rigidbody>().velocity;
-            if (transform.position.y + distance > box.transform.position.y)
+            if (this.transform.position.y + .2f > box.transform.position.y  && !teleported)
             {
-                box.transform.position = new Vector3(destination.position.x-distance, destination.position.y, destination.position.z);
-                box.GetComponent<Rigidbody>().velocity = new Vector3(-newVelocity.y, newVelocity.x, newVelocity.z);
-                //box.GetComponent<BoxCollider>().enabled = true;
+                boxcopy = Instantiate(myPrefab, new Vector3(destination.position.x - .6f, destination.position.y-.8f, destination.position.z), originalBoxrotation);
+
+                boxcopy.layer = layerPassable;
+                boxcopy.GetComponent<BoxController>().b_moveDirection = new Vector3(-auxDir.y + 2f, 0f, 0f);
                 teleported = true;
+                Debug.Log("Entra");
             }
             if (teleported)
             {
-                if(box.transform.position.x > destination.position.x + dis_to_reset_col)
+                if(boxcopy.transform.position.x > destination.position.x + dis_to_reset_col)
                 {
-                    boxcopy.active = false;
-                    box.GetComponent<BoxCollider>().enabled = true;
+                    Destroy(box);
                     passingTrough = false;
                     teleported = false;
+                    boxcopy.layer = layerBoxes;
                 }
             }
             
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Box"))
         {
             box = other.gameObject;
-            box.GetComponent<BoxCollider>().enabled = false;
+            box.layer = layerPassable;
+            //Physics.IgnoreLayerCollision(layerFloor, layerPassable);
+            //Physics.IgnoreLayerCollision(layerBoxes, layerPassable);
+
             passingTrough = true;
-            boxcopy= Instantiate(myPrefab, box.transform.position, box.transform.rotation);
-            boxcopy.GetComponent<BoxCollider>().enabled = false;
-            boxcopy.GetComponent<Rigidbody>().velocity = box.GetComponent<Rigidbody>().velocity;
+
+            originalBoxrotation = box.transform.rotation;
+            auxDir = box.GetComponent<BoxController>().b_moveDirection;
+
+
         }
-    
+
     }
+    //private void OnGUI()
+    //{
+    //    GUIStyle guiStyle = new GUIStyle(); //create a new variable
+    //    guiStyle.fontSize = 30;
+    //    if(box != null)GUI.Label(new Rect(10, 100, 500, 100), "Box: " + box.transform.position.y , guiStyle);
+    //    GUI.Label(new Rect(10, 200, 500, 100), "Portal: " + this.transform.position.y, guiStyle);
+
+
+    //}
 }                                                                                              

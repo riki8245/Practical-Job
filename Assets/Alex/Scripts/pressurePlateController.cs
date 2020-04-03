@@ -31,10 +31,12 @@ public class pressurePlateController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Box"))
         {
             pressed = true;
             door.SetBool("open",true);
+            if(other.gameObject.CompareTag("Box"))
+                other.GetComponent<BoxController>().b_moveDirection = Vector3.zero;
         }
     }
 

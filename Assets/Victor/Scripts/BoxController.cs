@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class BoxController : MonoBehaviour
 {
-    CharacterController b_Controller;
-    Vector3 b_moveDirection;
+    [HideInInspector]public CharacterController b_Controller;
+    public Vector3 b_moveDirection;
     PlayerController playerController;
 
     private float b_horizontalMove;
@@ -20,24 +20,23 @@ public class BoxController : MonoBehaviour
     private bool b_playerIsMoving;
     private float b_SpeedOverTime;
 
-    private void Awake()
-    {
-        b_Controller = this.GetComponent<CharacterController>();
-    }
-
     private void Start()
     {
         p_RelativePos = "";
         b_timePushed = 0f;
         b_AutoMove = false;
         b_SpeedOverTime = 0f;
+        playerController = null;
+        b_Controller = this.GetComponent<CharacterController>();
+
+
     }
     public void RotateBox(float slopeAngle, float orientation)
     {
         if (orientation < 0f)
-            iTween.RotateTo(this.gameObject, new Vector3(slopeAngle, 0f, 0f), b_timeToRotate);
-        else if (orientation > 0f && orientation < 1f)
             iTween.RotateTo(this.gameObject, new Vector3(-slopeAngle, 0f, 0f), b_timeToRotate);
+        else if (orientation > 0f && orientation < 1f)
+            iTween.RotateTo(this.gameObject, new Vector3(slopeAngle, 0f, 0f), b_timeToRotate);
         else if (orientation == 1f)
             iTween.RotateTo(this.gameObject, new Vector3(0f, 0f, -slopeAngle), b_timeToRotate);
         else if (orientation == 0f)
@@ -49,24 +48,24 @@ public class BoxController : MonoBehaviour
 
     private void Update()
     {
+
         b_horizontalMove = Input.GetAxis("Horizontal");
         b_verticalMove = Input.GetAxis("Vertical");
         MoveBox();
         if (b_AutoMove)
         {
-            b_moveDirection.x = (b_moveDirection.x > 0f) ? Mathf.Clamp(b_moveDirection.x * (b_timePushed / b_SpeedOverTime),0f,b_Speed): (b_moveDirection.x < 0f) ? Mathf.Clamp(b_moveDirection.x * b_timePushed / b_SpeedOverTime, -b_Speed, 0f) : b_moveDirection.x ;
+            b_moveDirection.x = (b_moveDirection.x > 0f) ? Mathf.Clamp(b_moveDirection.x * (b_timePushed / b_SpeedOverTime), 0f, b_Speed) : (b_moveDirection.x < 0f) ? Mathf.Clamp(b_moveDirection.x * b_timePushed / b_SpeedOverTime, -b_Speed, 0f) : b_moveDirection.x;
             b_moveDirection.z = (b_moveDirection.z > 0f) ? Mathf.Clamp(b_moveDirection.z * (b_timePushed / b_SpeedOverTime), 0f, b_Speed) : (b_moveDirection.z < 0f) ? Mathf.Clamp(b_moveDirection.z * b_timePushed / b_SpeedOverTime, -b_Speed, 0f) : b_moveDirection.z;
 
             //b_moveDirection *= Mathf.Clamp(b_Speed * b_timePushed, 0, 1f);
-            b_timePushed -= Time.deltaTime * 0.01f;
-            if (b_timePushed <= 0f || (b_moveDirection.x ==0 && b_moveDirection.z == 0))
+            b_timePushed -= Time.deltaTime;
+            if (b_timePushed <= 0f || (b_moveDirection.x == 0 && b_moveDirection.z == 0))
             {
                 b_AutoMove = false;
                 b_moveDirection = Vector3.zero;
                 b_timePushed = 0f;
                 b_SpeedOverTime = 0f;
             }
-                
         }
         SetGravity();
         b_Controller.Move(b_moveDirection * Time.deltaTime);
@@ -138,7 +137,7 @@ public class BoxController : MonoBehaviour
                     case "LeftSide":
                         if (b_moveDirection.x < 0f)
                             b_moveDirection = Vector3.zero;
-                        else if (b_Controller.velocity.magnitude > 3.5f)
+                        else if (b_Controller.velocity.magnitude > 2f)
                             b_AutoMove = true;
                         else
                             b_moveDirection = Vector3.zero;
@@ -146,7 +145,7 @@ public class BoxController : MonoBehaviour
                     case "RightSide":
                         if (b_moveDirection.x > 0f)
                             b_moveDirection = Vector3.zero;
-                        else if(b_Controller.velocity.magnitude >3.5f)
+                        else if(b_Controller.velocity.magnitude > 2f)
                             b_AutoMove = true;
                         else
                             b_moveDirection = Vector3.zero;
@@ -154,7 +153,7 @@ public class BoxController : MonoBehaviour
                     case "DownSide":
                         if (b_moveDirection.z < 0f)
                             b_moveDirection = Vector3.zero;
-                        else if (b_Controller.velocity.magnitude > 3.5f)
+                        else if (b_Controller.velocity.magnitude > 2f)
                             b_AutoMove = true;
                         else
                             b_moveDirection = Vector3.zero;
@@ -162,7 +161,7 @@ public class BoxController : MonoBehaviour
                     case "UpSide":
                         if (b_moveDirection.z > 0f)
                             b_moveDirection = Vector3.zero;
-                        else if (b_Controller.velocity.magnitude > 3.5f)
+                        else if (b_Controller.velocity.magnitude > 2f)
                             b_AutoMove = true;
                         else
                             b_moveDirection = Vector3.zero;
@@ -181,6 +180,7 @@ public class BoxController : MonoBehaviour
         {
 
         }
+        
     }
     private void OnTriggerStay(Collider other)
     {
@@ -198,17 +198,17 @@ public class BoxController : MonoBehaviour
             playerController = null;
         }
     }
-    private void OnGUI()
-    {
-        GUIStyle guiStyle = new GUIStyle(); //create a new variable
-        guiStyle.fontSize = 30;
+    //private void OnGUI()
+    //{
+    //    GUIStyle guiStyle = new GUIStyle(); //create a new variable
+    //    guiStyle.fontSize = 30;
         
-        GUI.Label(new Rect(10, 130, 500, 100), "B_Velocity: " + b_moveDirection, guiStyle);
-        GUI.Label(new Rect(10, 200, 500, 100), "B_VelocityMag: " + b_Controller.velocity.magnitude, guiStyle);
-        GUI.Label(new Rect(10, 320, 500, 100), "b_AutoMove: " + (b_AutoMove), guiStyle);
+    //    GUI.Label(new Rect(10, 130, 500, 100), "B_Velocity: " + b_moveDirection, guiStyle);
+    //    GUI.Label(new Rect(10, 200, 500, 100), "B_VelocityMag: " + b_Controller.velocity.magnitude, guiStyle);
+    //    GUI.Label(new Rect(10, 320, 500, 100), "b_AutoMove: " + (b_AutoMove), guiStyle);
 
 
 
 
-    }
+    //}
 }

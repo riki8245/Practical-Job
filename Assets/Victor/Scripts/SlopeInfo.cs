@@ -13,8 +13,6 @@ public class SlopeInfo : MonoBehaviour
     }
     void Start()
     {
-        
-        Debug.Log("Child pos : " + childPos.position);
         RaycastHit outRay;
         if (Physics.Raycast(this.childPos.position, -Vector3.up * 10, out outRay))
             slopeNormalV = outRay.normal;

@@ -51,7 +51,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: GreenFluorescent
-    second: {fileID: 2100000, guid: 201dc39487292fa49961330e9444f8f8, type: 2}
+    second: {fileID: 2100000, guid: 2b25877587ccc4e29a20bb3d5e652c18, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
