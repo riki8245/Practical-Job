@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/EntregaCharacterController.unity
     guid: 84d192912a27d4c1bb33a147ccf18a72
   - enabled: 1
+    path: Assets/Alex/Scenes/MainMenu.unity
+    guid: e3487080c709f914a83e9143b5fb9402
+  - enabled: 1
     path: Assets/Victor/Scenes/TestScene.unity
     guid: c43c2051ed99749a5a446442bbcf4890
   m_configObjects: {}
