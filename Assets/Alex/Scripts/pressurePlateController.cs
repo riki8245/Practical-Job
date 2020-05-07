@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class pressurePlateController : MonoBehaviour
 {
-    private bool pressed = false;
+    public bool pressed = false;
     private Vector3 scaleNotPressed = new Vector3(0.67f, 0.07f, 0.67f);
     private Vector3 scalePressed = new Vector3(0.67f, 0.01f, 0.67f);
     public GameObject canvas;
@@ -53,7 +53,7 @@ public class pressurePlateController : MonoBehaviour
     {
         if (!actualScene.Equals("Level 1"))
         {
-            if (other.gameObject.CompareTag("Player"))
+            if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Box"))
             {
                 pressed = false;
                 door.SetBool("open", false);
@@ -63,7 +63,7 @@ public class pressurePlateController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Box"))
         {
             pressed = true;
             door.SetBool("open", true);
