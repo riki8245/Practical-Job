@@ -12,23 +12,28 @@ public class EnemyController : MonoBehaviour
     private Transform startTransform;
     private float multiplyBy = 3f;
     private Rigidbody rb;
+    private Animator e_anim;
     // Start is called before the first frame update
     void Start()
     {
+
         Player = GameObject.FindGameObjectWithTag("Player").transform;
         nav = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
+        e_anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
         Move();
+        e_anim.SetFloat("Speed", nav.velocity.magnitude);
     }
 
     void Move()
     {
-        int PlayerFaceState = PlayerFace.FaceState;
+        int PlayerFaceState = Player.gameObject.GetComponent<PlayerController>().FaceState;
+        e_anim.SetInteger("Behaviour", PlayerFaceState);
         if(PlayerFaceState == 0)
         {
             nav.enabled = false;

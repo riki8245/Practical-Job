@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
+    public int FaceState;
     float p_horizontalMove;
     float p_verticalMove;
     float p_fallVelocity;
@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
         p_Controller = this.GetComponent<CharacterController>();
         mats = p_Head.GetComponent<SkinnedMeshRenderer>().materials;
         mats[1] = neutral;
+        FaceState = 0;
         p_CanMoveBox = false;
         p_horizontalMove = 0f;
         p_verticalMove = 0f;
@@ -75,15 +76,22 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetButtonUp("Fire2"))
         {
-            print(mats[1].name);
-            switch(mats[1].name.ToString()){
+            ChangeFaceState();
+            switch (mats[1].name.ToString()){
                 case "Face_neutral": mats[1] = vulnerable; break;
                 case "Face_scary": mats[1] = neutral; break;
                 case "Face_vulnerable": mats[1] = scary; break;
                 default: break;
             }
+            print(mats[1].name);
             p_Head.GetComponent<SkinnedMeshRenderer>().materials = mats;
         }
+    }
+
+    void ChangeFaceState()
+    {
+        if (FaceState == 2) FaceState = 0;
+        else FaceState++;
     }
 
     private void MovePlayer()
