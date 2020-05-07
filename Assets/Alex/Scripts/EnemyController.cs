@@ -11,11 +11,13 @@ public class EnemyController : MonoBehaviour
     private NavMeshAgent nav;
     private Transform startTransform;
     private float multiplyBy = 3f;
+    private Rigidbody rb;
     // Start is called before the first frame update
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player").transform;
         nav = GetComponent<NavMeshAgent>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -30,6 +32,7 @@ public class EnemyController : MonoBehaviour
         if(PlayerFaceState == 0)
         {
             nav.enabled = false;
+            rb.velocity = new Vector3(0, 0, 0);
         }
         else if (PlayerFaceState == 1)
         {
