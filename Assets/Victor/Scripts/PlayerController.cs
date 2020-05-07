@@ -69,9 +69,6 @@ public class PlayerController : MonoBehaviour
     //    {
     //        p_CanMoveBox = (Vector3.Angle(hit.normal, -transform.forward)) <= 10f ? true : false;
     //    }
-
-
-
     //}
 
     private void ChangeFaceTexture()
