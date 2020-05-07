@@ -1699,9 +1699,9 @@ GameObject:
   - component: {fileID: 758863542}
   - component: {fileID: 758863541}
   - component: {fileID: 758863543}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Character
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1804,6 +1804,10 @@ MonoBehaviour:
   p_Speed: 0
   p_PushingOrPulling: 0
   p_CanMoveBox: 0
+  p_Head: {fileID: 6656879464447787929}
+  neutral: {fileID: 2100000, guid: be49fc95ad8401347ae90313d20e462f, type: 2}
+  scary: {fileID: 2100000, guid: a7b2e1582ee44e146bc1e9e16bdf8d5a, type: 2}
+  vulnerable: {fileID: 2100000, guid: fc229361b8ce11146ac9a3539bd2a669, type: 2}
   cameraAdjust: {fileID: 0}
   p_moveDirection: {x: 0, y: 0, z: 0}
 --- !u!1 &6639908260787178529

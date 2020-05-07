@@ -21,12 +21,14 @@ public class Portal : MonoBehaviour
     Quaternion originalBoxrotation;
     Vector3 auxDir;
 
+    private GameObject directionObject;
 
     public bool isPortal_1;
 
     //This is A mierda, PLEASE check it
     void Start()
     {
+        directionObject = GetComponentInChildren<Transform>().gameObject;
         dis_to_reset_col = 0.2f;
         passingTrough = false;
         teleported = false;
@@ -39,8 +41,9 @@ public class Portal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
         if (passingTrough)
-        {
+        {  
             if (this.transform.position.y + .2f > box.transform.position.y  && !teleported)
             {
                 boxcopy = Instantiate(myPrefab, new Vector3(destination.position.x - .6f, destination.position.y-.8f, destination.position.z), originalBoxrotation);
@@ -60,7 +63,6 @@ public class Portal : MonoBehaviour
                     boxcopy.layer = layerBoxes;
                 }
             }
-            
         }
     }
 

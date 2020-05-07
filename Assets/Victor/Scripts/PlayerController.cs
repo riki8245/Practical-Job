@@ -23,6 +23,9 @@ public class PlayerController : MonoBehaviour
     CharacterController p_Controller;
     RaycastHit hit;
     Animator p_animator;
+    [SerializeField] private GameObject p_Head;
+    [SerializeField] private Material neutral, scary, vulnerable;
+    public Material[] mats;
     public CameraAdjust cameraAdjust;
 
     public Vector3 p_moveDirection;
@@ -32,7 +35,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         //p_animator = this.GetComponent<Animator>();
-        p_Speed = 5f;
+        p_Speed = 4.5f;
         p_gravity = 35f;
         p_moveDirection = Vector3.zero;
         
@@ -40,6 +43,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         p_Controller = this.GetComponent<CharacterController>();
+        mats = p_Head.GetComponent<SkinnedMeshRenderer>().materials;
+        mats[1] = neutral;
         p_CanMoveBox = false;
         p_horizontalMove = 0f;
         p_verticalMove = 0f;
@@ -52,6 +57,7 @@ public class PlayerController : MonoBehaviour
         p_verticalMove = Input.GetAxis("Vertical");
         //CheckIfCanMoveBox();
         MovePlayer();
+        ChangeFaceTexture();
     }
 
     //private void CheckIfCanMoveBox()
@@ -63,10 +69,25 @@ public class PlayerController : MonoBehaviour
     //    {
     //        p_CanMoveBox = (Vector3.Angle(hit.normal, -transform.forward)) <= 10f ? true : false;
     //    }
-       
-                
+
+
 
     //}
+
+    private void ChangeFaceTexture()
+    {
+        if (Input.GetButtonUp("Fire2"))
+        {
+            print(mats[1].name);
+            switch(mats[1].name.ToString()){
+                case "Face_neutral": mats[1] = vulnerable; break;
+                case "Face_scary": mats[1] = neutral; break;
+                case "Face_vulnerable": mats[1] = scary; break;
+                default: break;
+            }
+            p_Head.GetComponent<SkinnedMeshRenderer>().materials = mats;
+        }
+    }
 
     private void MovePlayer()
     {
@@ -76,6 +97,8 @@ public class PlayerController : MonoBehaviour
         p_input = Camera.main.transform.TransformDirection(p_input);
         p_input.y = 0.0f;
         p_moveDirection = p_input;
+
+        p_Speed = Input.GetButton("L3") ? 6.5f : 4.5f;
 
         if (p_moveDirection != Vector3.zero && !p_PushingOrPulling)
         {

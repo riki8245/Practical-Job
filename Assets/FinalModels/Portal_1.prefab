@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3050262035038668072}
   - component: {fileID: 1900038954312998178}
   - component: {fileID: 1900038954312998177}
+  - component: {fileID: 1189293575}
   m_Layer: 0
   m_Name: Portal_1
   m_TagString: Portal_1
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 3632262107283927540}
   m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.7072302}
   m_LocalPosition: {x: 0.918, y: 0.02, z: 1.215}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -90,7 +91,7 @@ BoxCollider:
   m_GameObject: {fileID: 3632262107283927540}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1.3, y: 1.3, z: 1}
   m_Center: {x: -0.0005348325, y: -0.00011116265, z: -0.026245592}
@@ -106,16 +107,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90f45de6bf4f95d43949c98368c6c64a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myPrefab: {fileID: 8748957266232797106, guid: dca0eb237121c0d42acf797f0b76c353,
+  myPrefab: {fileID: 3394904855348975169, guid: 0c46227b8d78b4aaab9a5fadcbe8d46a,
     type: 3}
-  distance: 0
-  dis_to_reset_col: 0
-  limits:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  layerBoxes: 0
-  layerPassable: 0
-  layerFloor: 0
+  distance: 0.15
+  dis_to_reset_col: 1
+  layerBoxes: 8
+  layerPassable: 11
+  layerFloor: 9
   isPortal_1: 1
+--- !u!136 &1189293575
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3632262107283927540}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1.07
+  m_Height: 3.02
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
