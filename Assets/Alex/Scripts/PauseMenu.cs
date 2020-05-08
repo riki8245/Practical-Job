@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 
 public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false; // Con esta variable podemos controlar también si queremos pausar la música que pongamos
-
+    public GameObject player;
     public GameObject pauseMenuIU;
+    public Button resumeButton;
 
-    // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape)) // Hay que cambiarlo por el botón de Start
+        if(Input.GetKeyDown(KeyCode.Joystick1Button7)) // Hay que cambiarlo por el botón de Start
         {
             if(GameIsPaused)
             {
@@ -29,6 +31,8 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuIU.SetActive(false);
         Time.timeScale = 1f;
+        player.GetComponent<CharacterController>().enabled = true;
+        player.GetComponent<PlayerController>().enabled = true;
         GameIsPaused = false;
     }
 
@@ -36,6 +40,9 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuIU.SetActive(true);
         Time.timeScale = 0f;
+        resumeButton.GetComponent<Button>().Select();
+        player.GetComponent<CharacterController>().enabled = false;
+        player.GetComponent<PlayerController>().enabled = false;
         GameIsPaused = true;
     }
 

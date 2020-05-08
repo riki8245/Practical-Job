@@ -42,8 +42,11 @@ public class EnemyController : MonoBehaviour
         else if (PlayerFaceState == 1)
         {
             nav.enabled = true;
-            if (Vector3.Distance(transform.position, Player.position) > 1.5) nav.SetDestination(Player.position);
-            else nav.enabled = false;
+            if (Vector3.Distance(transform.position, Player.position) > 2) { nav.SetDestination(Player.position); }
+            else
+            {
+                nav.enabled = false;
+            }
         }
         else
         {
@@ -60,11 +63,11 @@ public class EnemyController : MonoBehaviour
         startTransform = transform;
 
         //temporarily point the object to look away from the player
-        transform.rotation = Quaternion.LookRotation(transform.position - Player.position);
+        //transform.rotation = Quaternion.LookRotation(transform.position - Player.position);
 
         //Then we'll get the position on that rotation that's multiplyBy down the path (you could set a Random.range
         // for this if you want variable results) and store it in a new Vector3 called runTo
-        Vector3 runTo = transform.position + transform.forward * multiplyBy;
+        Vector3 runTo = transform.position + (transform.position - Player.position) * multiplyBy;
         //Debug.Log("runTo = " + runTo);
 
         //So now we've got a Vector3 to run to and we can transfer that to a location on the NavMesh with samplePosition.
