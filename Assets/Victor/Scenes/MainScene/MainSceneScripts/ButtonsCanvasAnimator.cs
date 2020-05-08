@@ -25,13 +25,7 @@ public class ButtonsCanvasAnimator : MonoBehaviour
     // Update is called once per frame
     private void moveButtons()
     {
-        Vector3[] path = {
-        new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, this.gameObject.transform.position.z),
-        new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + .8f, this.gameObject.transform.position.z),
-        new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y - .8f, this.gameObject.transform.position.z) ,
-        new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, this.gameObject.transform.position.z)};
-
-        iTween.MoveTo(this.transform.gameObject, iTween.Hash("path",path,"time", 5f, "easeType","linear","oncomplete","moveButtons"));
+        iTween.MoveTo(this.transform.gameObject, iTween.Hash("y", this.gameObject.transform.position.y + .8f, "time", 3f, "easeType", "linear","loopType","pingPong"));
         mS_EnemyMove.enabled = true;
     }
 }
