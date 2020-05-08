@@ -6,8 +6,8 @@ public class ButtonsCanvasAnimator : MonoBehaviour
 {
     private void Awake()
     {
-        this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, -10);
-        this.gameObject.transform.localScale = new Vector3(0.1f, 0.0f, 0.1f);
+        //this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, -10);
+        this.gameObject.transform.localScale = new Vector3(0f, 0f, 0.1f);
 
     }
     public MS_enemyMove mS_EnemyMove;
@@ -18,7 +18,7 @@ public class ButtonsCanvasAnimator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        iTween.MoveTo(this.transform.gameObject, iTween.Hash("z", 4.840001, "easeType", "easeOutBounce", "time", 2f));
+        //iTween.MoveTo(this.transform.gameObject, iTween.Hash("z", 5.5, "easeType", "easeOutBounce", "time", 2f));
         iTween.ScaleTo(this.transform.gameObject, iTween.Hash("x", 0.1, "y", 0.1, "z", 0.1,"easeType","easeOutSine","time",2f,"oncomplete","moveButtons"));
     }
 

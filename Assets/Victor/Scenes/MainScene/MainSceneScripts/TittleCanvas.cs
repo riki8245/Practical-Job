@@ -11,13 +11,14 @@ public class TittleCanvas : MonoBehaviour
     }
     void Start()
     {
-        iTween.MoveTo(this.transform.gameObject, iTween.Hash("y", this.gameObject.transform.position.y - 20, "easeType", "easeOutBounce", "time", 2f, "oncomplete","activeButtons"));
+        iTween.MoveTo(this.transform.gameObject, iTween.Hash("name","title","y", this.gameObject.transform.position.y - 20, "easeType", "easeOutBounce", "time", 2f, "oncomplete","activeButtons"));
 
     }
     private void activeButtons()
     {
         buttons.enabled = true;
-        iTween.ScaleTo(this.transform.gameObject, iTween.Hash("x", this.gameObject.transform.localScale.x + .02f, "y", this.gameObject.transform.localScale.y +.02f, "z", this.gameObject.transform.localScale.z + .02f, "easeType", "linear", "time", 3f, "looptype", "pingPong"));
+        iTween.ScaleTo(this.transform.gameObject, iTween.Hash("name","buttons","x", this.gameObject.transform.localScale.x + .02f, "y", this.gameObject.transform.localScale.y +.02f, "z", this.gameObject.transform.localScale.z + .02f, "easeType", "linear", "time", 3f, "looptype", "pingPong"));
+        iTween.ScaleTo(this.transform.gameObject, iTween.Hash("x", this.transform.gameObject.transform.localScale.x + .4f, "y", this.transform.gameObject.transform.localScale.y + .4f, "easeType", "linear", "time", 3f, "looptype", "pingPong"));
 
     }
 
