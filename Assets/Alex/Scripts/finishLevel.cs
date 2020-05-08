@@ -10,9 +10,13 @@ public class finishLevel : MonoBehaviour
     public Animator door;
     public GameObject player;
     // Start is called before the first frame update
+    private void Awake()
+    {
+        playerReachFinish = false;
+    }
     void Start()
     {
-        
+        playerReachFinish = false;
     }
 
     // Update is called once per frame
