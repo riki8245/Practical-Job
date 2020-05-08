@@ -19,7 +19,7 @@ public class AnimationScript : MonoBehaviour
     void Update()
     {
         ch_anim.SetBool("pushing", controller.p_PushingOrPulling);
-        ch_anim.SetFloat("speed", ch_controller.velocity.magnitude);
+        ch_anim.SetFloat("speed", controller.enabled ? ch_controller.velocity.magnitude : 0f);
         ch_anim.SetBool("joyinput", ch_controller.velocity.magnitude > 0.1f? Input.GetButton("L3") : false);
     }
 }

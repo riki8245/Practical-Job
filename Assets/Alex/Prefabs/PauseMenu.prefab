@@ -1158,4 +1158,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc4914a8ac4b92d42b0b1f96bcfbfef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   pauseMenuIU: {fileID: 6478102100575750931}
+  resumeButton: {fileID: 6478102100217765771}

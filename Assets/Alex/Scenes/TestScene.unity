@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -794,18 +794,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1149430357 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6478102100217765771, guid: 561c87fe4caccd24c8fa7b24cdac180d,
-    type: 3}
-  m_PrefabInstance: {fileID: 6478102101180512285}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &1360013684 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 4656583832887729743, guid: ce8fcad8876a84588b5ecfa44fa83358,
@@ -1387,11 +1375,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 436124280918136808, guid: e607e36d8da0d2749958b50215fd8aa1,
-        type: 3}
-      propertyPath: m_BaseOffset
-      value: -0.04
-      objectReference: {fileID: 0}
     - target: {fileID: 2241329433610663821, guid: e607e36d8da0d2749958b50215fd8aa1,
         type: 3}
       propertyPath: m_Name
@@ -1451,31 +1434,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3368610304530060854, guid: e607e36d8da0d2749958b50215fd8aa1,
-        type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3368610304530060854, guid: e607e36d8da0d2749958b50215fd8aa1,
-        type: 3}
-      propertyPath: m_CollisionDetection
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3368610304530060854, guid: e607e36d8da0d2749958b50215fd8aa1,
-        type: 3}
-      propertyPath: m_Mass
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 3368610304530060854, guid: e607e36d8da0d2749958b50215fd8aa1,
-        type: 3}
-      propertyPath: m_UseGravity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3368610304530060854, guid: e607e36d8da0d2749958b50215fd8aa1,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 112
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e607e36d8da0d2749958b50215fd8aa1, type: 3}
@@ -1551,15 +1509,5 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 75663051}
-    - target: {fileID: 6478102101392603390, guid: 561c87fe4caccd24c8fa7b24cdac180d,
-        type: 3}
-      propertyPath: resumeButton
-      value: 
-      objectReference: {fileID: 1149430357}
-    - target: {fileID: 6478102101392603391, guid: 561c87fe4caccd24c8fa7b24cdac180d,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 561c87fe4caccd24c8fa7b24cdac180d, type: 3}

@@ -22,7 +22,6 @@ public class finishLevel : MonoBehaviour
         {
             timeToPassToNextLevel += Time.deltaTime;
             door.SetBool("open", false);
-            player.GetComponent<Animator>().SetFloat("speed", player.GetComponent<Animator>().speed - timeToPassToNextLevel*1000);
             if (timeToPassToNextLevel > 2) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }

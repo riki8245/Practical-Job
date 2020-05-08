@@ -8,6 +8,7 @@ TagManager:
   - Platform
   - Portal_1
   - Portal_2
+  - Enemy
   layers:
   - Default
   - TransparentFX
