@@ -20,11 +20,13 @@ public class PressurePlateManager : MonoBehaviour
         {
             allOpen = allOpen && pressurePlates[i].pressed;
         }
-
-        if(allOpen)
+        if (!finishLevel.playerReachFinish)
         {
-            door.SetBool("open", true);
+            if (allOpen)
+            {
+                door.SetBool("open", true);
+            }
+            else door.SetBool("open", false);
         }
-        else door.SetBool("open", false);
     }
 }

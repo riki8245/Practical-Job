@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class finishLevel : MonoBehaviour
 {
-    private bool playerReachFinish = false;
+    public static bool playerReachFinish = false;
     private float timeToPassToNextLevel;
     public Animator door;
     public GameObject player;
