@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -3078,6 +3078,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 6478102101392603390, guid: 561c87fe4caccd24c8fa7b24cdac180d,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1149602637}
     - target: {fileID: 6478102101392603391, guid: 561c87fe4caccd24c8fa7b24cdac180d,
         type: 3}
       propertyPath: m_LocalPosition.z
