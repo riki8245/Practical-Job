@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/Victor/Scenes/MainScene/MainScene.unity
     guid: aa5cddbec9cd5400bb38187f29be8b01
   - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: d1c3109bdb54ad54c8a2b2838528e640
-  - enabled: 0
     path: Assets/Scenes/EntregaCharacterController.unity
     guid: 84d192912a27d4c1bb33a147ccf18a72
   - enabled: 0

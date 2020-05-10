@@ -59,4 +59,4 @@ Material:
     - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
     - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
-    - _UnderlayColor: {r: 0.067268305, g: 0.004049486, b: 0.122641504, a: 1}
+    - _UnderlayColor: {r: 0.7169812, g: 0.2722791, b: 0.20630117, a: 1}
