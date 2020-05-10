@@ -20,8 +20,11 @@ public class BoxController : MonoBehaviour
     private bool b_playerIsMoving;
     private float b_SpeedOverTime;
 
+    public bool gravity;
+
     private void Start()
     {
+        gravity = true;
         p_RelativePos = "";
         b_timePushed = 0f;
         b_AutoMove = false;
@@ -67,7 +70,7 @@ public class BoxController : MonoBehaviour
                 b_SpeedOverTime = 0f;
             }
         }
-        SetGravity();
+        if(gravity) SetGravity();
         b_Controller.Move(b_moveDirection * Time.deltaTime);
     }
 
