@@ -4157,7 +4157,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 1, y: 9}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!1 &751249894
@@ -16314,6 +16314,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe978e040c50c488bb6292263236c282, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  whenSelectedMat: {fileID: 0}
+  whenNotSelectedMat: {fileID: 0}
   texture2Ds:
   - {fileID: 2800000, guid: e23ba20bf40be41ce98702e0cc1688c9, type: 3}
   - {fileID: 2800000, guid: 55941c958cbd3474d899519c5e7521e7, type: 3}

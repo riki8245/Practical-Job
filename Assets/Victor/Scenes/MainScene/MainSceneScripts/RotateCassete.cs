@@ -9,14 +9,15 @@ public class RotateCassete : MonoBehaviour
     Button button;
     GameObject eventSystem;
     public static bool eventSystemBool { get; set; }
-    private Material whenSelectedMat;
+    public Material whenSelectedMat;
+    public Material whenNotSelectedMat;
+
     private MeshRenderer cassete;
     public Texture2D[] texture2Ds;
     public Transform onSelectedPos;
     private Vector3 onNotSelectedPos;
     static Quaternion actualRotation;
-    static bool animCompleted = true;
-    private Material baseMat;
+    static bool animCompleted;
     private void Awake()
     {
         if (!this.gameObject.name.Equals("OnlyRotation"))
@@ -24,11 +25,10 @@ public class RotateCassete : MonoBehaviour
             this.button = this.gameObject.GetComponent<Button>();
             this.cassete = this.gameObject.GetComponentInChildren<MeshRenderer>();
             this.onNotSelectedPos = this.transform.position;
-            this.baseMat = this.cassete.materials[1];
-            this.whenSelectedMat = this.baseMat;
-            this.baseMat.SetTexture("_BaseMap", texture2Ds[0]);
+            Material[] materials = this.cassete.materials;
         }
         else eventSystemBool = false;
+        animCompleted = true;
         this.eventSystem = GameObject.Find("EventSystem");
 
 
@@ -44,17 +44,12 @@ public class RotateCassete : MonoBehaviour
             {
                 if (animCompleted)
                 {
-                    iTween.MoveTo(this.gameObject, onSelectedPos.position, 1f);
-                    iTween.ScaleTo(this.gameObject, new Vector3(-.2f, -.2f, .2f), 1f);
-                    this.gameObject.transform.rotation = Quaternion.Euler(133.4f, 90f, 0f);
+                    iTween.MoveTo(this.gameObject,iTween.Hash("x", onSelectedPos.position.x, "y", onSelectedPos.position.y, "z", onSelectedPos.position.z, "time",.5f,"onStart","ChangeMaterial"));
+                    iTween.ScaleTo(this.gameObject, new Vector3(-.3f, -.3f, .3f), .5f);
+                    iTween.RotateTo(this.gameObject, new Vector3(133.4f, 90f, 0f), .5f);
                     animCompleted = false;
                 }
             }
-            if (!this.gameObject.name.Equals("Back")) this.whenSelectedMat.SetTexture("_BaseMap", texture2Ds[int.Parse(this.gameObject.name.Substring(5))]);
-            else this.whenSelectedMat.SetTexture("_BaseMap", texture2Ds[texture2Ds.Length - 1]);
-            Material[] materials = this.cassete.materials;
-            materials[1] = whenSelectedMat;
-            this.cassete.materials = materials;
         }
         else
         {
@@ -63,8 +58,7 @@ public class RotateCassete : MonoBehaviour
                 iTween.MoveTo(this.gameObject, iTween.Hash("name", "backToOg","x", this.onNotSelectedPos.x,"y", this.onNotSelectedPos.y,"z", this.onNotSelectedPos.z,"time",.5f,"onComplete","AnimCompleted"));
                 iTween.ScaleTo(this.gameObject, new Vector3(-.1f, -.1f, .1f), .5f);
                 Material[] materials = this.cassete.materials;
-                materials[1] = baseMat;
-                print(this.baseMat);
+                materials[1] = whenNotSelectedMat;
                 this.cassete.materials = materials;
             }
             else {
@@ -76,5 +70,13 @@ public class RotateCassete : MonoBehaviour
     {
         animCompleted = true;
         this.transform.rotation = actualRotation;
+    }
+    private void ChangeMaterial()
+    {
+        if (!this.gameObject.name.Equals("Back")) this.whenSelectedMat.SetTexture("_BaseMap", texture2Ds[int.Parse(this.gameObject.name.Substring(5))]);
+        else this.whenSelectedMat.SetTexture("_BaseMap", texture2Ds[texture2Ds.Length - 1]);
+        Material[] materials = this.cassete.materials;
+        materials[1] = whenSelectedMat;
+        this.cassete.materials = materials;
     }
 }

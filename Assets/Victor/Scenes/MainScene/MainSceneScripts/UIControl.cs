@@ -197,13 +197,13 @@ public class UIControl : MonoBehaviour
     public void ReturnMainMenu()
     {
         if(eSystemAbleToSelect)
-            StartCoroutine(LoadYourAsyncScene());
+            StartCoroutine(LoadYourAsyncScene(0));
         eSystemAbleToSelect = false;
     }
 
-    IEnumerator LoadYourAsyncScene()
+    IEnumerator LoadYourAsyncScene(int scene)
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(0);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene);
 
         while (!asyncLoad.isDone)
         {
@@ -256,5 +256,8 @@ public class UIControl : MonoBehaviour
     public void SelectLevel(GameObject gameObject)
     {
         currentLevel = int.Parse(gameObject.name.Substring(5));
+        if (eSystemAbleToSelect)
+            StartCoroutine(LoadYourAsyncScene(currentLevel));
+        eSystemAbleToSelect = false;
     }    
 }

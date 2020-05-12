@@ -205,6 +205,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe978e040c50c488bb6292263236c282, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  whenSelectedMat: {fileID: 2100000, guid: 611ed7f8fa6284a7e950db83816722ee, type: 2}
+  whenNotSelectedMat: {fileID: 2100000, guid: bf7cce723b41655478dd320f30d97cad, type: 2}
   texture2Ds:
   - {fileID: 2800000, guid: e23ba20bf40be41ce98702e0cc1688c9, type: 3}
   - {fileID: 2800000, guid: 55941c958cbd3474d899519c5e7521e7, type: 3}
