@@ -87,12 +87,14 @@ public class UIControl : MonoBehaviour
     
     private void MoveCharacter()
     {
+        character.GetComponent<Animator>().SetFloat("speed", 1f);
         iTween.MoveTo(character, iTween.Hash("Path", characterPath, "easeType", "linear", "time", 1f));
         iTween.RotateTo(character, iTween.Hash("y", -90f, "easeType", "easeInOutQuad", "oncomplete", "LoadLevelSelector", "time", 1f, "onCompleteTarget", this.gameObject));
     }
 
     private void LoadLevelSelector()
     {
+        character.GetComponent<Animator>().SetFloat("speed", 0f);
         foreach (GameObject gameObj in toDisableObjects) iTween.ScaleTo(gameObj, iTween.Hash("x", 0, "y", 0, "easeType", "easeOutSine", "time", 1f, "onComplete", "DisableObjects", "onCompleteTarget", this.gameObject, "onCompleteParams", gameObj));
         iTween.MoveTo(mainCamera, iTween.Hash("x",-3f,"y", 7.75f,"z", 5.75f,"time", 1f,"easeType","linear"));
         iTween.RotateTo(mainCamera, iTween.Hash("x", 31.8, "y", -90f,"time", 1f, "easeType", "linear"));
@@ -255,6 +257,5 @@ public class UIControl : MonoBehaviour
     public void SelectLevel(GameObject gameObject)
     {
         currentLevel = int.Parse(gameObject.name.Substring(5));
-        print(currentLevel);
     }    
 }

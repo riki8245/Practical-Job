@@ -209,6 +209,22 @@ MonoBehaviour:
   materials:
   - {fileID: 2100000, guid: c72066418addd7d4980588cab741a36e, type: 2}
   - {fileID: 2100000, guid: 3dad5181c97a5174bb08118e7e881cc2, type: 2}
+  whenSelectedMat: {fileID: 2100000, guid: 611ed7f8fa6284a7e950db83816722ee, type: 2}
+  texture2Ds:
+  - {fileID: 2800000, guid: e23ba20bf40be41ce98702e0cc1688c9, type: 3}
+  - {fileID: 2800000, guid: 527ec24440fa1441eaff567a5a8abfe6, type: 3}
+  - {fileID: 2800000, guid: 39de66ecfcf4a4ae0ad65fbb71f47b7b, type: 3}
+  - {fileID: 2800000, guid: f469773c041f347a1bb4a8a761a0b4a3, type: 3}
+  - {fileID: 2800000, guid: 286babc7bd13c41d19f9231f57b35349, type: 3}
+  - {fileID: 2800000, guid: 5cfe7af63b4544b27abf7bcd3d63630e, type: 3}
+  - {fileID: 2800000, guid: 8464bef0d7dfd4b6a858a2875918d6e6, type: 3}
+  - {fileID: 2800000, guid: 0dd5196488f7a4ba68c3abcde1247a0c, type: 3}
+  - {fileID: 2800000, guid: b87ee7bddb6654040aae8f3699288f13, type: 3}
+  - {fileID: 2800000, guid: 065d60434789544b3ad7cc0f67ce2e6a, type: 3}
+  - {fileID: 2800000, guid: 510d5c95f420b444dbf29f453a43b761, type: 3}
+  - {fileID: 2800000, guid: f38c22c41a2844645b1ae7c465bceabd, type: 3}
+  - {fileID: 2800000, guid: 28587ae8bda53428db1e7141b9e9384f, type: 3}
+  onSelectedPos: {fileID: 0}
 --- !u!205 &95510955
 LODGroup:
   m_ObjectHideFlags: 0
