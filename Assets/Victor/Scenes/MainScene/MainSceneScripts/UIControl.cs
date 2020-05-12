@@ -182,7 +182,6 @@ public class UIControl : MonoBehaviour
             case "Levels":
                 this.eventSystem.GetComponent<EventSystem>().firstSelectedGameObject = eSystem_firstSelected[3];
                 this.eventSystem.GetComponent<EventSystem>().SetSelectedGameObject(eSystem_firstSelected[3]);
-                print(this.eventSystem.GetComponent<EventSystem>().currentSelectedGameObject);
                 RotateCassete.eventSystemBool = true;
                 break;
         }
