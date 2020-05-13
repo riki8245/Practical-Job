@@ -26,7 +26,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject p_Head;
     [SerializeField] private Material neutral, scary, vulnerable;
     public Material[] mats;
-    public CameraAdjust cameraAdjust;
 
     public Vector3 p_moveDirection;
     private Vector3 p_input;
