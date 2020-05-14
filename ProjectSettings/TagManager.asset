@@ -23,7 +23,7 @@ TagManager:
   - Floor
   - Player
   - Passable
-  - Cheating
+  - SlopeLimitCollider
   - cast
   - 
   - 
