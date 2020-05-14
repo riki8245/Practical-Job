@@ -11,6 +11,7 @@ public class RotateCassete : MonoBehaviour
     public static bool eventSystemBool { get; set; }
     public Material whenSelectedMat;
     public Material whenNotSelectedMat;
+    public GameObject ifSelected;
 
     private MeshRenderer cassete;
     public Texture2D[] texture2Ds;
@@ -58,6 +59,7 @@ public class RotateCassete : MonoBehaviour
                 iTween.MoveTo(this.gameObject, iTween.Hash("name", "backToOg","x", this.onNotSelectedPos.x,"y", this.onNotSelectedPos.y,"z", this.onNotSelectedPos.z,"time",.5f,"onComplete","AnimCompleted"));
                 iTween.ScaleTo(this.gameObject, new Vector3(-.1f, -.1f, .1f), .5f);
                 Material[] materials = this.cassete.materials;
+                ifSelected.SetActive(false);
                 materials[1] = whenNotSelectedMat;
                 this.cassete.materials = materials;
             }
@@ -76,6 +78,7 @@ public class RotateCassete : MonoBehaviour
         if (!this.gameObject.name.Equals("Back")) this.whenSelectedMat.SetTexture("_BaseMap", texture2Ds[int.Parse(this.gameObject.name.Substring(5))]);
         else this.whenSelectedMat.SetTexture("_BaseMap", texture2Ds[texture2Ds.Length - 1]);
         Material[] materials = this.cassete.materials;
+        ifSelected.SetActive(true);
         materials[1] = whenSelectedMat;
         this.cassete.materials = materials;
     }

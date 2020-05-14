@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 6e75a09b0b9dd4a9b8e3099230add86a,
     type: 2}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -16381,6 +16381,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whenSelectedMat: {fileID: 0}
   whenNotSelectedMat: {fileID: 0}
+  ifSelected: {fileID: 0}
   texture2Ds:
   - {fileID: 2800000, guid: e23ba20bf40be41ce98702e0cc1688c9, type: 3}
   - {fileID: 2800000, guid: 55941c958cbd3474d899519c5e7521e7, type: 3}
