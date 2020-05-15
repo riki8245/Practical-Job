@@ -114,42 +114,46 @@ public class UIControl : MonoBehaviour
 
     private void Update()
     {
-        if (eSystemAbleToSelect)
+        try
         {
-            eSystem_currentSelected = this.eventSystem.GetComponent<EventSystem>().currentSelectedGameObject;
-            if (eSystem_currentSelected.name.Equals("VolumeSlider"))
+            if (eSystemAbleToSelect)
             {
-                backgroundImgs[0].color = new Color(0, 248, 250, 255);
-                backgroundImgs[1].color = Color.white;
+                eSystem_currentSelected = this.eventSystem.GetComponent<EventSystem>().currentSelectedGameObject;
+                if (eSystem_currentSelected.name.Equals("VolumeSlider"))
+                {
+                    backgroundImgs[0].color = new Color(0, 248, 250, 255);
+                    backgroundImgs[1].color = Color.white;
 
+                }
+                else if (eSystem_currentSelected.name.Equals("SFXSlider"))
+                {
+                    backgroundImgs[1].color = new Color(0, 248, 250, 255);
+                    backgroundImgs[0].color = Color.white;
+                }
+                else
+                {
+                    backgroundImgs[1].color = Color.white;
+                    backgroundImgs[0].color = Color.white;
+                }
             }
-            else if (eSystem_currentSelected.name.Equals("SFXSlider"))
+            if (changeColor)
             {
-                backgroundImgs[1].color = new Color(0, 248, 250, 255);
-                backgroundImgs[0].color = Color.white;
+                buttonColor.selectedColor = Color.Lerp(new Color(0f, 0f, 0f, 0f), new Color(245f, 245f, 245f, 1f), buttonColorAnim);
+                eSystem_firstSelected[0].GetComponent<Button>().colors = buttonColor;
+                if (buttonColor.selectedColor.Equals(Color.white)) changeColor = false;
+                else if (buttonColorAnim < 1f) buttonColorAnim += Time.deltaTime / 2f;
             }
-            else
+            if (lerpCamera)
             {
-                backgroundImgs[1].color = Color.white;
-                backgroundImgs[0].color = Color.white;
+                Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 27.3f, 2f * Time.deltaTime);
+                if (Camera.main.fieldOfView - 27.3f < .5f)
+                {
+                    lerpCamera = false;
+                    Able_eSystemInput("Levels");
+                }
             }
         }
-        if (changeColor)
-        {
-            buttonColor.selectedColor = Color.Lerp(new Color(0f, 0f, 0f, 0f), new Color(245f,245f,245f,1f), buttonColorAnim);
-            eSystem_firstSelected[0].GetComponent<Button>().colors = buttonColor;
-            if (buttonColor.selectedColor.Equals(Color.white)) changeColor = false;
-            else if(buttonColorAnim < 1f) buttonColorAnim += Time.deltaTime/2f;
-        }
-        if (lerpCamera)
-        {
-            Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 27.3f, 2f * Time.deltaTime);
-            if (Camera.main.fieldOfView - 27.3f < .5f)
-            {
-                lerpCamera = false;
-                Able_eSystemInput("Levels");
-            }
-        }
+        catch (System.NullReferenceException) { }
     }
 
     private void LoadSettingsMenu()
@@ -204,11 +208,7 @@ public class UIControl : MonoBehaviour
     IEnumerator LoadYourAsyncScene(int scene)
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene);
-
-        while (!asyncLoad.isDone)
-        {
-            yield return null;
-        }
+        while (!asyncLoad.isDone){yield return null;}
     }
 
     private void DisableObjects(GameObject game)

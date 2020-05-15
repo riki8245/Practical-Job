@@ -6,80 +6,62 @@ using UnityEngine.UI;
 
 public class RotateCassete : MonoBehaviour
 {
-    Button button;
     GameObject eventSystem;
     public static bool eventSystemBool { get; set; }
-    public Material whenSelectedMat;
-    public Material whenNotSelectedMat;
     public GameObject ifSelected;
-
-    private MeshRenderer cassete;
-    public Texture2D[] texture2Ds;
     public Transform onSelectedPos;
-    private Vector3 onNotSelectedPos;
+    public UIControl uIControl;
     static Quaternion actualRotation;
-    static bool animCompleted;
+    private bool animating;
+
     private void Awake()
     {
-        if (!this.gameObject.name.Equals("OnlyRotation"))
-        {
-            this.button = this.gameObject.GetComponent<Button>();
-            this.cassete = this.gameObject.GetComponentInChildren<MeshRenderer>();
-            this.onNotSelectedPos = this.transform.position;
-            Material[] materials = this.cassete.materials;
-        }
-        else eventSystemBool = false;
-        animCompleted = true;
-        this.eventSystem = GameObject.Find("EventSystem");
-
-
-
+        animating = false;
+        eventSystemBool = false;
+        eventSystem = GameObject.Find("EventSystem");
+        eventSystem.GetComponent<EventSystem>().enabled = true;
     }
     // Update is called once per frame
     void Update()
     {
-        if (this.gameObject.name.Equals("OnlyRotation")) actualRotation = this.transform.rotation;
-        if (eventSystemBool && this.eventSystem.GetComponent<EventSystem>().currentSelectedGameObject.Equals(this.gameObject))
+        try
         {
-            if (this.transform.position != onSelectedPos.position)
+            if (this.gameObject.name.Equals("OnlyRotation")) actualRotation = this.transform.rotation;
+            if (eventSystemBool && eventSystem.GetComponent<EventSystem>().currentSelectedGameObject.Equals(this.gameObject))
             {
-                if (animCompleted)
+                ifSelected.SetActive(true);
+                if (!this.transform.rotation.Equals(Quaternion.Euler(133.4f, 90f, 0f)) && !animating)
                 {
-                    iTween.MoveTo(this.gameObject,iTween.Hash("x", onSelectedPos.position.x, "y", onSelectedPos.position.y, "z", onSelectedPos.position.z, "time",.5f,"onStart","ChangeMaterial"));
-                    iTween.ScaleTo(this.gameObject, new Vector3(-.3f, -.3f, .3f), .5f);
+                    this.animating = true;
                     iTween.RotateTo(this.gameObject, new Vector3(133.4f, 90f, 0f), .5f);
-                    animCompleted = false;
                 }
             }
-        }
-        else
-        {
-            if (this.transform.position == this.onSelectedPos.position && !this.gameObject.name.Equals("OnlyRotation"))
+            else
             {
-                iTween.MoveTo(this.gameObject, iTween.Hash("name", "backToOg","x", this.onNotSelectedPos.x,"y", this.onNotSelectedPos.y,"z", this.onNotSelectedPos.z,"time",.5f,"onComplete","AnimCompleted"));
-                iTween.ScaleTo(this.gameObject, new Vector3(-.1f, -.1f, .1f), .5f);
-                Material[] materials = this.cassete.materials;
                 ifSelected.SetActive(false);
-                materials[1] = whenNotSelectedMat;
-                this.cassete.materials = materials;
-            }
-            else {
-                transform.Rotate(30f * Time.deltaTime, 30f * Time.deltaTime, 30f * Time.deltaTime);
+                if (this.animating) this.animating = false;
+                if (!this.transform.rotation.Equals(actualRotation)) this.transform.rotation = actualRotation;
+                transform.Rotate(-30f * Time.deltaTime, -30f * Time.deltaTime, -30f * Time.deltaTime);
             }
         }
+        catch (System.NullReferenceException){
+        }
+        
+        
     }
-    private void AnimCompleted()
+    public void selectLevel()
     {
-        animCompleted = true;
-        this.transform.rotation = actualRotation;
+        if (eventSystemBool)
+        {
+            eventSystem.GetComponent<EventSystem>().enabled = false;
+            iTween.MoveTo(this.gameObject, iTween.Hash("x", onSelectedPos.position.x, "y", onSelectedPos.position.y, "z", onSelectedPos.position.z, "time", .5f, "onComplete", "LoadLevel"));
+            iTween.ScaleTo(this.gameObject, new Vector3(-.3f, -.3f, .3f), .5f);
+            iTween.RotateTo(this.gameObject, new Vector3(133.4f, 90f, 0f), .5f);
+        }
     }
-    private void ChangeMaterial()
-    {
-        if (!this.gameObject.name.Equals("Back")) this.whenSelectedMat.SetTexture("_BaseMap", texture2Ds[int.Parse(this.gameObject.name.Substring(5))]);
-        else this.whenSelectedMat.SetTexture("_BaseMap", texture2Ds[texture2Ds.Length - 1]);
-        Material[] materials = this.cassete.materials;
-        ifSelected.SetActive(true);
-        materials[1] = whenSelectedMat;
-        this.cassete.materials = materials;
+    private void LoadLevel() {
+        new WaitForSeconds(1f);
+        uIControl.SelectLevel(this.gameObject);
     }
+    
 }
