@@ -17,11 +17,11 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Victor/Scenes/TestScene/TestScene.unity
     guid: c43c2051ed99749a5a446442bbcf4890
-  - enabled: 1
+  - enabled: 0
     path: Assets/Victor/Scenes/TestSceneV2/TestModuleScene.unity
     guid: 685a41fbf3b0c47788db9f07e77f933f
-  - enabled: 0
-    path: Assets/EscenasPochas/Level 1.unity
+  - enabled: 1
+    path: Assets/EscenasFinales/Level 1.unity
     guid: 7e6cd5c0dc9ce9e45a1afb33989806f7
   - enabled: 1
     path: Assets/EscenasPochas/Level 2.unity
