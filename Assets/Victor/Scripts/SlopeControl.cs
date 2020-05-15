@@ -12,17 +12,12 @@ public class SlopeControl : MonoBehaviour
     private void Awake()
     {
         childPos = this.gameObject.GetComponentsInChildren<Transform>()[1];
-        ry = this.transform.rotation.y;
+        ry = this.transform.eulerAngles.y;
         RaycastHit outRay;
         if (Physics.Raycast(this.childPos.position, -Vector3.up * 10, out outRay))
             slopeNormalV = outRay.normal;
         getAngle(slopeNormalV);
     }
-    //private void Update()
-    //{
-    //    Debug.DrawRay(this.childPos.position, -Vector3.up, Color.red);
-    //    Debug.DrawRay(this.childPos.position, slopeNormalV, Color.green);
-    //}
     private void getAngle(Vector3 normal)
     {
         Vector3 vec1 = Vector3.up;

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,7 +11,10 @@ public class GameManager : MonoBehaviour
     public bool c_enableShadows;
     public int  currentLevel;
 
-
+    private void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
     public void SaveGame()
     {
         SaveSystem.SaveGame(this);
@@ -25,5 +29,8 @@ public class GameManager : MonoBehaviour
         this.c_enableShadows = data.c_enableShadows;
         this.currentLevel    = data.currentLevel;
     }
-
+    void Update()
+    {
+        if (!SceneManager.GetActiveScene().name.Equals("MainMenu") && !SceneManager.GetSceneByName("PauseMenu").isLoaded) SceneManager.LoadScene("PauseMenu", LoadSceneMode.Additive);
+    }
 }

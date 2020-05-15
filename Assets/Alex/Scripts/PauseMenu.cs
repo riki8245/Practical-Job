@@ -1,50 +1,55 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
 public class PauseMenu : MonoBehaviour
 {
-    public static bool GameIsPaused = false; // Con esta variable podemos controlar también si queremos pausar la música que pongamos
-    public GameObject player;
+    private static bool GameIsPaused = false; // Con esta variable podemos controlar también si queremos pausar la música que pongamos
     public GameObject pauseMenuIU;
-    public Button resumeButton;
+    public GameObject firstButton;
 
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Joystick1Button7) || Input.GetKeyDown(KeyCode.Escape)) // Hay que cambiarlo por el botón de Start
         {
+            print("entra");
             if(GameIsPaused)
-            {
                 Resume();
-            }
             else
-            {
                 Pause();
-            }
         }
     }
 
     public void Resume()
     {
-        //if(resumeButton.)
         pauseMenuIU.SetActive(false);
-        Time.timeScale = 1f;
-        player.GetComponent<CharacterController>().enabled = true;
-        player.GetComponent<PlayerController>().enabled = true;
+        GameObject[] characters = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject item in characters)
+        {
+            item.GetComponent<PlayerControl>().enabled = true;
+        }
         GameIsPaused = false;
+        Time.timeScale = 1f;
+
     }
 
     void Pause()
     {
+        StartCoroutine(FixEventSystem());
+        pauseMenuIU.transform.localScale = new Vector3(0f, 0f, 0f);
         pauseMenuIU.SetActive(true);
-        Time.timeScale = 0f;
-        //resumeButton.Select();
-        player.GetComponent<CharacterController>().enabled = false;
-        player.GetComponent<PlayerController>().enabled = false;
+        GameObject[] characters = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject item in characters)
+        {
+            item.GetComponent<PlayerControl>().enabled = false;
+        }
         GameIsPaused = true;
+        Time.timeScale = 0f;
+        iTween.ScaleTo(pauseMenuIU,iTween.Hash("x",1f,"y",1f,"z",1f,"time",.2f,"onComplete","OnAnimationEnded","onCompleteTarget",this.gameObject,"ignoretimescale",true));
     }
 
     public void LoadMenu()
@@ -52,9 +57,16 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene(0);
     }
-
-    public void ExitGame()
+   void OnAnimationEnded()
     {
-        Application.Quit();
+        
+    }
+    public void ExitGame() { Application.Quit(); }
+    IEnumerator FixEventSystem()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        yield return new WaitForEndOfFrame();
+        EventSystem.current.SetSelectedGameObject(firstButton);
+
     }
 }

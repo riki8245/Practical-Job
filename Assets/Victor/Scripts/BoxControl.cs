@@ -22,16 +22,6 @@ public class BoxControl : MonoBehaviour
         else
             StartCoroutine(RotateToPosition(Quaternion.Euler(0f, this.transform.localRotation.y, 0f), .2f));
     }
-    
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag.Equals("Player"))
-        {
-            other.GetComponent<PlayerControl>().box = this.gameObject;
-            checkPlayerPosition = true;
-            playerSide = "";
-        }
-    }
     private void Update()
     {
         if (checkPlayerPosition)
@@ -53,6 +43,15 @@ public class BoxControl : MonoBehaviour
             else
                 playerSide = "";
 
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag.Equals("Player"))
+        {
+            other.GetComponent<PlayerControl>().box = this.gameObject;
+            checkPlayerPosition = true;
+            playerSide = "";
         }
     }
     private void OnTriggerExit(Collider other)

@@ -16,10 +16,11 @@ public class PlayerControl : MonoBehaviour
     public GameObject box;
     private bool pushingOut;
     [SerializeField] float forceToPushBox;
-    public Collider[] colliders = new Collider[2];
     public Transform movingBoxRayPosition;
     public bool canMoveBox;
     String playerPosRelativeBox;
+    int playerLayer;
+    int slopeLayer;
     private void Awake()
     {
         this.characterController = this.GetComponent<CharacterController>();
@@ -30,8 +31,8 @@ public class PlayerControl : MonoBehaviour
         box = null;
         forceToPushBox = 0f;
         playerPosRelativeBox = "";
-        int playerLayer = LayerMask.NameToLayer("Player");
-        int slopeLayer = LayerMask.NameToLayer("SlopeLimitCollider");
+        playerLayer = LayerMask.NameToLayer("Player");
+        slopeLayer = LayerMask.NameToLayer("SlopeLimitCollider");
     }
     private void Update()
     {
@@ -39,8 +40,7 @@ public class PlayerControl : MonoBehaviour
         float p_verticalMove = Input.GetAxis("Vertical");
         MovePlayer(p_horizontalMove , p_verticalMove);
         inFrontBox = Physics.Raycast(transform.position, transform.forward,50f,LayerMask.GetMask("Boxes"));
-        Debug.DrawRay(transform.position, transform.forward, Color.red);
-        Physics.IgnoreCollision(colliders[0], colliders[1], !grabbingBox);
+        Physics.IgnoreLayerCollision(playerLayer, slopeLayer, !grabbingBox);
     }
    
     private void MovePlayer(float p_horizontalMove, float p_verticalMove)
@@ -65,7 +65,6 @@ public class PlayerControl : MonoBehaviour
             else if (axisToUseWhileBox == 2)
                 p_input.x = 0f;
             p_input *= Mathf.Clamp(p_Speed, .1f, p_Speed);
-            Debug.DrawRay(movingBoxRayPosition.position, transform.forward * 10f, Color.yellow);
             if (Physics.Raycast(movingBoxRayPosition.position, transform.forward, .1f))
             {
                 if ((playerPosRelativeBox.Equals("inRight") && p_input.x < 0f) || (playerPosRelativeBox.Equals("inBack") && p_input.z > 0f)) p_input = Vector3.zero;
@@ -81,23 +80,26 @@ public class PlayerControl : MonoBehaviour
     {
         if (box != null)
         {
-            if (canMoveBox && inFrontBox && !box.GetComponent<BoxControl>().playerSide.Equals("")) //Dentro del trigger + delante de la caja
+            if (inFrontBox && !box.GetComponent<BoxControl>().playerSide.Equals("")) //Dentro del trigger + delante de la caja
             {
                 playerPosRelativeBox = box.GetComponent<BoxControl>().playerSide;
-                if (Input.GetButtonDown("Fire1"))
+                if (canMoveBox)
                 {
-                    axisToUseWhileBox = playerPosRelativeBox.Equals("inLeft") || playerPosRelativeBox.Equals("inFront") ? 1 : playerPosRelativeBox.Equals("inBack") || playerPosRelativeBox.Equals("inRight") ? 2 : 0;
-                    LookAtBox();
-                    box.transform.parent = this.transform;
-                    grabbingBox = true;
+                    if (Input.GetButtonDown("Fire1"))
+                    {
+                        axisToUseWhileBox = playerPosRelativeBox.Equals("inLeft") || playerPosRelativeBox.Equals("inFront") ? 1 : playerPosRelativeBox.Equals("inBack") || playerPosRelativeBox.Equals("inRight") ? 2 : 0;
+                        LookAtBox();
+                        box.transform.parent = this.transform;
+                        grabbingBox = true;
+                    }
+                    else if (Input.GetButtonUp("Fire1"))
+                    {
+                        box.transform.parent = null;
+                        grabbingBox = false;
+                        playerPosRelativeBox = "";
+                    }
                 }
-                if (Input.GetButtonUp("Fire1"))
-                {
-                box.transform.parent = null;
-                grabbingBox = false;
-                this.characterController.radius = .5f;
-                playerPosRelativeBox = "";
-                }
+                
                 if (!grabbingBox)
                 {
                     if (Input.GetButtonDown("Fire3"))
@@ -106,9 +108,9 @@ public class PlayerControl : MonoBehaviour
                         pushingOut = true;
                         forceToPushBox = 0f;
                     }
-                    if (Input.GetButton("Fire3") && !grabbingBox)
+                    else if (Input.GetButton("Fire3") && !grabbingBox)
                         forceToPushBox += Time.deltaTime;
-                    if (Input.GetButtonUp("Fire3"))
+                    else if (Input.GetButtonUp("Fire3"))
                     {
                         box.GetComponent<BoxControl>().PushBox(forceToPushBox);
                         pushingOut = false;
@@ -140,27 +142,27 @@ public class PlayerControl : MonoBehaviour
     private void LookAtBox()
     {
         switch (playerPosRelativeBox)
-                    {
-                        case "inLeft":
-                            this.transform.rotation = Quaternion.Euler(this.transform.rotation.x, 90f, this.transform.rotation.z);
-                            axisToUseWhileBox = 1;
-                            break;
-                        case "inRight":
-                            this.transform.rotation = Quaternion.Euler(this.transform.rotation.x, -90f, this.transform.rotation.z);
-                            axisToUseWhileBox = 1;
-                            break;
-                        case "inFront":
-                            this.transform.rotation = Quaternion.Euler(this.transform.rotation.x, 180f, this.transform.rotation.z);
-                            axisToUseWhileBox = 2;
-                            break;
-                        case "inBack":
-                            this.transform.rotation = Quaternion.Euler(this.transform.rotation.x, 0f, this.transform.rotation.z);
-                            axisToUseWhileBox = 2;
-                            break;
-                        default:
-                            axisToUseWhileBox = 0;
-                            break;
-                    }
+        {
+            case "inLeft":
+                this.transform.rotation = Quaternion.Euler(this.transform.rotation.x, 90f, this.transform.rotation.z);
+                axisToUseWhileBox = 1;
+                break;
+            case "inRight":
+                this.transform.rotation = Quaternion.Euler(this.transform.rotation.x, -90f, this.transform.rotation.z);
+                axisToUseWhileBox = 1;
+                break;
+            case "inFront":
+                this.transform.rotation = Quaternion.Euler(this.transform.rotation.x, 180f, this.transform.rotation.z);
+                axisToUseWhileBox = 2;
+                break;
+            case "inBack":
+                this.transform.rotation = Quaternion.Euler(this.transform.rotation.x, 0f, this.transform.rotation.z);
+                axisToUseWhileBox = 2;
+                break;
+            default:
+                axisToUseWhileBox = 0;
+                break;
+        }
     }
   
 }
