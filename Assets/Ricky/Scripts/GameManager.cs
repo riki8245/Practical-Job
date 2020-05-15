@@ -10,10 +10,21 @@ public class GameManager : MonoBehaviour
     public bool c_enableMSAA;
     public bool c_enableShadows;
     public int  currentLevel;
+    public float[] FOVs;
 
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+        
+    }
+    void Start()
+    {
+        Resolution[] resolutions = Screen.resolutions;
+        foreach (Resolution res in resolutions)
+        {
+            print(res.width + "x" + res.height);
+        }
+        Screen.SetResolution(resolutions[0].width, resolutions[0].height, true);
     }
     public void SaveGame()
     {
