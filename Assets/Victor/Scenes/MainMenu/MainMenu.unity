@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 6e75a09b0b9dd4a9b8e3099230add86a,
     type: 2}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1053,6 +1053,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 600239809}
     m_Modifications:
+    - target: {fileID: 8767194010653304014, guid: eae787680107c4f64a89d025e18f22ed,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8767194010653304018, guid: eae787680107c4f64a89d025e18f22ed,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2081,6 +2086,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7932919378157360981, guid: 1356b65119ce34f299e145d89f2c3131,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7932919378157360982, guid: 1356b65119ce34f299e145d89f2c3131,
         type: 3}
       propertyPath: m_Name
@@ -2178,6 +2188,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 600239809}
     m_Modifications:
+    - target: {fileID: 4549921193752109445, guid: 02b3c89c5012b46f7a12eaac779863d4,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4549921193752109465, guid: 02b3c89c5012b46f7a12eaac779863d4,
         type: 3}
       propertyPath: m_Name
@@ -3131,6 +3146,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3238027656577286636, guid: 02e418d64809c4b25affed82db5054bd,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02e418d64809c4b25affed82db5054bd, type: 3}
 --- !u!4 &437799675 stripped
@@ -3379,6 +3399,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101204013006629963, guid: a15509ed1f2664731b3278e0a66d3f91,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8341587198126269731, guid: a15509ed1f2664731b3278e0a66d3f91,
         type: 3}
@@ -8235,6 +8260,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 5101204013006629963, guid: a15509ed1f2664731b3278e0a66d3f91,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8341587198126269731, guid: a15509ed1f2664731b3278e0a66d3f91,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9370,6 +9400,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 2601542695454922640, guid: 61b654d70ffa54854bf0ea178bb638a0,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2601542695454922643, guid: 61b654d70ffa54854bf0ea178bb638a0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10073,6 +10108,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 5101204013006629963, guid: a15509ed1f2664731b3278e0a66d3f91,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8341587198126269731, guid: a15509ed1f2664731b3278e0a66d3f91,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10624,6 +10664,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3238027656577286636, guid: 02e418d64809c4b25affed82db5054bd,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02e418d64809c4b25affed82db5054bd, type: 3}
 --- !u!1001 &882531966
@@ -10785,6 +10830,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101204013006629963, guid: a15509ed1f2664731b3278e0a66d3f91,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8341587198126269731, guid: a15509ed1f2664731b3278e0a66d3f91,
         type: 3}
@@ -11109,6 +11159,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3238027656577286636, guid: 02e418d64809c4b25affed82db5054bd,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02e418d64809c4b25affed82db5054bd, type: 3}
 --- !u!4 &948575278 stripped
@@ -11397,6 +11452,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 600239809}
     m_Modifications:
+    - target: {fileID: 8476746848735518298, guid: 8d8f17de45bd846a0b4e03ed7b27c45d,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8476746848735518302, guid: 8d8f17de45bd846a0b4e03ed7b27c45d,
         type: 3}
       propertyPath: m_Name
@@ -11664,7 +11724,7 @@ PrefabInstance:
     - target: {fileID: 3238027656577286636, guid: 02e418d64809c4b25affed82db5054bd,
         type: 3}
       propertyPath: m_Convex
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02e418d64809c4b25affed82db5054bd, type: 3}
@@ -11684,6 +11744,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101204013006629963, guid: a15509ed1f2664731b3278e0a66d3f91,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8341587198126269731, guid: a15509ed1f2664731b3278e0a66d3f91,
         type: 3}
@@ -11818,6 +11883,11 @@ PrefabInstance:
     - target: {fileID: 3238027656577286633, guid: 02e418d64809c4b25affed82db5054bd,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3238027656577286636, guid: 02e418d64809c4b25affed82db5054bd,
+        type: 3}
+      propertyPath: m_Convex
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -12163,6 +12233,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7932919378157360981, guid: 1356b65119ce34f299e145d89f2c3131,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7932919378157360982, guid: 1356b65119ce34f299e145d89f2c3131,
         type: 3}
       propertyPath: m_Name
@@ -12306,6 +12381,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 600239809}
     m_Modifications:
+    - target: {fileID: 8476746848735518298, guid: 8d8f17de45bd846a0b4e03ed7b27c45d,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8476746848735518302, guid: 8d8f17de45bd846a0b4e03ed7b27c45d,
         type: 3}
       propertyPath: m_Name
@@ -13257,6 +13337,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 5101204013006629963, guid: a15509ed1f2664731b3278e0a66d3f91,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8341587198126269731, guid: a15509ed1f2664731b3278e0a66d3f91,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13888,6 +13973,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 600239809}
     m_Modifications:
+    - target: {fileID: 8810126099170859113, guid: 45092e54e6a62417fa27b607e2c80113,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8810126099170859116, guid: 45092e54e6a62417fa27b607e2c80113,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14929,6 +15019,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8322413266301640597, guid: 7b3356c0a204f4152b8e660d7bbdbc8d,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b3356c0a204f4152b8e660d7bbdbc8d, type: 3}
 --- !u!1001 &1631499832
@@ -14947,6 +15042,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101204013006629963, guid: a15509ed1f2664731b3278e0a66d3f91,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8341587198126269731, guid: a15509ed1f2664731b3278e0a66d3f91,
         type: 3}
@@ -15368,6 +15468,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 5101204013006629963, guid: a15509ed1f2664731b3278e0a66d3f91,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8341587198126269731, guid: a15509ed1f2664731b3278e0a66d3f91,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15564,6 +15669,11 @@ PrefabInstance:
     - target: {fileID: 6362528526938613061, guid: 1356b65119ce34f299e145d89f2c3131,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932919378157360981, guid: 1356b65119ce34f299e145d89f2c3131,
+        type: 3}
+      propertyPath: m_Convex
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7932919378157360982, guid: 1356b65119ce34f299e145d89f2c3131,
@@ -16362,6 +16472,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7932919378157360981, guid: 1356b65119ce34f299e145d89f2c3131,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7932919378157360982, guid: 1356b65119ce34f299e145d89f2c3131,
         type: 3}
       propertyPath: m_Name
@@ -17070,6 +17185,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 2601542695454922640, guid: 61b654d70ffa54854bf0ea178bb638a0,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2601542695454922643, guid: 61b654d70ffa54854bf0ea178bb638a0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17508,6 +17628,11 @@ PrefabInstance:
     - target: {fileID: 6362528526938613061, guid: 1356b65119ce34f299e145d89f2c3131,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932919378157360981, guid: 1356b65119ce34f299e145d89f2c3131,
+        type: 3}
+      propertyPath: m_Convex
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7932919378157360982, guid: 1356b65119ce34f299e145d89f2c3131,
@@ -17958,6 +18083,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 5101204013006629963, guid: a15509ed1f2664731b3278e0a66d3f91,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8341587198126269731, guid: a15509ed1f2664731b3278e0a66d3f91,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -18037,6 +18167,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101204013006629963, guid: a15509ed1f2664731b3278e0a66d3f91,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8341587198126269731, guid: a15509ed1f2664731b3278e0a66d3f91,
         type: 3}

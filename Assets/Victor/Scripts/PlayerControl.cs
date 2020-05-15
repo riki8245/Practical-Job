@@ -4,23 +4,32 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
     private CharacterController characterController;
-    [SerializeField]private Vector3 p_input;
-    [SerializeField] private float p_Speed;
-    [SerializeField] private bool grabbingBox;
-    [SerializeField] private float p_timeMovingObject;
-    [SerializeField] private int axisToUseWhileBox;
-    [SerializeField] private float p_fallVelocity;
+    private Vector3 p_input;
+    [SerializeField]private Material neutral, scary, vulnerable;
 
+    private float p_Speed;
+    private int axisToUseWhileBox;
+    private float p_fallVelocity;
     private const int p_gravity = 45;
-    public bool inFrontBox;
-    public GameObject box;
+    private float forceToPushBox;
     private bool pushingOut;
-    [SerializeField] float forceToPushBox;
-    public Transform movingBoxRayPosition;
+    private string playerPosRelativeBox;
+    private int playerLayer;
+    private int slopeLayer;
+
+    public int FaceState;
+    public bool inFrontBox;
     public bool canMoveBox;
-    String playerPosRelativeBox;
-    int playerLayer;
-    int slopeLayer;
+    public bool grabbingBox;
+
+    public Transform movingBoxRayPosition;
+    public GameObject box;
+    private Material[] mats;
+
+    public GameObject p_Head;
+
+
+
     private void Awake()
     {
         this.characterController = this.GetComponent<CharacterController>();
@@ -33,6 +42,9 @@ public class PlayerControl : MonoBehaviour
         playerPosRelativeBox = "";
         playerLayer = LayerMask.NameToLayer("Player");
         slopeLayer = LayerMask.NameToLayer("SlopeLimitCollider");
+        mats = p_Head.GetComponent<SkinnedMeshRenderer>().materials;
+        mats[1] = neutral;
+        FaceState = 0;
     }
     private void Update()
     {
@@ -41,8 +53,30 @@ public class PlayerControl : MonoBehaviour
         MovePlayer(p_horizontalMove , p_verticalMove);
         inFrontBox = Physics.Raycast(transform.position, transform.forward,50f,LayerMask.GetMask("Boxes"));
         Physics.IgnoreLayerCollision(playerLayer, slopeLayer, !grabbingBox);
+        ChangeFaceTexture();
     }
-   
+    private void ChangeFaceTexture()
+    {
+        if (Input.GetButtonUp("Fire2"))
+        {
+            ChangeFaceState();
+            switch (mats[1].name.ToString())
+            {
+                case "Face_neutral": mats[1] = vulnerable; break;
+                case "Face_scary": mats[1] = neutral; break;
+                case "Face_vulnerable": mats[1] = scary; break;
+                default: break;
+            }
+            p_Head.GetComponent<SkinnedMeshRenderer>().materials = mats;
+        }
+    }
+
+    void ChangeFaceState()
+    {
+        if (FaceState == 2) FaceState = 0;
+        else FaceState++;
+    }
+
     private void MovePlayer(float p_horizontalMove, float p_verticalMove)
     {
         p_input = new Vector3(p_horizontalMove, 0f, p_verticalMove);
@@ -65,7 +99,7 @@ public class PlayerControl : MonoBehaviour
             else if (axisToUseWhileBox == 2)
                 p_input.x = 0f;
             p_input *= Mathf.Clamp(p_Speed, .1f, p_Speed);
-            if (Physics.Raycast(movingBoxRayPosition.position, transform.forward, .1f))
+            if (Physics.Raycast(movingBoxRayPosition.position, this.transform.forward, .1f))
             {
                 if ((playerPosRelativeBox.Equals("inRight") && p_input.x < 0f) || (playerPosRelativeBox.Equals("inBack") && p_input.z > 0f)) p_input = Vector3.zero;
                 else if ((playerPosRelativeBox.Equals("inLeft") && p_input.x > 0f) || (playerPosRelativeBox.Equals("inFront") && p_input.z < 0f)) p_input = Vector3.zero;
@@ -117,7 +151,7 @@ public class PlayerControl : MonoBehaviour
                     }
                 }
             }
-            
+            box.GetComponent<BoxControl>().showOutline = inFrontBox &&  (!grabbingBox && !pushingOut) && box.GetComponent<Rigidbody>().velocity == Vector3.zero;
         }
         else
         {

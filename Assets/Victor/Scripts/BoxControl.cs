@@ -4,10 +4,11 @@ using UnityEngine;
 public class BoxControl : MonoBehaviour
 {
     public string playerSide;// { get; private set; }
-    RaycastHit hit;
-    [SerializeField]private bool checkPlayerPosition;
+    private bool checkPlayerPosition;
     Vector3 direction;
-     
+    public bool showOutline;
+    public GameObject outline;
+    private bool imgettingMoved = false;
 
     public void RotateBox(float slopeAngle, float orientation)
     {
@@ -27,11 +28,7 @@ public class BoxControl : MonoBehaviour
         if (checkPlayerPosition)
         {
             Vector3 rayPoint = this.transform.position + Vector3.up;
-            Debug.DrawRay(rayPoint, transform.forward * 100f, Color.blue);
-            Debug.DrawRay(rayPoint, -transform.forward * 100f, Color.blue);
-            Debug.DrawRay(rayPoint, transform.right * 100f, Color.blue);
-            Debug.DrawRay(rayPoint, -transform.right * 100f, Color.blue);
-
+            RaycastHit hit;
             if (Physics.Raycast(rayPoint, transform.forward, out hit, 100f, LayerMask.GetMask("Player")))
                 playerSide = "inFront";
             else if (Physics.Raycast(rayPoint, -transform.forward, out hit, 100f, LayerMask.GetMask("Player")))
@@ -42,8 +39,9 @@ public class BoxControl : MonoBehaviour
                 playerSide = "inRight";
             else
                 playerSide = "";
-
         }
+        if(imgettingMoved)imgettingMoved = !(this.GetComponent<Rigidbody>().velocity.Equals(Vector3.zero));
+        outline.SetActive(showOutline && !imgettingMoved);
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -85,6 +83,7 @@ public class BoxControl : MonoBehaviour
                 direction = Vector3.zero;
                 break;
         }
+        imgettingMoved = true;
         this.GetComponent<Rigidbody>().AddForce(direction * 300f * Mathf.Clamp(timePressed, 0f, 5f));
     }
     private IEnumerator RotateToPosition(Quaternion newRotation, float speed)

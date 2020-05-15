@@ -16,7 +16,6 @@ public class PauseMenu : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Joystick1Button7) || Input.GetKeyDown(KeyCode.Escape)) // Hay que cambiarlo por el botón de Start
         {
-            print("entra");
             if(GameIsPaused)
                 Resume();
             else
