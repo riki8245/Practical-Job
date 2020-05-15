@@ -3,10 +3,12 @@ using UnityEngine;
 
 public class BoxControl : MonoBehaviour
 {
-    public string playerSide { get; private set; }
+    public string playerSide;// { get; private set; }
     RaycastHit hit;
-    private bool checkPlayerPosition;
+    [SerializeField]private bool checkPlayerPosition;
     Vector3 direction;
+     
+
     public void RotateBox(float slopeAngle, float orientation)
     {
         if (orientation == 90f)
@@ -34,13 +36,19 @@ public class BoxControl : MonoBehaviour
     {
         if (checkPlayerPosition)
         {
-            if (Physics.Raycast(transform.position, transform.forward, out hit, 50f, LayerMask.GetMask("Player")))
+            Vector3 rayPoint = this.transform.position + Vector3.up;
+            Debug.DrawRay(rayPoint, transform.forward * 100f, Color.blue);
+            Debug.DrawRay(rayPoint, -transform.forward * 100f, Color.blue);
+            Debug.DrawRay(rayPoint, transform.right * 100f, Color.blue);
+            Debug.DrawRay(rayPoint, -transform.right * 100f, Color.blue);
+
+            if (Physics.Raycast(rayPoint, transform.forward, out hit, 100f, LayerMask.GetMask("Player")))
                 playerSide = "inFront";
-            else if (Physics.Raycast(transform.position, -transform.forward, out hit, 50f, LayerMask.GetMask("Player")))
+            else if (Physics.Raycast(rayPoint, -transform.forward, out hit, 100f, LayerMask.GetMask("Player")))
                 playerSide = "inBack";
-            else if (Physics.Raycast(transform.position, -transform.right, out hit, 50f, LayerMask.GetMask("Player")))
+            else if (Physics.Raycast(rayPoint, -transform.right, out hit, 100f, LayerMask.GetMask("Player")))
                 playerSide = "inLeft";
-            else if (Physics.Raycast(transform.position, transform.right, out hit, 50f, LayerMask.GetMask("Player")))
+            else if (Physics.Raycast(rayPoint, transform.right, out hit, 100f, LayerMask.GetMask("Player")))
                 playerSide = "inRight";
             else
                 playerSide = "";
