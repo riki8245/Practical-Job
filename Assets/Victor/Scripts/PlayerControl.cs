@@ -28,6 +28,7 @@ public class PlayerControl : MonoBehaviour
 
     public GameObject p_Head;
 
+    float resetMovement;
 
 
     private void Awake()
@@ -45,6 +46,7 @@ public class PlayerControl : MonoBehaviour
         mats = p_Head.GetComponent<SkinnedMeshRenderer>().materials;
         mats[1] = neutral;
         FaceState = 0;
+        resetMovement = 0;
     }
     private void Update()
     {
@@ -54,6 +56,7 @@ public class PlayerControl : MonoBehaviour
         inFrontBox = Physics.Raycast(transform.position, transform.forward,50f,LayerMask.GetMask("Boxes"));
         Physics.IgnoreLayerCollision(playerLayer, slopeLayer, !grabbingBox);
         ChangeFaceTexture();
+        contToResetMove();
     }
     private void ChangeFaceTexture()
     {
@@ -107,8 +110,12 @@ public class PlayerControl : MonoBehaviour
         }
 
         SetGravity();
-        if (!pushingOut)
+        if (!pushingOut && resetMovement <= 0) //He añadido esto porque la animacion de empujar dura 1 seg o menos, y quedaba raro que te pudieses mover haciendola
             characterController.Move(p_input * Time.deltaTime);
+        if(resetMovement < 0)
+        {
+            //Aqui un que no rote seria la polla si puede ser bro <3
+        }
     }
     void ManageInputs()
     {
@@ -146,6 +153,7 @@ public class PlayerControl : MonoBehaviour
                         forceToPushBox += Time.deltaTime;
                     else if (Input.GetButtonUp("Fire3"))
                     {
+                        resetMovement = 1f; //Aqui lo inicializo a 1 para que actue de contador
                         box.GetComponent<BoxControl>().PushBox(forceToPushBox);
                         pushingOut = false;
                     }
@@ -158,6 +166,12 @@ public class PlayerControl : MonoBehaviour
             grabbingBox = false;
             axisToUseWhileBox = 0;
         }
+    }
+
+    private void contToResetMove() //Y aqui pues le resto y ya (¿SE PEUDE HACER QUE NO ROTE APARTE DE QUE NO SE MUEVA?)
+    {
+        if (resetMovement < 0) resetMovement = 0;
+        else resetMovement -= Time.deltaTime;
     }
     private void SetGravity()
     {
