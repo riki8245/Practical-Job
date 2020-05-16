@@ -11,7 +11,7 @@ public class Portal : MonoBehaviour
     private RaycastHit ray;
     private Vector3 auxDir, InstantiateBoxPos, outvec;
     private float portalFacingAxis, boxEnteringAxis, boxExitAxis, DestinationPos;
-    private bool passingTrough, teleported;
+    [SerializeField] private bool passingTrough, teleported;
     private int layerBoxes, layerPassable;
 
     //Parameters needed;
@@ -23,28 +23,30 @@ public class Portal : MonoBehaviour
     //Modify Exit of the destination portal
     [SerializeField] private float dis_to_reset_col;
     [SerializeField] private float ForceAddedForExit;
-    [Header("Only if the portal is facing Y+ (Between 0-1)")]
+    [Header("Only if the Exit portal is facing Y+ (Between 0-1)")]
     [SerializeField] private float AmountForceOnY;
-    [SerializeField] private float AmountForceOnX;
     [SerializeField] private float AmountForceOnZ;
+    [SerializeField] private float AmountForceOnX;
 
-                                                  
-    public bool isPortal_1;                       
-                                                  
-    //This is A mierda, PLEASE check it           
-    void Start()                                  
+    public bool isPortal_1;
+
+    private void Awake()
     {
         layerBoxes = 8;
-        layerPassable = 11;
-        calculatePortalPosition();
-        dis_to_reset_col = 4f;
-        passingTrough = false;
-        teleported = false;
+        layerPassable = 11;        
         if (!isPortal_1)
             destination = GameObject.FindGameObjectWithTag("Portal_1").GetComponent<Transform>();
         else
             destination = GameObject.FindGameObjectWithTag("Portal_2").GetComponent<Transform>();
-        calculateDestinationBoxPos();
+    }
+
+    void Start()                                  
+    {
+        calculatePortalPosition();
+        dis_to_reset_col = 1.5f;
+        passingTrough = false;
+        teleported = false;
+        destination.gameObject.GetComponent<Portal>().calculateDestinationBoxPos();
     }
 
     private void calculateDestinationBoxPos()
@@ -98,8 +100,8 @@ public class Portal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isPortal_1) print("Portal 1 is facing: " + portal_face);
-        else print("Portal 2 is facing: " + portal_face);
+        if (isPortal_1) print("Portal 1 is facing: " + portal_face + ", My transform: " + transform.position + ", Destination: " + destination.position);
+        else print("Portal 2 is facing: " + portal_face + ", My transform: " + transform.position + ", Destination: " + destination.position);
 
         if (!portal_face.Equals("") && passingTrough)
         {
@@ -113,10 +115,11 @@ public class Portal : MonoBehaviour
 
             if (portalFacingAxis + .2f > boxEnteringAxis && !teleported)
             {
+                print(InstantiateBoxPos);
                 boxcopy = Instantiate(myPrefab, InstantiateBoxPos, originalBoxrotation);
+                boxcopy.transform.parent = null;
                 boxcopy.layer = layerPassable;
-                boxcopy.GetComponent<BoxController>().gravity = false;
-                boxcopy.GetComponent<BoxController>().b_moveDirection = auxDir;
+                boxcopy.GetComponent<Rigidbody>().AddForce(auxDir * 100f); ;
                 teleported = true;
                 Debug.Log("Entra");
             }
@@ -132,12 +135,11 @@ public class Portal : MonoBehaviour
 
                 if (boxExitAxis > DestinationPos + dis_to_reset_col)
                 {
-                    boxcopy.GetComponent<BoxController>().gravity = true;
                     Destroy(box);
                     passingTrough = false;
                     teleported = false;
                     boxcopy.layer = layerBoxes;
-                    boxcopy = null;
+                    //boxcopy = null;
                 }
             }
         }
@@ -152,13 +154,11 @@ public class Portal : MonoBehaviour
                 print("Entro al portal");
                 box = other.gameObject;
                 box.layer = layerPassable;
-                print(box.layer + "deberia atracesarlo todo");
-                //Physics.IgnoreLayerCollision(layerFloor, layerPassable);
-                //Physics.IgnoreLayerCollision(layerBoxes, layerPassable);
+                print(box.layer + "deberia atravesarlo todo");
 
                 originalBoxrotation = box.transform.rotation;
-                auxDir = box.GetComponent<BoxController>().b_moveDirection;
-                float FastestAxis = auxDir.x > auxDir.y? auxDir.x > auxDir.z? auxDir.x : auxDir.z : auxDir.y > auxDir.z? auxDir.y : auxDir.z;
+                auxDir = box.GetComponent<Rigidbody>().velocity;
+                float FastestAxis = auxDir.magnitude;
 
                 switch (portal_face)
                 {
