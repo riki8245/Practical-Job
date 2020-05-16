@@ -1962,6 +1962,10 @@ MonoBehaviour:
   neutral: {fileID: 2100000, guid: be49fc95ad8401347ae90313d20e462f, type: 2}
   scary: {fileID: 2100000, guid: a7b2e1582ee44e146bc1e9e16bdf8d5a, type: 2}
   vulnerable: {fileID: 2100000, guid: fc229361b8ce11146ac9a3539bd2a669, type: 2}
+  emission: {fileID: 2100000, guid: 2b25877587ccc4e29a20bb3d5e652c18, type: 2}
+  blue: {r: 0, g: 2.2934186, b: 2.433572, a: 0}
+  red: {r: 2.433572, g: 0, b: 0, a: 0}
+  green: {r: 0.56061345, g: 2.433572, b: 0.05096486, a: 0}
   FaceState: 0
   inFrontBox: 0
   canMoveBox: 0
@@ -2201,7 +2205,7 @@ Transform:
   - {fileID: 1674662666084993751}
   m_Father: {fileID: 1709723429951573979}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 89.98021, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -0.00001729878, y: 0, z: 0}
 --- !u!1 &6658392093560469818
 GameObject:
   m_ObjectHideFlags: 0

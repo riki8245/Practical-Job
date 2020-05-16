@@ -5,7 +5,9 @@ public class PlayerControl : MonoBehaviour
 {
     private CharacterController characterController;
     private Vector3 p_input;
-    [SerializeField]private Material neutral, scary, vulnerable;
+    [SerializeField]private Material neutral, scary, vulnerable, emission;
+    [ColorUsage(true, true)]
+    public Color blue, red, green;
 
     private float p_Speed;
     private int axisToUseWhileBox;
@@ -45,6 +47,7 @@ public class PlayerControl : MonoBehaviour
         slopeLayer = LayerMask.NameToLayer("SlopeLimitCollider");
         mats = p_Head.GetComponent<SkinnedMeshRenderer>().materials;
         mats[1] = neutral;
+        emission.SetColor("_EmissionColor", green);
         FaceState = 0;
         resetMovement = 0;
     }
@@ -65,9 +68,9 @@ public class PlayerControl : MonoBehaviour
             ChangeFaceState();
             switch (mats[1].name.ToString())
             {
-                case "Face_neutral": mats[1] = vulnerable; break;
-                case "Face_scary": mats[1] = neutral; break;
-                case "Face_vulnerable": mats[1] = scary; break;
+                case "Face_neutral": mats[1] = vulnerable; emission.SetColor("_EmissionColor", blue); break;
+                case "Face_scary": mats[1] = neutral; emission.SetColor("_EmissionColor", green); break;
+                case "Face_vulnerable": mats[1] = scary; emission.SetColor("_EmissionColor", red); break;
                 default: break;
             }
             p_Head.GetComponent<SkinnedMeshRenderer>().materials = mats;
@@ -89,7 +92,7 @@ public class PlayerControl : MonoBehaviour
 
         p_Speed = Input.GetButton("L3") ? 6.5f : 4.5f;
         ManageInputs();
-        if (p_input != Vector3.zero && !grabbingBox && !pushingOut)
+        if (p_input != Vector3.zero && !grabbingBox && !pushingOut && resetMovement <= 0)
         {
             characterController.transform.LookAt(characterController.transform.position + p_input);
             p_input *= p_Speed;
@@ -110,12 +113,8 @@ public class PlayerControl : MonoBehaviour
         }
 
         SetGravity();
-        if (!pushingOut && resetMovement <= 0) //He añadido esto porque la animacion de empujar dura 1 seg o menos, y quedaba raro que te pudieses mover haciendola
+        if (!pushingOut && resetMovement <= 0) 
             characterController.Move(p_input * Time.deltaTime);
-        if(resetMovement < 0)
-        {
-            //Aqui un que no rote seria la polla si puede ser bro <3
-        }
     }
     void ManageInputs()
     {
@@ -153,7 +152,7 @@ public class PlayerControl : MonoBehaviour
                         forceToPushBox += Time.deltaTime;
                     else if (Input.GetButtonUp("Fire3"))
                     {
-                        resetMovement = 1f; //Aqui lo inicializo a 1 para que actue de contador
+                        resetMovement = 0.7f;
                         box.GetComponent<BoxControl>().PushBox(forceToPushBox);
                         pushingOut = false;
                     }
@@ -168,7 +167,7 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    private void contToResetMove() //Y aqui pues le resto y ya (¿SE PEUDE HACER QUE NO ROTE APARTE DE QUE NO SE MUEVA?)
+    private void contToResetMove() 
     {
         if (resetMovement < 0) resetMovement = 0;
         else resetMovement -= Time.deltaTime;

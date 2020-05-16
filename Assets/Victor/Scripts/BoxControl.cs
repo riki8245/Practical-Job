@@ -60,6 +60,7 @@ public class BoxControl : MonoBehaviour
             this.transform.parent = null;
             playerSide = "";
             checkPlayerPosition = false;
+            if (outline) outline.SetActive(false);
         }
     }
 
