@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 3604417067001518843}
   - component: {fileID: 3604417067001518841}
   - component: {fileID: 3604417067001518842}
+  - component: {fileID: 5062326599156573925}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -203,6 +204,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &5062326599156573925
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3604417067001518844}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8201437419870775723, guid: f40fb43c45b8002499d78f761a233025, type: 3}
 --- !u!1 &3662875360431178828
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,6 +229,7 @@ GameObject:
   - component: {fileID: 7607922904764729082}
   - component: {fileID: 7121949380362361680}
   - component: {fileID: 5093075366759509334}
+  - component: {fileID: 9086998037167803321}
   m_Layer: 0
   m_Name: Top
   m_TagString: Untagged
@@ -282,6 +298,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &9086998037167803321
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3662875360431178828}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8201437419870775723, guid: f40fb43c45b8002499d78f761a233025, type: 3}
 --- !u!1 &4632672537491989596
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,6 +460,7 @@ GameObject:
   - component: {fileID: 2194781019466256199}
   - component: {fileID: 5569234057390568382}
   - component: {fileID: 6157883945310979937}
+  - component: {fileID: 2604734077225603450}
   m_Layer: 0
   m_Name: DoorModule
   m_TagString: Untagged
@@ -521,3 +552,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!64 &2604734077225603450
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6157883945310979938}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 1215230190209833024, guid: f40fb43c45b8002499d78f761a233025, type: 3}
