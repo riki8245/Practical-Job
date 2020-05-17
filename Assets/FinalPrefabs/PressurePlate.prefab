@@ -91,9 +91,9 @@ MeshCollider:
   m_GameObject: {fileID: 647304717640625921}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!135 &647304717640625922
@@ -122,8 +122,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pressed: 0
-  canvas: {fileID: 0}
   door: {fileID: 0}
+  red_on: {r: 2.9960785, g: 0, b: 0, a: 0}
+  red_off: {r: 1, g: 0, b: 0, a: 0}
+  justOneStep: 0
 --- !u!1 &647304719192773743
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,7 +215,7 @@ MeshCollider:
   m_GameObject: {fileID: 647304719192773743}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Convex: 1
   m_CookingOptions: 30

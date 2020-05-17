@@ -7,11 +7,11 @@ public class finishLevel : MonoBehaviour
 {
     public static bool playerReachFinish = false;
     private float timeToPassToNextLevel;
-    public Animator door;
-    public GameObject player;
+    private Animator door;
     // Start is called before the first frame update
     private void Awake()
     {
+        door = gameObject.GetComponentInChildren<Animator>();
         playerReachFinish = false;
     }
     void Start()
@@ -35,7 +35,7 @@ public class finishLevel : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             playerReachFinish = true;
-            player.GetComponent<PlayerController>().enabled = false;
+            other.gameObject.GetComponent<PlayerController>().enabled = false;
         }
     }
 }

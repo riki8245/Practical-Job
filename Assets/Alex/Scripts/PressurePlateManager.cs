@@ -5,11 +5,12 @@ using UnityEngine;
 public class PressurePlateManager : MonoBehaviour
 {
     public pressurePlateController[] pressurePlates;
-    public Animator door;
+    public GameObject door;
+    private Animator door_anim;
     // Start is called before the first frame update
     void Start()
     {
-        
+        door_anim = door.GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -24,9 +25,14 @@ public class PressurePlateManager : MonoBehaviour
         {
             if (allOpen)
             {
-                door.SetBool("open", true);
+                door_anim.SetBool("open", true);
+                door.GetComponent<CapsuleCollider>().enabled = true;
             }
-            else door.SetBool("open", false);
+            else
+            {
+                door_anim.SetBool("open", false);
+                door.GetComponent<CapsuleCollider>().enabled = true;
+            }
         }
     }
 }

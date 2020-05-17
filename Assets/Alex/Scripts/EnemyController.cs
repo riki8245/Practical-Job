@@ -32,7 +32,7 @@ public class EnemyController : MonoBehaviour
 
     void Move()
     {
-        int PlayerFaceState = Player.gameObject.GetComponent<PlayerController>().FaceState;
+        int PlayerFaceState = Player.gameObject.GetComponent<PlayerControl>().FaceState;
         e_anim.SetInteger("Behaviour", PlayerFaceState);
         if(PlayerFaceState == 0)
         {

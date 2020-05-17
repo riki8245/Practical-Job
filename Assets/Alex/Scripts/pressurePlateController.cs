@@ -8,14 +8,20 @@ public class pressurePlateController : MonoBehaviour
     public bool pressed = false;
     private Vector3 scaleNotPressed = new Vector3(0.67f, 0.07f, 0.67f);
     private Vector3 scalePressed = new Vector3(0.67f, 0.01f, 0.67f);
-    private string actualScene;
 
-    public Animator door;
+    public GameObject door;
+    private Animator door_anim;
+    [ColorUsage(true, true)]
+    public Color red_on, red_off;
+
+    [Header("Change type")]
+    [SerializeField] private bool justOneStep;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        actualScene = SceneManager.GetActiveScene().name;
+        door_anim = door.GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -36,21 +42,25 @@ public class pressurePlateController : MonoBehaviour
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Box") || other.gameObject.CompareTag("Enemy"))
         {
             pressed = true;
-            door.SetBool("open",true);
-            if(other.gameObject.CompareTag("Box"))
-                other.GetComponent<BoxController>().b_moveDirection = Vector3.zero;
+            gameObject.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", red_on);
+            door_anim.SetBool("open",true);
+            door.GetComponent<CapsuleCollider>().enabled = false;
+            /*if (other.gameObject.CompareTag("Box"))
+                other.GetComponent<BoxController>().b_moveDirection = Vector3.zero;*/
 
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (!actualScene.Equals("Level 1"))
+        if (!justOneStep)
         {
             if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Box") || other.gameObject.CompareTag("Enemy"))
             {
+                door.GetComponent<CapsuleCollider>().enabled = true;
+                gameObject.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", red_off);
                 pressed = false;
-                door.SetBool("open", false);
+                door_anim.SetBool("open", false);
             }
         }
     }
@@ -59,8 +69,10 @@ public class pressurePlateController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Box") || other.gameObject.CompareTag("Enemy"))
         {
+            door.GetComponent<CapsuleCollider>().enabled = false;
+            gameObject.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", red_on);
             pressed = true;
-            door.SetBool("open", true);
+            door_anim.SetBool("open", true);
         }
     }
 
