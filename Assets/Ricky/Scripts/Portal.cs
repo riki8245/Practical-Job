@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Portal : MonoBehaviour
 {
 
     private Transform destination;
-    private GameObject box, boxcopy;
+    private GameObject objectTeleporting, boxcopy;
     private Quaternion originalBoxrotation;
     private RaycastHit ray;
     private Vector3 auxDir, InstantiateBoxPos, outvec;
@@ -15,14 +16,14 @@ public class Portal : MonoBehaviour
     private int layerBoxes, layerPassable;
 
     //Parameters needed;
-    [SerializeField] private GameObject myPrefab, directionObject;
+    [SerializeField] private GameObject BoxPrefab, EnemyPrefab, directionObject;
     [SerializeField] private LayerMask LayersToCast;
 
     [HideInInspector] public string portal_face = "";
 
+
     //Modify Exit of the destination portal
-    [SerializeField] private float dis_to_reset_col;
-    [SerializeField] private float ForceAddedForExit;
+    [SerializeField] private float dis_to_reset_col, ForceAddedForExit;
     [Header("Only if the Exit portal is facing Y+ (Between 0-1)")]
     [SerializeField] private float AmountForceOnY;
     [SerializeField] private float AmountForceOnZ;
@@ -107,19 +108,19 @@ public class Portal : MonoBehaviour
         {
             switch (portal_face)
             {
-                case "y+": boxEnteringAxis = box.transform.position.y; break;
-                case "z+": boxEnteringAxis = box.transform.position.z; break;
-                case "x+": boxEnteringAxis = box.transform.position.x; break;
+                case "y+": boxEnteringAxis = objectTeleporting.transform.position.y; break;
+                case "z+": boxEnteringAxis = objectTeleporting.transform.position.z; break;
+                case "x+": boxEnteringAxis = objectTeleporting.transform.position.x; break;
                 default: break;
             }
 
             if (portalFacingAxis + .2f > boxEnteringAxis && !teleported)
             {
                 print(InstantiateBoxPos);
-                boxcopy = Instantiate(myPrefab, InstantiateBoxPos, originalBoxrotation);
+                boxcopy = objectTeleporting.CompareTag("Box")? Instantiate(BoxPrefab, InstantiateBoxPos, originalBoxrotation) : Instantiate(EnemyPrefab, InstantiateBoxPos, originalBoxrotation);
                 boxcopy.transform.parent = null;
                 boxcopy.layer = layerPassable;
-                boxcopy.GetComponent<Rigidbody>().AddForce(auxDir * 100f); ;
+                boxcopy.GetComponent<Rigidbody>().AddForce(auxDir * 100f); 
                 teleported = true;
                 Debug.Log("Entra");
             }
@@ -135,10 +136,10 @@ public class Portal : MonoBehaviour
 
                 if (boxExitAxis > DestinationPos + dis_to_reset_col)
                 {
-                    Destroy(box);
+                    Destroy(objectTeleporting);
                     passingTrough = false;
                     teleported = false;
-                    boxcopy.layer = layerBoxes;
+                    boxcopy.layer = objectTeleporting.CompareTag("Box") ? layerBoxes : 0;
                     //boxcopy = null;
                 }
             }
@@ -147,28 +148,28 @@ public class Portal : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Box"))
+        if (other.gameObject.CompareTag("Box") || other.gameObject.CompareTag("Enemy"))
         {
             if(!destination.GetComponent<Portal>().passingTrough && !destination.GetComponent<Portal>().teleported)
             {
                 print("Entro al portal");
-                box = other.gameObject;
-                box.layer = layerPassable;
-                print(box.layer + "deberia atravesarlo todo");
+                objectTeleporting = other.gameObject;
+                objectTeleporting.layer = layerPassable;
+                print(objectTeleporting.layer + "deberia atravesarlo todo");
 
-                originalBoxrotation = box.transform.rotation;
-                auxDir = box.GetComponent<Rigidbody>().velocity;
-                float FastestAxis = auxDir.magnitude;
+                originalBoxrotation = objectTeleporting.transform.rotation;
+                auxDir = objectTeleporting.GetComponent<Rigidbody>().velocity;
+                float FastestAxis = SceneManager.GetActiveScene().buildIndex != 0 ? auxDir.magnitude : 0f;
 
                 switch (portal_face)
                 {
-                    case "y+": boxEnteringAxis = box.transform.position.y;
+                    case "y+": boxEnteringAxis = objectTeleporting.transform.position.y;
                         auxDir = outvec * (FastestAxis + ForceAddedForExit);
                         break;
-                    case "z+": boxEnteringAxis = box.transform.position.z;
+                    case "z+": boxEnteringAxis = objectTeleporting.transform.position.z;
                         auxDir = outvec * (FastestAxis + ForceAddedForExit);
                         break;
-                    case "x+": boxEnteringAxis = box.transform.position.x;
+                    case "x+": boxEnteringAxis = objectTeleporting.transform.position.x;
                         auxDir = outvec * (FastestAxis + ForceAddedForExit);
                         break;
                     default: break;
