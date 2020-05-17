@@ -95,6 +95,7 @@ public class UIControl : MonoBehaviour
     private void LoadLevelSelector()
     {
         character.GetComponent<Animator>().SetFloat("speed", 0f);
+        this.eventSystem.GetComponent<EventSystem>().SetSelectedGameObject(null);
         foreach (GameObject gameObj in toDisableObjects) iTween.ScaleTo(gameObj, iTween.Hash("x", 0, "y", 0, "easeType", "easeOutSine", "time", 1f, "onComplete", "DisableObjects", "onCompleteTarget", this.gameObject, "onCompleteParams", gameObj));
         iTween.MoveTo(mainCamera, iTween.Hash("x",-3f,"y", 7.75f,"z", 5.75f,"time", 1f,"easeType","linear"));
         iTween.RotateTo(mainCamera, iTween.Hash("x", 31.8, "y", -90f,"time", 1f, "easeType", "linear"));
@@ -214,11 +215,15 @@ public class UIControl : MonoBehaviour
     private void DisableObjects(GameObject game)
     {
         game.SetActive(false);
-        if (game.name.Equals(toDisableObjects[toDisableObjects.Length - 1].name))
+        try
         {
-            if (this.eventSystem.GetComponent<EventSystem>().currentSelectedGameObject.name.Equals("Settings")) LoadSettingsMenu();
-            else if (this.eventSystem.GetComponent<EventSystem>().currentSelectedGameObject.name.Equals("About")) LoadAboutMenu();
+            if (game.name.Equals(toDisableObjects[toDisableObjects.Length - 1].name))
+            {
+                if (this.eventSystem.GetComponent<EventSystem>().currentSelectedGameObject.name.Equals("Settings")) LoadSettingsMenu();
+                else if (this.eventSystem.GetComponent<EventSystem>().currentSelectedGameObject.name.Equals("About")) LoadAboutMenu();
+            }
         }
+        catch (System.NullReferenceException) { }  
     }
     public void SelectAntiAlisingMode(TextMeshProUGUI textMesh)
     {
