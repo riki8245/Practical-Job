@@ -17,15 +17,15 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         
     }
-    void Start()
-    {
-        Resolution[] resolutions = Screen.resolutions;
-        foreach (Resolution res in resolutions)
-        {
-            print(res.width + "x" + res.height);
-        }
-        Screen.SetResolution(resolutions[0].width, resolutions[0].height, true);
-    }
+    //void Start()
+    //{
+    //    Resolution[] resolutions = Screen.resolutions;
+    //    foreach (Resolution res in resolutions)
+    //    {
+    //        print(res.width + "x" + res.height);
+    //    }
+    //    Screen.SetResolution(resolutions[0].width, resolutions[0].height, true);
+    //}
     public void SaveGame()
     {
         SaveSystem.SaveGame(this);
