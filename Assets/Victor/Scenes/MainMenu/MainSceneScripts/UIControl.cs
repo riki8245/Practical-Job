@@ -59,7 +59,6 @@ public class UIControl : MonoBehaviour
 
     private void StartMovingButtons()
     {
-        Able_eSystemInput("MainMenu");
         iTween.MoveTo(buttonLeftCanvas, iTween.Hash("z", buttonLeftCanvas.transform.position.z + 15, "easeType", "easeOutBounce", "time", 2f));
         iTween.ScaleTo(buttonLeftCanvas, iTween.Hash("x", 1, "y", 1, "z", 1, "easeType", "easeOutSine", "time", 2f, "oncomplete", "MoveButtons", "onCompleteTarget", this.gameObject));
         iTween.MoveTo(buttonRightCanvas, iTween.Hash("z", buttonRightCanvas.transform.position.z + 15, "easeType", "easeOutBounce", "time", 2f));
@@ -68,6 +67,7 @@ public class UIControl : MonoBehaviour
 
     private void MoveButtons()
     {
+        Able_eSystemInput("MainMenu");
         iTween.MoveTo(buttonLeftCanvas, iTween.Hash("name", "buttonsLeft","y", buttonLeftCanvas.transform.position.y + .8f, "time", 3f, "easeType", "linear", "loopType", "pingPong"));
         iTween.MoveTo(buttonRightCanvas, iTween.Hash("name", "buttonsRight","y", buttonRightCanvas.transform.position.y + .8f, "time", 3f, "easeType", "linear", "loopType", "pingPong"));
         
@@ -204,6 +204,29 @@ public class UIControl : MonoBehaviour
         if(eSystemAbleToSelect)
             StartCoroutine(LoadYourAsyncScene(0));
         eSystemAbleToSelect = false;
+    }
+    public void ReturnMainMenuFromMenus()
+    {
+        
+        foreach (GameObject gameObject in toEnableObjects)
+            if (gameObject.activeInHierarchy) iTween.ScaleTo(gameObject, iTween.Hash("x", 0f, "y", 0f, "z", 1f, "time", 1f, "onComplete", "ReturnMainMenuAnim", "onCompleteTarget", this.gameObject, "onCompleteParams", gameObject));
+    }
+    private void ReturnMainMenuAnim(GameObject gameObject)
+    {
+        gameObject.SetActive(false);
+        foreach (GameObject gameObject1 in toDisableObjects)
+        {
+            gameObject1.SetActive(true);
+            if (gameObject1.name.Equals("Title")) iTween.ScaleTo(gameObject1, iTween.Hash("x", 5f, "y", 5f, "z", 5f, "time", 1f));
+            else iTween.ScaleTo(gameObject1, iTween.Hash("x", 1f, "y", 1f, "z", 1f, "time", 1f));
+
+        }
+        StartCoroutine(ReloadMainMenu());
+    }
+    IEnumerator ReloadMainMenu()
+    {
+        yield return new WaitForSeconds(1);
+        MoveButtons();
     }
 
     IEnumerator LoadYourAsyncScene(int scene)

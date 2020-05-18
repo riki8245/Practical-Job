@@ -35,7 +35,7 @@ public class finishLevel : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             playerReachFinish = true;
-            other.gameObject.GetComponent<PlayerController>().enabled = false;
+            other.gameObject.GetComponent<PlayerControl>().enabled = false;
         }
     }
 }
