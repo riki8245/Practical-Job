@@ -11,6 +11,7 @@ public class PressurePlateManager : MonoBehaviour
     void Start()
     {
         door_anim = door.GetComponentInChildren<Animator>();
+        this.GetComponentsInChildren<pressurePlateController>();
     }
 
     // Update is called once per frame

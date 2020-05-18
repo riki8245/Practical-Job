@@ -44,7 +44,7 @@ public class Portal : MonoBehaviour
     void Start()                                  
     {
         calculatePortalPosition();
-        dis_to_reset_col = 1.5f;
+        dis_to_reset_col = 2.4f;
         passingTrough = false;
         teleported = false;
         destination.gameObject.GetComponent<Portal>().calculateDestinationBoxPos();
@@ -74,26 +74,33 @@ public class Portal : MonoBehaviour
     {
         //Esto ya funciona (solo he puesto esas posiciones porque son las unicas en las que se ve el portal en isometrica)
         Physics.Raycast(directionObject.transform.position, -directionObject.transform.forward, out ray, 2.5f, LayersToCast);
-        Debug.DrawLine(directionObject.transform.position, ray.point);
+        //Debug.DrawLine(directionObject.transform.position, ray.point);
         if (ray.normal.y == 1f)
         {
             portal_face = "y+";
             portalFacingAxis = this.transform.position.y;
         }
-        else if (ray.normal.z == 1f)
+        else if (Mathf.Abs(ray.normal.z) == 1f)
         {
             portal_face = "z+";
             portalFacingAxis = this.transform.position.z;
         }
-        else if (ray.normal.x == 1f)
+        else if (Mathf.Abs(ray.normal.x) == 1f)
         {
             portal_face = "x+";
             portalFacingAxis = this.transform.position.x;
         }
-        /*
-        else if (ray.normal.Equals(Vector3.right))  //the rest of the axis cant be shown show i dont aply the raycast
+       /* else if (ray.normal.y == -1f)  //the rest of the axis cant be shown show i dont aply the raycast
         {
-            portal_face = "right(x-)";
+            portal_face = "y-";
+        }
+        else if (ray.normal.z == -1f)  //the rest of the axis cant be shown show i dont aply the raycast
+        {
+            portal_face = "z-";
+        } 
+        else if (ray.normal.x == -1f)  //the rest of the axis cant be shown show i dont aply the raycast
+        {
+            portal_face = "x-";
         }
         */
     }
@@ -118,11 +125,10 @@ public class Portal : MonoBehaviour
             {
                 print(InstantiateBoxPos);
                 boxcopy = objectTeleporting.CompareTag("Box")? Instantiate(BoxPrefab, InstantiateBoxPos, originalBoxrotation) : Instantiate(EnemyPrefab, InstantiateBoxPos, originalBoxrotation);
-                boxcopy.transform.parent = null;
+                //boxcopy.transform.parent = null;
                 boxcopy.layer = layerPassable;
                 boxcopy.GetComponent<Rigidbody>().AddForce(auxDir * 100f); 
                 teleported = true;
-                Debug.Log("Entra");
             }
             if (teleported)
             {
@@ -134,16 +140,23 @@ public class Portal : MonoBehaviour
                     default: break;
                 }
 
-                if (boxExitAxis > DestinationPos + dis_to_reset_col)
+                if (boxExitAxis > DestinationPos + dis_to_reset_col /*|| boxExitAxis < DestinationPos - dis_to_reset_col*/)
                 {
-                    Destroy(objectTeleporting);
-                    passingTrough = false;
-                    teleported = false;
-                    boxcopy.layer = objectTeleporting.CompareTag("Box") ? layerBoxes : 0;
+                    Reset();
                     //boxcopy = null;
                 }
             }
         }
+    }
+
+    private void Reset()
+    {
+        passingTrough = false;
+        teleported = false;
+        boxcopy.layer = layerBoxes;//objectTeleporting.CompareTag("Box") ? layerBoxes : 0;
+        print(objectTeleporting.tag); //Porque cojones no lo destruye? hello?
+        print(boxcopy.layer);
+        Destroy(objectTeleporting);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -152,10 +165,8 @@ public class Portal : MonoBehaviour
         {
             if(!destination.GetComponent<Portal>().passingTrough && !destination.GetComponent<Portal>().teleported)
             {
-                print("Entro al portal");
                 objectTeleporting = other.gameObject;
                 objectTeleporting.layer = layerPassable;
-                print(objectTeleporting.layer + "deberia atravesarlo todo");
 
                 originalBoxrotation = objectTeleporting.transform.rotation;
                 auxDir = objectTeleporting.GetComponent<Rigidbody>().velocity;
@@ -181,15 +192,6 @@ public class Portal : MonoBehaviour
 
     }
 
-    /*
-    private void OnTriggerExit(Collider other)
-    {
-        if (portalFacingAxis + .2f > boxEnteringAxis)
-        {
-            box = other.gameObject;
-            box.layer = layerBoxes;
-        }
-    }*/
 
     /*
     private void OnGUI()

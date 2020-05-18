@@ -217,7 +217,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_Height: 0.9
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
@@ -233,7 +233,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90f45de6bf4f95d43949c98368c6c64a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myPrefab: {fileID: 2483275936250839915, guid: 0c46227b8d78b4aaab9a5fadcbe8d46a,
+  passingTrough: 0
+  teleported: 0
+  BoxPrefab: {fileID: 2483275936250839915, guid: 0c46227b8d78b4aaab9a5fadcbe8d46a,
+    type: 3}
+  EnemyPrefab: {fileID: 2241329433610663821, guid: e607e36d8da0d2749958b50215fd8aa1,
     type: 3}
   directionObject: {fileID: 2096976959}
   LayersToCast:
@@ -241,7 +245,7 @@ MonoBehaviour:
     m_Bits: 8192
   portal_face: 
   dis_to_reset_col: 3
-  ForceAddedForExit: 2
+  ForceAddedForExit: 3
   AmountForceOnY: 1.8
   AmountForceOnZ: 0
   AmountForceOnX: 0.5

@@ -61,6 +61,8 @@ public class PlayerControl : MonoBehaviour
         ChangeFaceTexture();
         contToResetMove();
     }
+
+
     private void ChangeFaceTexture()
     {
         if (Input.GetButtonUp("Fire2"))
@@ -211,5 +213,7 @@ public class PlayerControl : MonoBehaviour
                 break;
         }
     }
+
+  
   
 }
