@@ -208,6 +208,7 @@ public class UIControl : MonoBehaviour
 
     IEnumerator LoadYourAsyncScene(int scene)
     {
+        yield return new WaitForSeconds(1);
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene);
         while (!asyncLoad.isDone){yield return null;}
     }
