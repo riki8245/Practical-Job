@@ -77,44 +77,102 @@ public class AudioController : MonoBehaviour
         
     }
 
-    void playerSteps(bool play)
+    public void soundPlayerSteps(bool play)
     {
-
+        if (play == true)
+        {
+            emitter[2].Play();
+        }
+        else 
+        {
+            emitter[2].Stop();
+        }
     }
 
-    void enemySteps(bool play)
+    public void soundEnemySteps(bool play)
     {
-
+        if (play == true)
+        {
+            emitter[3].Play();
+        }
+        else 
+        {
+            emitter[3].Stop();
+        }
     }
 
-    void pressurePlateClanks(bool play)
+    public void soundPressurePlateClanks(bool play)
     {
-
+        if (play == true)
+        {
+            emitter[4].Play();
+        }
+        else 
+        {
+            emitter[4].Stop();
+        }
     }
 
-    void selectButton(bool play)
+    public void soundSelectButton(bool play)
     {
-
+        if (play == true)
+        {
+            emitter[5].Play();
+        }
+        else 
+        {
+            emitter[5].Stop();
+        }
     }
 
-    void trespassPortal(bool play)
+    public void soundTrespassPortal(bool play)
     {
-
+        if (play == true)
+        {
+            emitter[6].Play();
+        }
+        else 
+        {
+            emitter[6].Stop();
+        }
     }
 
-    void door(bool play)
+    public void soundDoor(bool play)
     {
-
+        if (play == true)
+        {
+            emitter[8].Stop();
+            emitter[7].Play();
+        }
+        else 
+        {
+            emitter[7].Stop();
+            emitter[8].Play();
+        }
     }
 
-    void menuPop(bool play)
+    public void soundMenuPop(bool play)
     {
-
+        if (play == true)
+        {
+            emitter[9].Play();
+        }
+        else 
+        {
+            emitter[9].Stop();
+        }
     }
 
-    Svoid pushBox(bool play)
+    public void soundPushBox(bool play)
     {
-
+        if (play == true)
+        {
+            emitter[10].Play();
+        }
+        else 
+        {
+            emitter[10].Stop();
+        }
     }
 
     private IEnumerator showSign(AudioSource emisor)
