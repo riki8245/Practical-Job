@@ -34,7 +34,6 @@ public class Portal : MonoBehaviour
 
     private void Awake()
     {
-        PercentForce = 1;
         layerBoxes = 8;
         layerPassable = 11;
         if (!isPortal_1)
