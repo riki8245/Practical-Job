@@ -273,14 +273,17 @@ public class UIControl : MonoBehaviour
     public void EnableHDR(Toggle toggle)
     {
         c_enableHDR = toggle.isOn;
+        GameManager.instance.c_enableHDR = c_enableHDR;
     }
     public void EnableMSAA(Toggle toggle)
     {
         c_enableMSAA = toggle.isOn;
+        GameManager.instance.c_enableMSAA = c_enableMSAA;
     }
     public void EnableShadows(Toggle toggle)
     {
         c_enableShadows = toggle.isOn;
+        GameManager.instance.c_enableShadows = c_enableShadows;
     }
     public void SelectLevel(GameObject gameObject)
     {

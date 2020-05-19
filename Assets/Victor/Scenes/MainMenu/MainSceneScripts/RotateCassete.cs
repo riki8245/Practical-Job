@@ -13,6 +13,7 @@ public class RotateCassete : MonoBehaviour
     public UIControl uIControl;
     static Quaternion actualRotation;
     private bool animating;
+    [SerializeField] Material locked, Unlocked;
 
     private void Awake()
     {
@@ -20,6 +21,11 @@ public class RotateCassete : MonoBehaviour
         eventSystemBool = false;
         eventSystem = GameObject.Find("EventSystem");
         eventSystem.GetComponent<EventSystem>().enabled = true;
+    }
+
+    private void Sart()
+    {
+
     }
     // Update is called once per frame
     void Update()
