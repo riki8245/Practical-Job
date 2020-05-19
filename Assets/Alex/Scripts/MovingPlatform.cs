@@ -5,8 +5,7 @@ using UnityEngine;
 public class MovingPlatform : MonoBehaviour
 {
     public Transform target;
-    public float speed;
-    public GameObject player;
+    private float speed = 5;
 
     [HideInInspector] public Vector3 start, end;
     private bool touching;
@@ -22,12 +21,7 @@ public class MovingPlatform : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+  
     private void FixedUpdate()
     {
         if(target != null)
@@ -35,8 +29,8 @@ public class MovingPlatform : MonoBehaviour
             float fixedSpeed = speed * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, target.position, fixedSpeed);
         }
-
-        if(transform.position == target.position)
+        
+        if(target.position == transform.position)
         {
             target.position = (target.position == start) ? end : start;
         }
@@ -44,17 +38,17 @@ public class MovingPlatform : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject == player)
+        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Box"))
         {
-            player.transform.parent = transform;
+            other.gameObject.transform.parent = transform;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject == player)
+        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Box"))
         {
-            player.transform.parent = null;
+            other.gameObject.transform.parent = null;
         }
     }
 
