@@ -28,6 +28,7 @@ public class Portal : MonoBehaviour
     [SerializeField] private float AmountForceOnY;
     [SerializeField] private float AmountForceOnZ;
     [SerializeField] private float AmountForceOnX;
+    [SerializeField] private bool ControlForceManually;
 
     public bool isPortal_1;
 
@@ -183,7 +184,7 @@ public class Portal : MonoBehaviour
 
                 originalBoxrotation = objectTeleporting.transform.rotation;
                 auxDir = objectTeleporting.GetComponent<Rigidbody>().velocity;
-                float FastestAxis = SceneManager.GetActiveScene().buildIndex != 0 ? auxDir.magnitude : 0f;
+                float FastestAxis = !ControlForceManually ? auxDir.magnitude : 0f;
 
                 switch (portal_face)
                 {
