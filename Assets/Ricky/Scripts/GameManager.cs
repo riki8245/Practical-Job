@@ -14,9 +14,12 @@ public class GameManager : MonoBehaviour
     public int  currentLevel;
     public float[] FOVs;
 
+    private ShadowQuality _originalShadowSettings;
+
     private void Awake()
     {
         MakeSingleton();
+        _originalShadowSettings = QualitySettings.shadows;
     }
 
     private void MakeSingleton()
@@ -50,11 +53,13 @@ public class GameManager : MonoBehaviour
     public void LoadGame()
     {
         GameData data = SaveSystem.LoadGame();
-
-        this.c_enableHDR     = data.c_enableHDR;
-        this.c_enableMSAA    = data.c_enableMSAA;
-        this.c_enableShadows = data.c_enableShadows;
-        this.currentLevel    = data.currentLevel;
+        if(data != null)
+        {
+            this.c_enableHDR     = data.c_enableHDR;
+            this.c_enableMSAA    = data.c_enableMSAA;
+            this.c_enableShadows = data.c_enableShadows;
+            this.currentLevel    = data.currentLevel;
+        }
     }
 
     public void SaveAndLoad()
@@ -65,5 +70,13 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (!SceneManager.GetActiveScene().name.Equals("MainMenu") && !SceneManager.GetSceneByName("PauseMenu").isLoaded) SceneManager.LoadScene("PauseMenu", LoadSceneMode.Additive);
+        if (!SceneManager.GetActiveScene().name.Equals("MainMenu")) {
+            if (Camera.main.allowHDR != c_enableHDR) Camera.main.allowHDR = c_enableHDR;
+            if (Camera.main.allowMSAA != c_enableMSAA) Camera.main.allowMSAA = c_enableMSAA;
+            if (c_enableShadows)
+                QualitySettings.shadows = _originalShadowSettings;
+            else
+                QualitySettings.shadows = ShadowQuality.Disable;
+        }
     }
 }

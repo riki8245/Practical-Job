@@ -8,9 +8,9 @@ public static class SaveSystem
     {
         BinaryFormatter formatter = new BinaryFormatter();
 
-        string path = Application.persistentDataPath + "/game.fun";
+        string path = Application.persistentDataPath + "/game.game";
         FileStream stream = new FileStream(path, FileMode.Create);
-
+        //stream.Dispose();
         GameData data = new GameData(gameManager);
 
         formatter.Serialize(stream, data);
@@ -19,7 +19,7 @@ public static class SaveSystem
 
     public static GameData LoadGame()
     {
-        string path = Application.persistentDataPath + "/game.fun";
+        string path = Application.persistentDataPath + "/game.game";
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
