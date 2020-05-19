@@ -12,7 +12,7 @@ public class Portal : MonoBehaviour
     private RaycastHit ray;
     private Vector3 auxDir, InstantiateBoxPos, outvec;
     private float portalFacingAxis, boxEnteringAxis, boxExitAxis, DestinationPos;
-    [SerializeField] private bool passingTrough, teleported;
+    private bool passingTrough, teleported;
     private int layerBoxes, layerPassable;
 
     //Parameters needed;
@@ -23,7 +23,7 @@ public class Portal : MonoBehaviour
 
 
     //Modify Exit of the destination portal
-    [SerializeField] private float dis_to_reset_col, ForceAddedForExit;
+    [SerializeField] private float dis_to_reset_col, ForceAddedForExit, PercentForce;
     [Header("Only if the Exit portal is facing Y+ (Between 0-1)")]
     [SerializeField] private float AmountForceOnY;
     [SerializeField] private float AmountForceOnZ;
@@ -34,6 +34,7 @@ public class Portal : MonoBehaviour
 
     private void Awake()
     {
+        PercentForce = 1;
         layerBoxes = 8;
         layerPassable = 11;
         if (!isPortal_1)
@@ -184,18 +185,18 @@ public class Portal : MonoBehaviour
 
                 originalBoxrotation = objectTeleporting.transform.rotation;
                 auxDir = objectTeleporting.GetComponent<Rigidbody>().velocity;
-                float FastestAxis = !ControlForceManually ? auxDir.magnitude : 0f;
+                float FastestAxis = !ControlForceManually ? auxDir.magnitude : 1f;
 
                 switch (portal_face)
                 {
                     case "y+": boxEnteringAxis = objectTeleporting.transform.position.y;
-                        auxDir = outvec * (FastestAxis + ForceAddedForExit);
+                        auxDir = outvec * (FastestAxis * PercentForce + ForceAddedForExit);
                         break;
                     case "z+": boxEnteringAxis = objectTeleporting.transform.position.z;
-                        auxDir = outvec * (FastestAxis + ForceAddedForExit);
+                        auxDir = outvec * (FastestAxis * PercentForce + ForceAddedForExit);
                         break;
                     case "x+": boxEnteringAxis = objectTeleporting.transform.position.x;
-                        auxDir = outvec * (FastestAxis + ForceAddedForExit);
+                        auxDir = outvec * (FastestAxis * PercentForce + ForceAddedForExit);
                         break;
                     default: break;
                 }
