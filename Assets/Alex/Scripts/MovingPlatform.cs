@@ -5,10 +5,13 @@ using UnityEngine;
 public class MovingPlatform : MonoBehaviour
 {
     public Transform target;
-    private float speed = 5;
+    public float speed;
+    public List<GameObject> ThingsInPlatform;
 
     [HideInInspector] public Vector3 start, end;
     private bool touching;
+    private bool change = false;
+    private float timer = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -24,24 +27,42 @@ public class MovingPlatform : MonoBehaviour
   
     private void FixedUpdate()
     {
-        if(target != null)
+        if (change)
         {
-            float fixedSpeed = speed * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, target.position, fixedSpeed);
+            transform.position = Vector3.MoveTowards(transform.position, transform.position, 0);
+            if (timer < 1) { timer += Time.deltaTime; }
+            else { change = false; timer = 0; }
         }
-        
-        if(target.position == transform.position)
+        else
         {
-            target.position = (target.position == start) ? end : start;
+
+            if (target != null)
+            {
+                float fixedSpeed = speed * Time.deltaTime;
+                transform.position = Vector3.MoveTowards(transform.position, target.position, fixedSpeed);
+            }
+
+            if (target.position == transform.position)
+            {
+                change = true;
+                target.position = (target.position == start) ? end : start;
+            }
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    private void Update()
     {
-        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Box"))
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (ThingsInPlatform.Contains(other.gameObject))
         {
             other.gameObject.transform.parent = transform;
+            print(other.gameObject.tag);
         }
+
     }
 
     private void OnTriggerExit(Collider other)
@@ -51,8 +72,4 @@ public class MovingPlatform : MonoBehaviour
             other.gameObject.transform.parent = null;
         }
     }
-
-
-
-
 }
