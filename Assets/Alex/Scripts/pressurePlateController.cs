@@ -42,7 +42,7 @@ public class pressurePlateController : MonoBehaviour
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Box") || other.gameObject.CompareTag("Enemy"))
         {
             pressed = true;
-            gameObject.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", red_on);
+            transform.gameObject.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", red_on);
             door_anim.SetBool("open",true);
             door.GetComponent<CapsuleCollider>().enabled = false;
             /*if (other.gameObject.CompareTag("Box"))
@@ -58,7 +58,7 @@ public class pressurePlateController : MonoBehaviour
             if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Box") || other.gameObject.CompareTag("Enemy"))
             {
                 door.GetComponent<CapsuleCollider>().enabled = true;
-                gameObject.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", red_off);
+                transform.gameObject.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", red_off);
                 pressed = false;
                 door_anim.SetBool("open", false);
             }
@@ -70,7 +70,7 @@ public class pressurePlateController : MonoBehaviour
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Box") || other.gameObject.CompareTag("Enemy"))
         {
             door.GetComponent<CapsuleCollider>().enabled = false;
-            gameObject.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", red_on);
+            transform.gameObject.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", red_on);
             pressed = true;
             door_anim.SetBool("open", true);
         }

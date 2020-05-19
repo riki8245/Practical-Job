@@ -7,12 +7,12 @@ using UnityEngine.AI;
 public class EnemyController : MonoBehaviour
 {
     private Transform Player;
-
-    private NavMeshAgent nav;
+    public NavMeshAgent nav;
     private Transform startTransform;
     private float multiplyBy = 3f;
     private Rigidbody rb;
     private Animator e_anim;
+    public bool Grounded;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +26,8 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
+        if (Grounded) Move();
+
         e_anim.SetFloat("Speed", nav.velocity.magnitude);
     }
 
@@ -87,6 +88,11 @@ public class EnemyController : MonoBehaviour
 
         // And get it to head towards the found NavMesh position
         nav.SetDestination(hit.position);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+            Grounded = gameObject.layer != 11? other.gameObject.layer == 9? true : false : false;
     }
 }
 

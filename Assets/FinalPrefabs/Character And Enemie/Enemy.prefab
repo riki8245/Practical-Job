@@ -423,6 +423,7 @@ GameObject:
   - component: {fileID: 797248469625998660}
   - component: {fileID: 436124280918136808}
   - component: {fileID: 197623602580391584}
+  - component: {fileID: 2895274813812556628}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -511,7 +512,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2241329433610663821}
-  m_Enabled: 0
+  m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
@@ -533,11 +534,26 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2241329433610663821}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 16225eb9521997d4a9e5840dcc6852d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nav: {fileID: 436124280918136808}
+  Grounded: 0
+--- !u!135 &2895274813812556628
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2241329433610663821}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0.05, z: 0}
 --- !u!1 &3615763589894301655
 GameObject:
   m_ObjectHideFlags: 0

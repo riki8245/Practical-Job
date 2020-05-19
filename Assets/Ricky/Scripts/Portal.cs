@@ -34,7 +34,7 @@ public class Portal : MonoBehaviour
     private void Awake()
     {
         layerBoxes = 8;
-        layerPassable = 11;        
+        layerPassable = 11;
         if (!isPortal_1)
             destination = GameObject.FindGameObjectWithTag("Portal_1").GetComponent<Transform>();
         else
@@ -125,6 +125,11 @@ public class Portal : MonoBehaviour
             {
                 print(InstantiateBoxPos);
                 boxcopy = objectTeleporting.CompareTag("Box")? Instantiate(BoxPrefab, InstantiateBoxPos, originalBoxrotation) : Instantiate(EnemyPrefab, InstantiateBoxPos, originalBoxrotation);
+                if (objectTeleporting.CompareTag("Enemy"))
+                {
+                    boxcopy.GetComponent<EnemyController>().Grounded = false;
+                    boxcopy.GetComponent<EnemyController>().nav.enabled = false;
+                }
                 //boxcopy.transform.parent = null;
                 boxcopy.layer = layerPassable;
                 boxcopy.GetComponent<Rigidbody>().AddForce(auxDir * 100f); 
@@ -151,10 +156,12 @@ public class Portal : MonoBehaviour
 
     private void Reset()
     {
+        if(objectTeleporting.CompareTag("Enemy")) objectTeleporting.GetComponent<EnemyController>().nav.enabled = true;
+
         passingTrough = false;
         teleported = false;
-        boxcopy.layer = layerBoxes;//objectTeleporting.CompareTag("Box") ? layerBoxes : 0;
-        print(objectTeleporting.tag); //Porque cojones no lo destruye? hello?
+        boxcopy.layer = objectTeleporting.CompareTag("Box") ? layerBoxes : 0;
+        print(objectTeleporting.tag); 
         print(boxcopy.layer);
         Destroy(objectTeleporting);
     }
@@ -167,6 +174,11 @@ public class Portal : MonoBehaviour
             {
                 objectTeleporting = other.gameObject;
                 objectTeleporting.layer = layerPassable;
+                if (objectTeleporting.CompareTag("Enemy"))
+                {
+                    objectTeleporting.GetComponent<EnemyController>().Grounded = false;
+                    if(objectTeleporting.GetComponent<EnemyController>().nav.enabled == true) objectTeleporting.GetComponent<EnemyController>().nav.enabled  = false;
+                }
 
                 originalBoxrotation = objectTeleporting.transform.rotation;
                 auxDir = objectTeleporting.GetComponent<Rigidbody>().velocity;

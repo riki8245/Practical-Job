@@ -11,7 +11,6 @@ public class PressurePlateManager : MonoBehaviour
     void Start()
     {
         door_anim = door.GetComponentInChildren<Animator>();
-        this.GetComponentsInChildren<pressurePlateController>();
     }
 
     // Update is called once per frame
@@ -27,7 +26,7 @@ public class PressurePlateManager : MonoBehaviour
             if (allOpen)
             {
                 door_anim.SetBool("open", true);
-                door.GetComponent<CapsuleCollider>().enabled = true;
+                door.GetComponent<CapsuleCollider>().enabled = false;
             }
             else
             {
