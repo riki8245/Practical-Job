@@ -124,6 +124,7 @@ public class Portal : MonoBehaviour
             if (portalFacingAxis + .2f > boxEnteringAxis && !teleported)
             {
                 print(InstantiateBoxPos);
+                calculateDestinationBoxPos();
                 boxcopy = objectTeleporting.CompareTag("Box")? Instantiate(BoxPrefab, InstantiateBoxPos, originalBoxrotation) : Instantiate(EnemyPrefab, InstantiateBoxPos, originalBoxrotation);
                 if (objectTeleporting.CompareTag("Enemy"))
                 {
