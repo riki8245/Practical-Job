@@ -9,7 +9,10 @@ public class BoxControl : MonoBehaviour
     public bool showOutline;
     public GameObject outline;
     private bool imgettingMoved = false;
-
+    private void Start()
+    {
+        StartCoroutine(FreezeConstrainsts());
+    }
     public void RotateBox(float slopeAngle, float orientation)
     {
         if (orientation == 90f)
@@ -108,5 +111,12 @@ public class BoxControl : MonoBehaviour
             yield return new WaitForEndOfFrame();
         this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 
+    }
+    private IEnumerator FreezeConstrainsts()
+    {
+        yield return new WaitForSeconds(1);
+        while (this.GetComponent<Rigidbody>().velocity.magnitude != 0f)
+            yield return new WaitForEndOfFrame();
+        this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
     }
 }
