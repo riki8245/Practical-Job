@@ -13,7 +13,9 @@ public class RotateCassete : MonoBehaviour
     public UIControl uIControl;
     static Quaternion actualRotation;
     private bool animating;
-    [SerializeField] Material locked, Unlocked;
+    public Material locked;
+    Material unlocked;
+    bool levelLock;
 
     private void Awake()
     {
@@ -21,12 +23,22 @@ public class RotateCassete : MonoBehaviour
         eventSystemBool = false;
         eventSystem = GameObject.Find("EventSystem");
         eventSystem.GetComponent<EventSystem>().enabled = true;
+        if (!this.gameObject.name.Equals("OnlyRotation"))this.unlocked = this.GetComponentInChildren<MeshRenderer>().materials[1];
+    
     }
-
-    private void Sart()
+    private void Start()
     {
+        bool aux = !this.gameObject.name.Equals("Back") && !this.gameObject.name.Equals("OnlyRotation");
+        levelLock = aux && int.Parse(this.gameObject.name.Substring(5)) > GameManager.instance.currentLevel;
+        if (levelLock)
+        {
+            Material[] mats = this.gameObject.GetComponentInChildren<MeshRenderer>().materials;
+            mats[1] = this.locked;
+            this.gameObject.GetComponentInChildren<MeshRenderer>().materials = mats;
+        }
 
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -57,7 +69,7 @@ public class RotateCassete : MonoBehaviour
     }
     public void selectLevel()
     {
-        if (eventSystemBool)
+        if (eventSystemBool && !levelLock)
         {
             eventSystem.GetComponent<EventSystem>().enabled = false;
             iTween.MoveTo(this.gameObject, iTween.Hash("x", onSelectedPos.position.x, "y", onSelectedPos.position.y, "z", onSelectedPos.position.z, "time", .5f, "onComplete", "LoadLevel"));

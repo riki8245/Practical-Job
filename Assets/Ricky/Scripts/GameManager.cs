@@ -18,6 +18,10 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        c_enableHDR = true;
+        c_enableMSAA = true;
+        c_enableShadows = true;
+        currentLevel = 1;
         MakeSingleton();
         _originalShadowSettings = QualitySettings.shadows;
     }

@@ -66,6 +66,8 @@ public class BoxControl : MonoBehaviour
 
     public void PushBox(float timePressed)
     {
+        this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+        this.GetComponent<Rigidbody>().freezeRotation = true;
         switch (playerSide)
         {
             case "inFront":
@@ -86,6 +88,7 @@ public class BoxControl : MonoBehaviour
         }
         imgettingMoved = true;
         this.GetComponent<Rigidbody>().AddForce(direction * 300f * Mathf.Clamp(timePressed, 0f, 5f));
+        StartCoroutine(BoxIsMoving());
     }
     private IEnumerator RotateToPosition(Quaternion newRotation, float speed)
     {
@@ -97,5 +100,13 @@ public class BoxControl : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+    }
+    private IEnumerator BoxIsMoving()
+    {
+        yield return new WaitForSeconds(1);
+        while (this.GetComponent<Rigidbody>().velocity.magnitude != 0f)
+            yield return new WaitForEndOfFrame();
+        this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+
     }
 }

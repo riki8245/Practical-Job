@@ -13,6 +13,7 @@ public class SlopeControl : MonoBehaviour
     {
         childPos = this.gameObject.GetComponentsInChildren<Transform>()[1];
         ry = this.transform.eulerAngles.y;
+        //if (ry == 270f) ry = 90f;
         RaycastHit outRay;
         if (Physics.Raycast(this.childPos.position, -Vector3.up * 10, out outRay))
             slopeNormalV = outRay.normal;

@@ -107,7 +107,8 @@ public class PlayerControl : MonoBehaviour
             else if (axisToUseWhileBox == 2)
                 p_input.x = 0f;
             p_input *= Mathf.Clamp(p_Speed, .1f, p_Speed);
-            if (Physics.Raycast(movingBoxRayPosition.position, this.transform.forward, .1f))
+            RaycastHit hit;
+            if (Physics.Raycast(movingBoxRayPosition.position, this.transform.forward,out hit, .1f,LayerMask.GetMask("Floor")))
             {
                 if ((playerPosRelativeBox.Equals("inRight") && p_input.x < 0f) || (playerPosRelativeBox.Equals("inBack") && p_input.z > 0f)) p_input = Vector3.zero;
                 else if ((playerPosRelativeBox.Equals("inLeft") && p_input.x > 0f) || (playerPosRelativeBox.Equals("inFront") && p_input.z < 0f)) p_input = Vector3.zero;

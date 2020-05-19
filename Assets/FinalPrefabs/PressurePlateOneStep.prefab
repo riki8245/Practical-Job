@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4927491551931323450}
   - component: {fileID: 4927491551931323445}
   - component: {fileID: 4927491551931323444}
-  m_Layer: 9
+  m_Layer: 17
   m_Name: buttonPressurePlate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 4927491552526659420}
   - component: {fileID: 4927491552526659423}
   - component: {fileID: 4927491552526659422}
-  m_Layer: 9
+  m_Layer: 17
   m_Name: basePressurePlate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -229,7 +229,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4927491552696708841}
-  m_Layer: 9
+  m_Layer: 17
   m_Name: PressurePlateOneStep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -243,7 +243,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4927491552696708840}
-  m_LocalRotation: {x: 0.000002078712, y: 0.000000074505806, z: -0.70710576, w: 0.70710784}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -1.91, y: 10.09, z: 13.25}
   m_LocalScale: {x: 1.8309, y: 1.8309, z: 1.8309}
   m_Children:
