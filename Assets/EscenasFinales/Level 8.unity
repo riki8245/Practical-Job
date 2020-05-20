@@ -221,7 +221,7 @@ PrefabInstance:
     - target: {fileID: 1453826597484704120, guid: 0c46227b8d78b4aaab9a5fadcbe8d46a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.13
+      value: -2.02
       objectReference: {fileID: 0}
     - target: {fileID: 1453826597484704120, guid: 0c46227b8d78b4aaab9a5fadcbe8d46a,
         type: 3}
@@ -231,7 +231,7 @@ PrefabInstance:
     - target: {fileID: 1453826597484704120, guid: 0c46227b8d78b4aaab9a5fadcbe8d46a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.19
+      value: 15.98
       objectReference: {fileID: 0}
     - target: {fileID: 1453826597484704120, guid: 0c46227b8d78b4aaab9a5fadcbe8d46a,
         type: 3}
@@ -563,6 +563,10 @@ PrefabInstance:
     - target: {fileID: 391785350, guid: e0e29012cc810624499ce06d61fd6deb, type: 3}
       propertyPath: isPortal_1
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 391785350, guid: e0e29012cc810624499ce06d61fd6deb, type: 3}
+      propertyPath: PercentForce
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3763244169070595171, guid: e0e29012cc810624499ce06d61fd6deb,
         type: 3}
@@ -1491,6 +1495,16 @@ PrefabInstance:
         type: 3}
       propertyPath: AmountForceOnX
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900038954312998177, guid: 58a6b5d50c6a04b4096c268ea12ef609,
+        type: 3}
+      propertyPath: PercentForce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900038954312998177, guid: 58a6b5d50c6a04b4096c268ea12ef609,
+        type: 3}
+      propertyPath: ForceAddedForExit
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3632262107283927540, guid: 58a6b5d50c6a04b4096c268ea12ef609,
         type: 3}

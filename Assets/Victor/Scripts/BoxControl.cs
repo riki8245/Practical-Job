@@ -90,7 +90,14 @@ public class BoxControl : MonoBehaviour
                 break;
         }
         imgettingMoved = true;
-        this.GetComponent<Rigidbody>().AddForce(direction * 300f * Mathf.Clamp(timePressed, 0f, 5f));
+        float force = 1;
+        switch (Mathf.Floor(Mathf.Clamp(timePressed, 0f, 3f)))
+        {
+            case 1: force = 1.5f; break;
+            case 2: force = 2.75f; break;
+            case 3: force = 5f; break;
+        }
+        this.GetComponent<Rigidbody>().AddForce(direction * 300f * force);
         StartCoroutine(BoxIsMoving());
     }
     private IEnumerator RotateToPosition(Quaternion newRotation, float speed)
@@ -109,7 +116,9 @@ public class BoxControl : MonoBehaviour
         yield return new WaitForSeconds(1);
         while (this.GetComponent<Rigidbody>().velocity.magnitude != 0f)
             yield return new WaitForEndOfFrame();
-        this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX;
+        this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ;
+        this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
 
     }
     private IEnumerator FreezeConstrainsts()
@@ -117,6 +126,9 @@ public class BoxControl : MonoBehaviour
         yield return new WaitForSeconds(1);
         while (this.GetComponent<Rigidbody>().velocity.magnitude != 0f)
             yield return new WaitForEndOfFrame();
-        this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX;
+        this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ;
+        this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+
     }
 }

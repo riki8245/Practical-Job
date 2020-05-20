@@ -1300,7 +1300,12 @@ PrefabInstance:
     - target: {fileID: 1900038954312998177, guid: 58a6b5d50c6a04b4096c268ea12ef609,
         type: 3}
       propertyPath: ControlForceManually
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900038954312998177, guid: 58a6b5d50c6a04b4096c268ea12ef609,
+        type: 3}
+      propertyPath: PercentForce
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 3632262107283927540, guid: 58a6b5d50c6a04b4096c268ea12ef609,
         type: 3}

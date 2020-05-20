@@ -109,8 +109,8 @@ public class Portal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isPortal_1) print("Portal 1 is facing: " + portal_face + ", My transform: " + transform.position + ", Destination: " + destination.position);
-        else print("Portal 2 is facing: " + portal_face + ", My transform: " + transform.position + ", Destination: " + destination.position);
+        //if (isPortal_1) print("Portal 1 is facing: " + portal_face + ", My transform: " + transform.position + ", Destination: " + destination.position);
+        //else print("Portal 2 is facing: " + portal_face + ", My transform: " + transform.position + ", Destination: " + destination.position);
 
         if (!portal_face.Equals("") && passingTrough)
         {
@@ -124,7 +124,6 @@ public class Portal : MonoBehaviour
 
             if (portalFacingAxis + .2f > boxEnteringAxis && !teleported)
             {
-                print(InstantiateBoxPos);
                 calculateDestinationBoxPos();
                 boxcopy = objectTeleporting.CompareTag("Box")? Instantiate(BoxPrefab, InstantiateBoxPos, originalBoxrotation) : Instantiate(EnemyPrefab, InstantiateBoxPos, originalBoxrotation);
                 if (objectTeleporting.CompareTag("Enemy"))
@@ -132,8 +131,14 @@ public class Portal : MonoBehaviour
                     boxcopy.GetComponent<EnemyController>().Grounded = false;
                     boxcopy.GetComponent<EnemyController>().nav.enabled = false;
                 }
+                if (objectTeleporting.CompareTag("Box"))
+                {
+                    boxcopy.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+                    boxcopy.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+                }
                 //boxcopy.transform.parent = null;
                 boxcopy.layer = layerPassable;
+                print(auxDir);
                 boxcopy.GetComponent<Rigidbody>().AddForce(auxDir * 100f); 
                 teleported = true;
             }
@@ -163,8 +168,6 @@ public class Portal : MonoBehaviour
         passingTrough = false;
         teleported = false;
         boxcopy.layer = objectTeleporting.CompareTag("Box") ? layerBoxes : 0;
-        print(objectTeleporting.tag); 
-        print(boxcopy.layer);
         Destroy(objectTeleporting);
     }
 
@@ -174,14 +177,20 @@ public class Portal : MonoBehaviour
         {
             if(!destination.GetComponent<Portal>().passingTrough && !destination.GetComponent<Portal>().teleported)
             {
+
                 objectTeleporting = other.gameObject;
+                if (other.gameObject.CompareTag("Box"))
+                {
+                    objectTeleporting.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+                    objectTeleporting.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+                }
                 objectTeleporting.layer = layerPassable;
                 if (objectTeleporting.CompareTag("Enemy"))
                 {
                     objectTeleporting.GetComponent<EnemyController>().Grounded = false;
                     if(objectTeleporting.GetComponent<EnemyController>().nav.enabled == true) objectTeleporting.GetComponent<EnemyController>().nav.enabled  = false;
                 }
-
+                
                 originalBoxrotation = objectTeleporting.transform.rotation;
                 auxDir = objectTeleporting.GetComponent<Rigidbody>().velocity;
                 float FastestAxis = !ControlForceManually ? auxDir.magnitude : 1f;
