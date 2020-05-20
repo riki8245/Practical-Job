@@ -15,7 +15,7 @@ public class BoxSpawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonUp("Fire3"))
+        if (Input.GetButtonUp("Jump"))
         {
             box = Instantiate(BoxPrefab, this.transform);
             box.transform.parent = null;

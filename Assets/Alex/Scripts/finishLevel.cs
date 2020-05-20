@@ -28,9 +28,16 @@ public class finishLevel : MonoBehaviour
             door.SetBool("open", false);
             if (timeToPassToNextLevel > 1.5f)
             {
-                GameManager.instance.currentLevel = SceneManager.GetActiveScene().buildIndex + 1;
-                GameManager.instance.SaveGame();
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                if (SceneManager.GetActiveScene().buildIndex == 11) //If game complete, return to menu
+                {
+                    SceneManager.LoadScene(0);
+                }
+                else
+                {
+                    GameManager.instance.currentLevel = SceneManager.GetActiveScene().buildIndex + 1;
+                    GameManager.instance.SaveGame();
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                }
             }
         }
     }

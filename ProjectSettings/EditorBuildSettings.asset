@@ -33,6 +33,15 @@ EditorBuildSettings:
     path: Assets/EscenasFinales/Level 8.unity
     guid: 97f5ba82c97d20c43bb284660bc359b2
   - enabled: 1
+    path: Assets/EscenasFinales/Level 9.unity
+    guid: 073bd5172a3bbef4fbda6a2cde160de4
+  - enabled: 1
+    path: Assets/EscenasFinales/Level 10.unity
+    guid: f54a41c88ee589b4a9ec9e0e71f0d814
+  - enabled: 1
+    path: Assets/EscenasFinales/Level 11.unity
+    guid: e42323b8cca4389489e6cadf435cdb18
+  - enabled: 1
     path: Assets/Victor/Scenes/PauseMenu/PauseMenu.unity
     guid: c7da4b8179e4441268139c2d52d45862
   m_configObjects: {}
