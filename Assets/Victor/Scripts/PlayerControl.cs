@@ -135,14 +135,14 @@ public class PlayerControl : MonoBehaviour
                         box.transform.parent = this.transform;
                         grabbingBox = true;
                     }
-                    else if (Input.GetButtonUp("Fire1"))
-                    {
-                        box.transform.parent = null;
-                        grabbingBox = false;
-                        playerPosRelativeBox = "";
-                    }
-                }
                 
+                }
+                if (Input.GetButtonUp("Fire1"))
+                {
+                    box.transform.parent = null;
+                    grabbingBox = false;
+                    playerPosRelativeBox = "";
+                }
                 if (!grabbingBox)
                 {
                     if (Input.GetButtonDown("Fire3"))

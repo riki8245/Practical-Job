@@ -14,7 +14,7 @@ public class SlopeControl : MonoBehaviour
     {
         childPos = this.gameObject.GetComponentsInChildren<Transform>()[1];
         ry = this.transform.eulerAngles.y;
-        print(this.transform.forward == Vector3.forward);
+        if(this.transform.forward != Vector3.forward) ry = ry==90f? -90f : 90f;
         //if (ry == 270f) ry = 90f;
         RaycastHit outRay;
         if (Physics.Raycast(this.childPos.position, -Vector3.up * 10, out outRay))
@@ -32,7 +32,7 @@ public class SlopeControl : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Box"))
+        if (other.CompareTag("BoxSlopeInteraction"))
             other.GetComponentInParent<BoxControl>().RotateBox(this.slopeAngle, ry);
         if (other.CompareTag("Player"))
             other.GetComponentInParent<PlayerControl>().canMoveBox = false;
@@ -40,7 +40,7 @@ public class SlopeControl : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Box"))
+        if (other.CompareTag("BoxSlopeInteraction"))
             other.GetComponentInParent<BoxControl>().RotateBox(0f, -1);
         if (other.CompareTag("Player"))
             other.GetComponentInParent<PlayerControl>().canMoveBox = true;

@@ -11,6 +11,7 @@ TagManager:
   - Enemy
   - Floor
   - Slope
+  - BoxSlopeInteraction
   layers:
   - Default
   - TransparentFX
@@ -30,7 +31,7 @@ TagManager:
   - ForceFieldBoxes
   - ForceFieldEnemies
   - PressurePlate
-  - 
+  - Walls
   - 
   - 
   - 

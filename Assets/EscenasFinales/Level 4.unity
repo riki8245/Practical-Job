@@ -1279,11 +1279,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FenceModule (11)
       objectReference: {fileID: 0}
-    - target: {fileID: 8393160570177322574, guid: 224a67e5143044e4ea8ba1c87ffaa656,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 224a67e5143044e4ea8ba1c87ffaa656, type: 3}
 --- !u!4 &443812120 stripped
@@ -3339,6 +3334,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 797248469625998660, guid: e607e36d8da0d2749958b50215fd8aa1,
+        type: 3}
+      propertyPath: m_Height
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 797248469625998660, guid: e607e36d8da0d2749958b50215fd8aa1,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2241329433610663821, guid: e607e36d8da0d2749958b50215fd8aa1,
         type: 3}
       propertyPath: m_Name
@@ -4164,7 +4169,7 @@ PrefabInstance:
     - target: {fileID: 9217520251619936533, guid: 427b99dae39094e1cb988770ff9aa451,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.3
+      value: 5.33
       objectReference: {fileID: 0}
     - target: {fileID: 9217520251619936533, guid: 427b99dae39094e1cb988770ff9aa451,
         type: 3}
@@ -6871,21 +6876,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WallModule (6)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8007749324727933547, guid: 51d2f6cde96b24c23be5d886f3f22ba7,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8583275510612258487, guid: 51d2f6cde96b24c23be5d886f3f22ba7,
-        type: 3}
-      propertyPath: m_CastShadows
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8583275510612258487, guid: 51d2f6cde96b24c23be5d886f3f22ba7,
-        type: 3}
-      propertyPath: m_ReceiveGI
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51d2f6cde96b24c23be5d886f3f22ba7, type: 3}
