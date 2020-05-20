@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ForceFieldEnemie
+  m_Name: AuxBoxes
   m_Shader: {fileID: -6465566751694194690, guid: 452b49b079255b942bae050e42f56245,
     type: 3}
   m_ShaderKeywords: 
@@ -29,8 +29,8 @@ Material:
     - Vector1_A768F393: 0.34
     - Vector1_B9A444BF: 0.22
     - Vector1_D4724FCD: 0.05
-    - Vector1_D88CE56: 0.07
+    - Vector1_D88CE56: 0.06
     m_Colors:
     - Color_9A6B686F: {r: 2.9490197, g: 0.6249634, b: 0, a: 0}
-    - Color_B7864A80: {r: 178.90823, g: 8.430225, b: 13.489732, a: 0}
-    - Vector2_84DE1160: {r: 3, g: 1.6, b: 0, a: 0}
+    - Color_B7864A80: {r: 7.3389387, g: 77.87429, b: 3.6694694, a: 0}
+    - Vector2_84DE1160: {r: 3, g: 0.77, b: 0, a: 0}

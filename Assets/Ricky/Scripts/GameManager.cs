@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public bool c_enableShadows;
     public int  currentLevel;
     public float[] FOVs;
+    int sceneN;
 
     private ShadowQuality _originalShadowSettings;
 
@@ -63,6 +64,7 @@ public class GameManager : MonoBehaviour
             this.c_enableMSAA    = data.c_enableMSAA;
             this.c_enableShadows = data.c_enableShadows;
             this.currentLevel    = data.currentLevel;
+
         }
     }
 
@@ -77,10 +79,16 @@ public class GameManager : MonoBehaviour
         if (!SceneManager.GetActiveScene().name.Equals("MainMenu")) {
             if (Camera.main.allowHDR != c_enableHDR) Camera.main.allowHDR = c_enableHDR;
             if (Camera.main.allowMSAA != c_enableMSAA) Camera.main.allowMSAA = c_enableMSAA;
-            if (c_enableShadows)
-                QualitySettings.shadows = _originalShadowSettings;
-            else
-                QualitySettings.shadows = ShadowQuality.Disable;
+            if (SceneManager.GetActiveScene().buildIndex != sceneN)
+            {
+                sceneN = SceneManager.GetActiveScene().buildIndex;
+                if (c_enableShadows)
+                {
+                    QualitySettings.shadows = _originalShadowSettings;
+                }
+                else
+                    QualitySettings.shadows = ShadowQuality.Disable;
+            }
         }
     }
 }

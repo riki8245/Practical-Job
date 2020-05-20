@@ -175,42 +175,53 @@ public class Portal : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Box") || other.gameObject.CompareTag("Enemy"))
         {
-            if(!destination.GetComponent<Portal>().passingTrough && !destination.GetComponent<Portal>().teleported)
+            try
+            {
+                if (!destination.GetComponent<Portal>().passingTrough && !destination.GetComponent<Portal>().teleported)
+                {
+
+                    objectTeleporting = other.gameObject;
+                    if (other.gameObject.CompareTag("Box"))
+                    {
+                        objectTeleporting.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+                        objectTeleporting.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+                    }
+                    objectTeleporting.layer = layerPassable;
+                    if (objectTeleporting.CompareTag("Enemy"))
+                    {
+                        objectTeleporting.GetComponent<EnemyController>().Grounded = false;
+                        if (objectTeleporting.GetComponent<EnemyController>().nav.enabled == true) objectTeleporting.GetComponent<EnemyController>().nav.enabled = false;
+                    }
+
+                    originalBoxrotation = objectTeleporting.transform.rotation;
+                    auxDir = objectTeleporting.GetComponent<Rigidbody>().velocity;
+                    float FastestAxis = !ControlForceManually ? auxDir.magnitude : 1f;
+
+                    switch (portal_face)
+                    {
+                        case "y+":
+                            boxEnteringAxis = objectTeleporting.transform.position.y;
+                            auxDir = outvec * (FastestAxis * PercentForce + ForceAddedForExit);
+                            break;
+                        case "z+":
+                            boxEnteringAxis = objectTeleporting.transform.position.z;
+                            auxDir = outvec * (FastestAxis * PercentForce + ForceAddedForExit);
+                            break;
+                        case "x+":
+                            boxEnteringAxis = objectTeleporting.transform.position.x;
+                            auxDir = outvec * (FastestAxis * PercentForce + ForceAddedForExit);
+                            break;
+                        default: break;
+                    }
+
+                    passingTrough = true;
+                }
+            }
+            catch (MissingComponentException e)
             {
 
-                objectTeleporting = other.gameObject;
-                if (other.gameObject.CompareTag("Box"))
-                {
-                    objectTeleporting.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-                    objectTeleporting.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
-                }
-                objectTeleporting.layer = layerPassable;
-                if (objectTeleporting.CompareTag("Enemy"))
-                {
-                    objectTeleporting.GetComponent<EnemyController>().Grounded = false;
-                    if(objectTeleporting.GetComponent<EnemyController>().nav.enabled == true) objectTeleporting.GetComponent<EnemyController>().nav.enabled  = false;
-                }
-                
-                originalBoxrotation = objectTeleporting.transform.rotation;
-                auxDir = objectTeleporting.GetComponent<Rigidbody>().velocity;
-                float FastestAxis = !ControlForceManually ? auxDir.magnitude : 1f;
-
-                switch (portal_face)
-                {
-                    case "y+": boxEnteringAxis = objectTeleporting.transform.position.y;
-                        auxDir = outvec * (FastestAxis * PercentForce + ForceAddedForExit);
-                        break;
-                    case "z+": boxEnteringAxis = objectTeleporting.transform.position.z;
-                        auxDir = outvec * (FastestAxis * PercentForce + ForceAddedForExit);
-                        break;
-                    case "x+": boxEnteringAxis = objectTeleporting.transform.position.x;
-                        auxDir = outvec * (FastestAxis * PercentForce + ForceAddedForExit);
-                        break;
-                    default: break;
-                }
-
-                passingTrough = true;
             }
+
         }
 
     }
