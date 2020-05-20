@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +10,7 @@ public class GameManager : MonoBehaviour
     public bool c_enableHDR;
     public bool c_enableMSAA;
     public bool c_enableShadows;
+    public int c_Antialising;
     public int  currentLevel;
     public float[] FOVs;
     int sceneN;
@@ -22,9 +22,12 @@ public class GameManager : MonoBehaviour
         c_enableHDR = true;
         c_enableMSAA = true;
         c_enableShadows = true;
+        c_Antialising = 4;
         currentLevel = 1;
         MakeSingleton();
         _originalShadowSettings = QualitySettings.shadows;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void MakeSingleton()
@@ -64,6 +67,7 @@ public class GameManager : MonoBehaviour
             this.c_enableMSAA    = data.c_enableMSAA;
             this.c_enableShadows = data.c_enableShadows;
             this.currentLevel    = data.currentLevel;
+            this.c_Antialising   = data.c_Antialising;
 
         }
     }
@@ -77,17 +81,14 @@ public class GameManager : MonoBehaviour
     {
         if (!SceneManager.GetActiveScene().name.Equals("MainMenu") && !SceneManager.GetSceneByName("PauseMenu").isLoaded) SceneManager.LoadScene("PauseMenu", LoadSceneMode.Additive);
         if (!SceneManager.GetActiveScene().name.Equals("MainMenu")) {
-            if (Camera.main.allowHDR != c_enableHDR) Camera.main.allowHDR = c_enableHDR;
-            if (Camera.main.allowMSAA != c_enableMSAA) Camera.main.allowMSAA = c_enableMSAA;
             if (SceneManager.GetActiveScene().buildIndex != sceneN)
             {
                 sceneN = SceneManager.GetActiveScene().buildIndex;
-                if (c_enableShadows)
-                {
-                    QualitySettings.shadows = _originalShadowSettings;
-                }
-                else
-                    QualitySettings.shadows = ShadowQuality.Disable;
+                Camera.main.allowHDR  = c_enableHDR;
+                Camera.main.allowMSAA = c_enableMSAA;
+s                if (c_enableShadows) QualitySettings.shadows = _originalShadowSettings;
+                else QualitySettings.shadows = ShadowQuality.Disable;
+                QualitySettings.antiAliasing = c_Antialising;
             }
         }
     }

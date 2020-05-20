@@ -7,6 +7,7 @@ using TMPro;
 
 public class UIControl : MonoBehaviour
 {
+    #region
     public GameObject gTitle;
     public GameObject buttonRightCanvas;
     public GameObject buttonLeftCanvas;
@@ -26,11 +27,12 @@ public class UIControl : MonoBehaviour
     private bool eSystemAbleToSelect;
     public string[] Resolutions;
 
-    [Header("PlayerSettings")]
-    [SerializeField]private bool c_enableHDR;
-    [SerializeField] private bool c_enableMSAA;
-    [SerializeField] private bool c_enableShadows;
-    [SerializeField] private int currentLevel;
+    private bool c_enableHDR;
+    private bool c_enableMSAA;
+    private bool c_enableShadows;
+    private int currentLevel;
+    [HideInInspector]public Toggle[] toggles = new Toggle[3];
+    #endregion
 
     private bool lerpCamera;
     public bool changeColor { get; private set; } //Para los sliders
@@ -51,10 +53,26 @@ public class UIControl : MonoBehaviour
         foreach (GameObject gameObject in toEnableObjects) gameObject.SetActive(false);
         toEnableObjects[0].transform.localScale = new Vector3(0f, 0f, 1f);
         toEnableObjects[1].transform.localScale = new Vector3(0f, 0f, 1f);
+        
     }
     private void Start()
     {
         iTween.MoveTo(gTitle, iTween.Hash("y", gTitle.transform.position.y - 20, "easeType", "easeOutBounce", "time", 2f, "onComplete", "StartMovingButtons", "onCompleteTarget",this.gameObject));
+        foreach (Toggle t in toggles)
+        {
+            switch (t.name)
+            {
+                case "HDRToggle":
+                    toggles[0].isOn = GameManager.instance.c_enableHDR;
+                    break;
+                case "MSAAToggle":
+                    toggles[1].isOn = GameManager.instance.c_enableMSAA;
+                    break;
+                case "Shadows":
+                    toggles[2].isOn = GameManager.instance.c_enableShadows;
+                    break;
+            }
+        }
     }
 
     private void StartMovingButtons()
@@ -255,12 +273,15 @@ public class UIControl : MonoBehaviour
         {
             case "None":
                 textMesh.SetText("FXAA");
+                GameManager.instance.c_Antialising = 4;
                 break;
             case "FXAA":
                 textMesh.SetText("SMAA");
+                GameManager.instance.c_Antialising = 8;
                 break;
             case "SMAA":
                 textMesh.SetText("None");
+                GameManager.instance.c_Antialising = 0;
                 break;
             default:
                 break;
