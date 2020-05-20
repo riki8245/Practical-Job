@@ -27,7 +27,7 @@ TagManager:
   - Passable
   - SlopeLimitCollider
   - cast
-  - ForceFieldNeutral
+  - ForceFieldCharacter
   - ForceFieldBoxes
   - ForceFieldEnemies
   - PressurePlate

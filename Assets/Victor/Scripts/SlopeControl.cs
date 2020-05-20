@@ -13,10 +13,14 @@ public class SlopeControl : MonoBehaviour
     private void Awake()
     {
         childPos = this.gameObject.GetComponentsInChildren<Transform>()[1];
-        ry = this.transform.eulerAngles.y;
-        if(this.transform.forward != Vector3.forward) ry = ry==90f? -90f : 90f;
-        //if (ry == 270f) ry = 90f;
-        RaycastHit outRay;
+        //ry = this.transform.eulerAngles.y;
+        if(this.transform.forward == Vector3.left) ry = 90f;
+        else if(this.transform.forward == Vector3.back) ry = 180f;
+        else if(this.transform.forward == Vector3.forward) ry = 0f;
+        else if(this.transform.forward == Vector3.right) ry = -90f;
+
+            //if (ry == 270f) ry = 90f;
+            RaycastHit outRay;
         if (Physics.Raycast(this.childPos.position, -Vector3.up * 10, out outRay))
             slopeNormalV = outRay.normal;
         getAngle(slopeNormalV);

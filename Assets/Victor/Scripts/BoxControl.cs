@@ -15,6 +15,7 @@ public class BoxControl : MonoBehaviour
     }
     public void RotateBox(float slopeAngle, float orientation)
     {
+        print("entra");
         if (orientation == 90f)
             StartCoroutine(RotateToPosition(Quaternion.Euler(this.transform.localRotation.x, this.transform.localRotation.y, this.transform.localRotation.z - slopeAngle), .2f));
         else if (orientation == -90f)

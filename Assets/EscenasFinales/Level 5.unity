@@ -3685,10 +3685,20 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 3.5487065
       objectReference: {fileID: 0}
+    - target: {fileID: 8866054042533281819, guid: 4f58341808906754b95f2ae34f8b9f8f,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 27a0bb545a69a7d4a850e64157437488, type: 2}
     - target: {fileID: 8866054042533281821, guid: 4f58341808906754b95f2ae34f8b9f8f,
         type: 3}
       propertyPath: m_Name
       value: ForceFiled_Sphere
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866054042533281821, guid: 4f58341808906754b95f2ae34f8b9f8f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f58341808906754b95f2ae34f8b9f8f, type: 3}
