@@ -8,11 +8,13 @@ public class SlopeControl : MonoBehaviour
     [SerializeField] private Transform childPos;
     [SerializeField] private Vector3 slopeNormalV;
     [SerializeField] private float ry;
+    //public bool;
 
     private void Awake()
     {
         childPos = this.gameObject.GetComponentsInChildren<Transform>()[1];
         ry = this.transform.eulerAngles.y;
+        print(this.transform.forward == Vector3.forward);
         //if (ry == 270f) ry = 90f;
         RaycastHit outRay;
         if (Physics.Raycast(this.childPos.position, -Vector3.up * 10, out outRay))
