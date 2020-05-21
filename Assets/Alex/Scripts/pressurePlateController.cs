@@ -14,6 +14,8 @@ public class pressurePlateController : MonoBehaviour
     [ColorUsage(true, true)]
     public Color red_on, red_off;
 
+    bool itsounds;
+
     [Header("Change type")]
     [SerializeField] private bool justOneStep;
 
@@ -30,9 +32,15 @@ public class pressurePlateController : MonoBehaviour
         if (pressed)
         {
             transform.localScale = scalePressed;
+            if (!itsounds)
+            {
+                AudioController.AudioInstance.soundPressurePlateClanks(true);
+                itsounds = true;
+            }
         }
         else
         {
+            itsounds = false;
             transform.localScale = scaleNotPressed;
         }
     }

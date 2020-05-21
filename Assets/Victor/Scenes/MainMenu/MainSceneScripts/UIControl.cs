@@ -7,6 +7,8 @@ using TMPro;
 
 public class UIControl : MonoBehaviour
 {
+    GameObject lastSelected;
+
     #region
     public GameObject gTitle;
     public GameObject buttonRightCanvas;
@@ -39,6 +41,7 @@ public class UIControl : MonoBehaviour
 
     private void Awake()
     {
+        lastSelected = new GameObject();
         currentLevel = 1;
         gTitle.transform.position = new Vector3(gTitle.transform.position.x, gTitle.transform.position.y + 20, gTitle.transform.position.z);
         buttonLeftCanvas.transform.localScale = new Vector3(0f, 1f, 1f);
@@ -138,6 +141,11 @@ public class UIControl : MonoBehaviour
             if (eSystemAbleToSelect)
             {
                 eSystem_currentSelected = this.eventSystem.GetComponent<EventSystem>().currentSelectedGameObject;
+                if (lastSelected != eSystem_currentSelected)
+                {
+                    lastSelected = eSystem_currentSelected;
+                    AudioController.AudioInstance.soundMenuPop(true);
+                }
                 if (eSystem_currentSelected.name.Equals("VolumeSlider"))
                 {
                     backgroundImgs[0].color = new Color(0, 248, 250, 255);
@@ -209,7 +217,7 @@ public class UIControl : MonoBehaviour
                 break;
         }
         eSystemAbleToSelect = true;
-
+        lastSelected = this.eventSystem.GetComponent<EventSystem>().currentSelectedGameObject;
     }
 
     public void ExitGame()

@@ -12163,7 +12163,7 @@ MonoBehaviour:
   enemySteps: {fileID: 8300000, guid: 8334e0f5e9d62bf47bc9a2cc81417d21, type: 3}
   pressurePlateClanks: {fileID: 8300000, guid: 61f2084f2eea0404aa3ba70587bcf483, type: 3}
   selectButton: {fileID: 8300000, guid: 46f282330cf98a04e808aaac5fb5cfe4, type: 3}
-  trespassPortal: {fileID: 8300000, guid: 7fe1873d73f8db840a649dac05abe545, type: 3}
+  trespassPortal: {fileID: 8300000, guid: 3e884ebd2f5a7c049b2df8d52e4dd35c, type: 3}
   doorOpen: {fileID: 8300000, guid: 451008a913114b14da61fa3952752f51, type: 3}
   doorClose: {fileID: 8300000, guid: 451008a913114b14da61fa3952752f51, type: 3}
   menuPop: {fileID: 8300000, guid: fa725918161acbc4b845e06739bb4857, type: 3}

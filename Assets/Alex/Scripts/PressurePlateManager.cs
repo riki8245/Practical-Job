@@ -7,6 +7,7 @@ public class PressurePlateManager : MonoBehaviour
     public pressurePlateController[] pressurePlates;
     public GameObject door;
     private Animator door_anim;
+    bool itsounds;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,10 +27,16 @@ public class PressurePlateManager : MonoBehaviour
             if (allOpen)
             {
                 door_anim.SetBool("open", true);
+                if (!itsounds)
+                {
+                    AudioController.AudioInstance.soundDoor(true);
+                    itsounds = true;
+                }
                 door.GetComponent<CapsuleCollider>().enabled = false;
             }
             else
             {
+                itsounds = false;
                 door_anim.SetBool("open", false);
                 door.GetComponent<CapsuleCollider>().enabled = true;
             }

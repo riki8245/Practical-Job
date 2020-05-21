@@ -179,7 +179,7 @@ public class Portal : MonoBehaviour
             {
                 if (!destination.GetComponent<Portal>().passingTrough && !destination.GetComponent<Portal>().teleported)
                 {
-
+                    AudioController.AudioInstance.soundTrespassPortal(true);
                     objectTeleporting = other.gameObject;
                     if (other.gameObject.CompareTag("Box"))
                     {
