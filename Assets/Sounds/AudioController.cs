@@ -15,7 +15,7 @@ public class AudioController : MonoBehaviour
     public AudioClip doorOpen;
     public AudioClip doorClose; 
     public AudioClip menuPop;
-    public AudioClip pushBox;
+    public AudioClip confirmSelection;
 
     bool menu = false;
 
@@ -49,7 +49,7 @@ public class AudioController : MonoBehaviour
         emitter[8].volume = 0;
         emitter[9].clip = menuPop;
         emitter[9].volume = 0;
-        emitter[10].clip = pushBox;
+        emitter[10].clip = confirmSelection;
         emitter[10].volume = 0;
 
     }
@@ -163,7 +163,7 @@ public class AudioController : MonoBehaviour
         }
     }
 
-    public void soundPushBox(bool play)
+    public void soundConfirmSelection(bool play)
     {
         if (play == true)
         {
