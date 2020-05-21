@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class AudioController : MonoBehaviour
 {
+    public static AudioController AudioInstance;
     public AudioClip menuMusic;
     public AudioClip gameMusic;
     public AudioClip playerSteps;
@@ -24,8 +25,21 @@ public class AudioController : MonoBehaviour
     AudioSource [] emitter;
 
     void Awake(){
-        DontDestroyOnLoad(this.gameObject);
+        MakeSingleton();
     }
+    private void MakeSingleton()
+    {
+        if (AudioInstance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            AudioInstance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+    }
+
     void Start()
     {
         emitter = GetComponents<AudioSource>();
