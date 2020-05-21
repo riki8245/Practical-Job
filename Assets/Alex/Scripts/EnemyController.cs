@@ -13,10 +13,11 @@ public class EnemyController : MonoBehaviour
     private Rigidbody rb;
     private Animator e_anim;
     public bool Grounded;
+    bool itsounds;
     // Start is called before the first frame update
     void Start()
     {
-
+        itsounds = false;
         Player = GameObject.FindGameObjectWithTag("Player").transform;
         nav = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
@@ -29,6 +30,14 @@ public class EnemyController : MonoBehaviour
         if (Grounded) Move();
 
         e_anim.SetFloat("Speed", nav.velocity.magnitude);
+        if (nav.velocity.magnitude > 0.1 && !itsounds)
+        {
+            AudioController.AudioInstance.soundEnemySteps(true); itsounds = true;
+        }
+        else if (nav.velocity.magnitude < 0.1 && itsounds)
+        {
+            AudioController.AudioInstance.soundEnemySteps(false); itsounds = false;
+        }
     }
 
     void Move()

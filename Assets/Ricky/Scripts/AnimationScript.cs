@@ -8,9 +8,13 @@ public class AnimationScript : MonoBehaviour
     private CharacterController ch_controller;
     private Animator ch_anim;
     [SerializeField] private GameObject bt;
+
+    bool itsounds;
+    float ch_speedXZ;
     // Start is called before the first frame update
     void Start()
     {
+        itsounds = false;
         ch_controller = GetComponent<CharacterController>();
         controller = GetComponent<PlayerControl>();
         ch_anim = GetComponent<Animator>();
@@ -41,7 +45,19 @@ public class AnimationScript : MonoBehaviour
         }    
     
         ch_anim.SetBool("pushing", controller.grabbingBox);
-        ch_anim.SetFloat("speed", controller.enabled ? Mathf.Abs(ch_controller.velocity.x) + Mathf.Abs(ch_controller.velocity.z) : 0f);
+        ch_speedXZ = Mathf.Abs(ch_controller.velocity.x) + Mathf.Abs(ch_controller.velocity.z);
+        ch_anim.SetFloat("speed", controller.enabled ? ch_speedXZ : 0f);
         ch_anim.SetBool("joyinput", ch_controller.velocity.magnitude > 0.1f? Input.GetButton("L3") : false);
+
+        if (ch_speedXZ > 0.1 && !itsounds)
+        {
+            AudioController.AudioInstance.soundPlayerSteps(true);
+            itsounds = true;
+        }
+        else if (ch_speedXZ < 0.1 && itsounds) { 
+            AudioController.AudioInstance.soundPlayerSteps(false);
+            itsounds = false;
+        }
+
     }
 }
