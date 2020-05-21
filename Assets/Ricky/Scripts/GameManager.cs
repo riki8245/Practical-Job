@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
                 sceneN = SceneManager.GetActiveScene().buildIndex;
                 Camera.main.allowHDR  = c_enableHDR;
                 Camera.main.allowMSAA = c_enableMSAA;
-s                if (c_enableShadows) QualitySettings.shadows = _originalShadowSettings;
+                if (c_enableShadows) QualitySettings.shadows = _originalShadowSettings;
                 else QualitySettings.shadows = ShadowQuality.Disable;
                 QualitySettings.antiAliasing = c_Antialising;
             }
