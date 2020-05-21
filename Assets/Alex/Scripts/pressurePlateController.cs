@@ -8,6 +8,7 @@ public class pressurePlateController : MonoBehaviour
     public bool pressed = false;
     private Vector3 scaleNotPressed = new Vector3(0.67f, 0.07f, 0.67f);
     private Vector3 scalePressed = new Vector3(0.67f, 0.01f, 0.67f);
+    bool itsounds;
 
     public GameObject door;
     private Animator door_anim;
@@ -30,11 +31,16 @@ public class pressurePlateController : MonoBehaviour
         if (pressed)
         {
             transform.localScale = scalePressed;
+            if (!itsounds)
+            {
+                AudioController.AudioInstance.soundPressurePlateClanks(true);
+                itsounds = true;
+            }
         }
         else
         {
             transform.localScale = scaleNotPressed;
-            AudioController.AudioInstance.soundPressurePlateClanks(true);
+            itsounds = false;
         }
     }
 

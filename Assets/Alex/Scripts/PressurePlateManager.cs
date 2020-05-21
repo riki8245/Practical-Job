@@ -38,7 +38,7 @@ public class PressurePlateManager : MonoBehaviour
             {
                 if (itsounds)
                 {
-                    AudioController.AudioInstance.soundInvalidSelection(false);
+                    AudioController.AudioInstance.soundDoor(false);
                     itsounds = false;
                 }
                 door_anim.SetBool("open", false);
