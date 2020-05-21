@@ -45,26 +45,37 @@ public class AudioController : MonoBehaviour
         emitter = GetComponents<AudioSource>();
         emitter[0].clip = menuMusic;
         emitter[0].volume = 0;
+        emitter[0].loop = true;
         emitter[1].clip = gameMusic;
         emitter[1].volume = 0;
+        emitter[1].loop = true;
         emitter[2].clip = playerSteps;
         emitter[2].volume = 0;
+        emitter[2].loop = true;
         emitter[3].clip = enemySteps;
         emitter[3].volume = 0;
+        emitter[3].loop = true;
         emitter[4].clip = pressurePlateClanks;
         emitter[4].volume = 0;
+        emitter[4].loop = false;
         emitter[5].clip = selectButton;
         emitter[5].volume = 0;
+        emitter[5].loop = false;
         emitter[6].clip = trespassPortal;
         emitter[6].volume = 0;
+        emitter[6].loop = false;
         emitter[7].clip = doorOpen;
         emitter[7].volume = 0;
+        emitter[7].loop = false;
         emitter[8].clip = doorClose;
         emitter[8].volume = 0;
+        emitter[8].loop = false;
         emitter[9].clip = menuPop;
         emitter[9].volume = 0;
+        emitter[9].loop = false;
         emitter[10].clip = confirmSelection;
         emitter[10].volume = 0;
+        emitter[10].loop = false;
 
     }
 
@@ -121,10 +132,10 @@ public class AudioController : MonoBehaviour
         {
             emitter[4].Play();
         }
-        else 
+        /*else 
         {
             emitter[4].Stop();
-        }
+        }*/
     }
 
     public void soundSelectButton(bool play)
@@ -133,10 +144,10 @@ public class AudioController : MonoBehaviour
         {
             emitter[5].Play();
         }
-        else 
+        /*else 
         {
             emitter[5].Stop();
-        }
+        }*/
     }
 
     public void soundTrespassPortal(bool play)
@@ -145,10 +156,10 @@ public class AudioController : MonoBehaviour
         {
             emitter[6].Play();
         }
-        else 
+        /*else 
         {
             emitter[6].Stop();
-        }
+        }*/
     }
 
     public void soundDoor(bool play)
@@ -171,10 +182,10 @@ public class AudioController : MonoBehaviour
         {
             emitter[9].Play();
         }
-        else 
+        /*else 
         {
             emitter[9].Stop();
-        }
+        }*/
     }
 
     public void soundConfirmSelection(bool play)
@@ -183,10 +194,10 @@ public class AudioController : MonoBehaviour
         {
             emitter[10].Play();
         }
-        else 
+        /*else 
         {
             emitter[10].Stop();
-        }
+        }*/
     }
 
     private IEnumerator showSign(AudioSource emisor)
