@@ -17,6 +17,7 @@ public class AudioController : MonoBehaviour
     public AudioClip doorClose; 
     public AudioClip menuPop;
     public AudioClip confirmSelection;
+    public AudioClip invalidSelection;
 
     bool menu = false;
 
@@ -76,6 +77,9 @@ public class AudioController : MonoBehaviour
         emitter[10].clip = confirmSelection;
         emitter[10].volume = 1;
         emitter[10].loop = false;
+        emitter[11].clip = invalidSelection;
+        emitter[11].volume = 1;
+        emitter[11].loop = false;
 
     }
 
@@ -193,6 +197,17 @@ public class AudioController : MonoBehaviour
         if (play == true)
         {
             emitter[10].Play();
+        }
+        /*else 
+        {
+            emitter[10].Stop();
+        }*/
+    }
+    public void soundInvalidSelection(bool play)
+    {
+        if (play == true)
+        {
+            emitter[11].Play();
         }
         /*else 
         {
