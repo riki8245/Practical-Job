@@ -41,7 +41,7 @@ public class AnimationScript : MonoBehaviour
         }    
     
         ch_anim.SetBool("pushing", controller.grabbingBox);
-        ch_anim.SetFloat("speed", controller.enabled ? Mathf.Abs(ch_controller.velocity.x + ch_controller.velocity.z) : 0f);
+        ch_anim.SetFloat("speed", controller.enabled ? Mathf.Abs(ch_controller.velocity.x) + Mathf.Abs(ch_controller.velocity.z) : 0f);
         ch_anim.SetBool("joyinput", ch_controller.velocity.magnitude > 0.1f? Input.GetButton("L3") : false);
     }
 }
