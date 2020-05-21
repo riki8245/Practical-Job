@@ -36,7 +36,11 @@ public class PressurePlateManager : MonoBehaviour
             }
             else
             {
-                itsounds = false;
+                if (itsounds)
+                {
+                    AudioController.AudioInstance.soundInvalidSelection(false);
+                    itsounds = false;
+                }
                 door_anim.SetBool("open", false);
                 door.GetComponent<CapsuleCollider>().enabled = true;
             }

@@ -92,11 +92,11 @@ public class BoxControl : MonoBehaviour
         }
         imgettingMoved = true;
         float force = 1;
-        switch (Mathf.Floor(Mathf.Clamp(timePressed, 0f, 3f)))
+        switch (Mathf.Floor(Mathf.Clamp(timePressed, 0f, 2f)))
         {
-            case 1: force = 1.5f; break;
-            case 2: force = 2.75f; break;
-            case 3: force = 5f; break;
+            case 0: force = 1.5f; break;
+            case 1: force = 2.75f; break;
+            case 2: force = 5f; break;
         }
         this.GetComponent<Rigidbody>().AddForce(direction * 300f * force);
         StartCoroutine(BoxIsMoving());

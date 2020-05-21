@@ -100,6 +100,7 @@ public class UIControl : MonoBehaviour
     {
         if (eSystemAbleToSelect)
         {
+            AudioController.AudioInstance.soundConfirmSelection(true);
             eSystemAbleToSelect = false;
             foreach (Transform transform in characterPath) transform.position = new Vector3(transform.position.x, character.transform.position.y, transform.position.z);
             iTween.RotateTo(character, iTween.Hash("y", -180f, "easeType", "easeInOutQuad", "time", 1f, "oncomplete", "MoveCharacter", "onCompleteTarget", this.gameObject));
@@ -120,13 +121,14 @@ public class UIControl : MonoBehaviour
         foreach (GameObject gameObj in toDisableObjects) iTween.ScaleTo(gameObj, iTween.Hash("x", 0, "y", 0, "easeType", "easeOutSine", "time", 1f, "onComplete", "DisableObjects", "onCompleteTarget", this.gameObject, "onCompleteParams", gameObj));
         iTween.MoveTo(mainCamera, iTween.Hash("x",-3f,"y", 7.75f,"z", 5.75f,"time", 1f,"easeType","linear"));
         iTween.RotateTo(mainCamera, iTween.Hash("x", 31.8, "y", -90f,"time", 1f, "easeType", "linear"));
-        lerpCamera = true;
+        lerpCamera = true;    
     }
 
     public void NewMenuOpen()
     {
         if (eSystemAbleToSelect)
         {
+            AudioController.AudioInstance.soundConfirmSelection(true);
             eSystemAbleToSelect = false;
             if (iTween.tweens.Contains(iTween.Hash("name", "buttonsLeft"))) iTween.StopByName("buttonsLeft");
             if (iTween.tweens.Contains(iTween.Hash("name", "buttonsRight"))) iTween.StopByName("buttonsRight");

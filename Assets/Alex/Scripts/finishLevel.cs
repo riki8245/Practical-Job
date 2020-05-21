@@ -47,6 +47,7 @@ public class finishLevel : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             playerReachFinish = true;
+            AudioController.AudioInstance.soundPlayerSteps(false);
             other.gameObject.GetComponent<PlayerControl>().enabled = false;
         }
     }
