@@ -48,6 +48,7 @@ public class finishLevel : MonoBehaviour
         {
             playerReachFinish = true;
             AudioController.AudioInstance.soundPlayerSteps(false);
+            AudioController.AudioInstance.soundDoor(false);
             other.gameObject.GetComponent<PlayerControl>().enabled = false;
         }
     }
