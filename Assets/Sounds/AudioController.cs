@@ -22,7 +22,7 @@ public class AudioController : MonoBehaviour
     public float MusicVolume;
     public float SfxVolume;
 
-    bool menu = false;
+    bool menu = true;
 
     private IEnumerator coroutine;
 
@@ -73,7 +73,11 @@ public class AudioController : MonoBehaviour
         emitter[11].loop = false;
         for (int i = 0; i < 2; i++) emitter[i].volume = GameManager.instance.MusicVolume;
         for (int i = 2; i <= 11; i++) emitter[i].volume = GameManager.instance.SfxVolume;
-        if (SceneManager.GetActiveScene().buildIndex == 0) GameObject.Find("UIController").GetComponent<UIControl>().SetSliders();
+        GameObject.Find("UIController").GetComponent<UIControl>().SetSliders();
+
+        emitter[0].Play();
+        coroutine = startMusicMenu(emitter[0]);
+        StartCoroutine(coroutine);
     }
 
     void Update()
@@ -81,20 +85,19 @@ public class AudioController : MonoBehaviour
         if (!menu && SceneManager.GetActiveScene().buildIndex == 0){
             menu = true;
             emitter[0].Play();
-            coroutine = showSign(emitter[0]);
+            coroutine = FadeIn_Out(emitter[0]);
             StartCoroutine(coroutine);
-            coroutine = showSign(emitter[1]);
+            coroutine = FadeIn_Out(emitter[1]);
             StartCoroutine(coroutine);
-            //emitter[1].Stop();
+            GameObject.Find("UIController").GetComponent<UIControl>().SetSliders();
         }
         else if(menu  && SceneManager.GetActiveScene().buildIndex != 0){
             menu = false;
             emitter[1].Play();
-            coroutine = showSign(emitter[0]);
+            coroutine = FadeIn_Out(emitter[0]);
             StartCoroutine(coroutine);
-            coroutine = showSign(emitter[1]);
+            coroutine = FadeIn_Out(emitter[1]);
             StartCoroutine(coroutine);
-            //emitter[0].Stop();
         }
         
     }
@@ -229,9 +232,9 @@ public class AudioController : MonoBehaviour
         for (int i = 2; i <= 11; i++) emitter[i].volume = slider.value;
     }
 
-    private IEnumerator showSign(AudioSource emisor)
+    private IEnumerator FadeIn_Out(AudioSource emisor)
     {
-        float init = menu == (emisor == emitter[0]) ? 0: 1;
+        float init = menu == (emisor == emitter[0]) ? 0: GameManager.instance.MusicVolume;
         float target = init == 0 ? GameManager.instance.MusicVolume:0;
         float duration = 1.0f;
         float time = 0.0f;
@@ -244,5 +247,22 @@ public class AudioController : MonoBehaviour
         {
             emisor.Stop();
         }
+    }
+
+    private IEnumerator startMusicMenu(AudioSource emisor)
+    {
+        float duration = 1.0f;
+        float time = 0.0f;
+        while (time <= duration)
+        {
+            emisor.volume = Mathf.Lerp(0, GameManager.instance.MusicVolume, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    internal void SetMusicVolume(Slider.SliderEvent onValueChanged)
+    {
+        throw new NotImplementedException();
     }
 }

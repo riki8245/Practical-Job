@@ -328,6 +328,9 @@ public class UIControl : MonoBehaviour
     }
     public void SetSliders()
     {
+        MusicSlider.onValueChanged.AddListener(delegate { AudioController.AudioInstance.SetMusicVolume(MusicSlider); });
+        SfxSlider.onValueChanged.AddListener(delegate { AudioController.AudioInstance.SetSfxVolume(SfxSlider); });
+
         MusicSlider.value = GameManager.instance.MusicVolume;
         SfxSlider.value = GameManager.instance.SfxVolume;
     }
