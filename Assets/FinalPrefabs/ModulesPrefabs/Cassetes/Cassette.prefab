@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1398551206}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 3, z: 0.4}
   m_Children: []
   m_Father: {fileID: 1783686793700392835}
   m_RootOrder: 1
@@ -210,7 +210,6 @@ MonoBehaviour:
   onSelectedPos: {fileID: 0}
   uIControl: {fileID: 0}
   locked: {fileID: 2100000, guid: 0bc92a68d7de3e34cba09fa098f6cfed, type: 2}
-  unlocked: {fileID: 0}
 --- !u!205 &95510955
 LODGroup:
   m_ObjectHideFlags: 0
