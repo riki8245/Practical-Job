@@ -28,6 +28,7 @@ public class finishLevel : MonoBehaviour
             door.SetBool("open", false);
             if (timeToPassToNextLevel > 1.5f)
             {
+
                 if (SceneManager.GetActiveScene().buildIndex == 11) //If game complete, return to menu
                 {
                     SceneManager.LoadScene(0);
@@ -47,8 +48,7 @@ public class finishLevel : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             playerReachFinish = true;
-            AudioController.AudioInstance.soundPlayerSteps(false);
-            AudioController.AudioInstance.soundDoor(false);
+            AudioController.AudioInstance.StopAllSounds();
             other.gameObject.GetComponent<PlayerControl>().enabled = false;
         }
     }

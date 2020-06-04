@@ -211,9 +211,26 @@ public class AudioController : MonoBehaviour
         }
         /*else 
         {
-            emitter[10].Stop();
+            emitter[11].Stop();
         }*/
     }
+
+    public void StopAllSounds()
+    {
+        for(int i = 2; i <=11; i++)
+        {
+            emitter[i].Stop();
+        }
+    }
+
+    public void SetVolume(float volume)
+    {
+        for (int i = 0; i <= 11; i++)
+        {
+            emitter[i].volume = volume;
+        }
+    }
+    
 
     private IEnumerator showSign(AudioSource emisor)
     {
