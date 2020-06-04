@@ -76,7 +76,7 @@ public class AudioController : MonoBehaviour
         emitter[11].loop = false;
         for (int i = 0; i < 2; i++) emitter[i].volume = MusicVolume;
         for (int i = 2; i <= 11; i++) emitter[i].volume = SfxVolume;
-        for (int i = 0; i <= 11; i++) print("volume " + i + " " + emitter[i].volume);
+        if (SceneManager.GetActiveScene().buildIndex == 0) GameObject.Find("UIController").GetComponent<UIControl>().SetSliders();
     }
 
     void Update()

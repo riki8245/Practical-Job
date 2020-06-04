@@ -44,4 +44,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Victor/Scenes/PauseMenu/PauseMenu.unity
     guid: c7da4b8179e4441268139c2d52d45862
+  - enabled: 1
+    path: Assets/Victor/Scenes/FadeScene.unity
+    guid: 15f5d1c5b6ddd4f1cb0e1f246dd0d2fd
   m_configObjects: {}

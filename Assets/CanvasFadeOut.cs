@@ -1,23 +1,54 @@
 ﻿
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CanvasFadeOut : MonoBehaviour
 {
-    Color color = new Color();
-    float duration;
+    Color colorTransparent;
+    private float durationFades;
     float timer;
+    static int state = 1;
     private void Awake()
     {
-        color = Color.black;
-        duration = 3f;
+        colorTransparent = new Color(0f, 0f, 0f, 0f);
+        durationFades = 1f;
         timer = 0f;
+        this.GetComponentInChildren<Image>().color = colorTransparent;
+
     }
-    void Update()
+    private void Start()
     {
-        color = Color.Lerp(Color.black, new Color(0f, 0f, 0f, 0f), timer);
-        this.GetComponentInChildren<Image>().color = color;
-        if (color.Equals(new Color(0, 0, 0, 0))) Destroy(this);
-        else timer += Time.deltaTime / duration;
+        if (state == 1) StartCoroutine(FadeIn());
+        else StartCoroutine(FadeOut());
+    }
+
+    IEnumerator FadeIn()
+    {
+        state = 2;
+        Color currentColor;
+        while (timer < durationFades)
+        {
+            currentColor = Color.Lerp(colorTransparent, Color.black, timer);
+            this.GetComponentInChildren<Image>().color = currentColor;
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        Destroy(this);
+        yield return null;
+    }
+    IEnumerator FadeOut()
+    {
+        state = 1;
+        Color currentColor;
+        while (timer < durationFades)
+        {
+            currentColor = Color.Lerp(Color.black, colorTransparent, timer);
+            this.GetComponentInChildren<Image>().color = currentColor;
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        Destroy(this);
+        yield return null;
     }
 }

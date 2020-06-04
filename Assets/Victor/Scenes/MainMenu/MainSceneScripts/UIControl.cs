@@ -79,10 +79,6 @@ public class UIControl : MonoBehaviour
                     break;
             }
         }
-        MusicSlider.value = GameManager.instance.MusicVolume;
-        SfxSlider.value   = GameManager.instance.SfxVolume;
-        print("Ms : " + MusicSlider.value);
-        print("Ss : " + SfxSlider.value);
     }
 
     private void StartMovingButtons()
@@ -329,5 +325,10 @@ public class UIControl : MonoBehaviour
         if (eSystemAbleToSelect)
             StartCoroutine(LoadYourAsyncScene(currentLevel));
         eSystemAbleToSelect = false;
-    }    
+    }
+    public void SetSliders()
+    {
+        MusicSlider.value = GameManager.instance.MusicVolume;
+        SfxSlider.value = GameManager.instance.SfxVolume;
+    }
 }
