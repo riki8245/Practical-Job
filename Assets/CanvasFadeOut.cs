@@ -5,43 +5,38 @@ using UnityEngine.UI;
 
 public class CanvasFadeOut : MonoBehaviour
 {
-    Color colorTransparent;
-    private float durationFades;
-    float timer;
-    static int state = 1;
+    Color colorTransparent = new Color(0f, 0f, 0f, 0f);
     private void Awake()
     {
-        colorTransparent = new Color(0f, 0f, 0f, 0f);
-        durationFades = 1f;
-        timer = 0f;
         this.GetComponentInChildren<Image>().color = colorTransparent;
-
+        DontDestroyOnLoad(this);
     }
     private void Start()
     {
-        if (state == 1) StartCoroutine(FadeIn());
-        else StartCoroutine(FadeOut());
+        StartCoroutine(Fades());
     }
 
-    IEnumerator FadeIn()
+    IEnumerator Fades()
     {
-        state = 2;
+        float timer = 0;
+
         Color currentColor;
-        while (timer < durationFades)
+        while (timer < 1f)
         {
             currentColor = Color.Lerp(colorTransparent, Color.black, timer);
             this.GetComponentInChildren<Image>().color = currentColor;
             timer += Time.deltaTime;
             yield return null;
         }
-        Destroy(this);
-        yield return null;
-    }
-    IEnumerator FadeOut()
-    {
-        state = 1;
-        Color currentColor;
-        while (timer < durationFades)
+        timer = 0f;
+        while (timer < .5f)
+        {
+           
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        timer = 0f;
+        while (timer < 1f)
         {
             currentColor = Color.Lerp(Color.black, colorTransparent, timer);
             this.GetComponentInChildren<Image>().color = currentColor;

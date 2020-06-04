@@ -26,6 +26,7 @@ public class PlayerControl : MonoBehaviour
 
     public Transform movingBoxRayPosition;
     public GameObject box;
+    private bool enableUpdate;
     private Material[] mats;
 
     public GameObject p_Head;
@@ -41,6 +42,7 @@ public class PlayerControl : MonoBehaviour
         canMoveBox = true;
         pushingOut = false;
         box = null;
+        enableUpdate = false;
         forceToPushBox = 0f;
         playerPosRelativeBox = "";
         playerLayer = LayerMask.NameToLayer("Player");
@@ -50,15 +52,21 @@ public class PlayerControl : MonoBehaviour
         emission.SetColor("_EmissionColor", green);
         FaceState = 0;
         resetMovement = 0;
+        Invoke("EnableUpdate",1f);
+    }
+    void EnableUpdate()
+    {
+        enableUpdate = true;
     }
     private void Update()
     {
         float p_horizontalMove = Input.GetAxis("Horizontal");
         float p_verticalMove = Input.GetAxis("Vertical");
-        MovePlayer(p_horizontalMove , p_verticalMove);
-        inFrontBox = Physics.Raycast(transform.position, transform.forward,50f,LayerMask.GetMask("Boxes"));
+        if (enableUpdate) MovePlayer(p_horizontalMove, p_verticalMove);
+        else MovePlayer(0f, 0f);
+        inFrontBox = Physics.Raycast(transform.position, transform.forward, 50f, LayerMask.GetMask("Boxes"));
         Physics.IgnoreLayerCollision(playerLayer, slopeLayer, !grabbingBox);
-        ChangeFaceTexture();
+        if(enableUpdate)ChangeFaceTexture();
         contToResetMove();
     }
 
@@ -93,7 +101,7 @@ public class PlayerControl : MonoBehaviour
         p_input.y = 0.0f;
 
         p_Speed = Input.GetButton("L3") ? 6.5f : 4.5f;
-        ManageInputs();
+        if (enableUpdate) ManageInputs();
         if (p_input != Vector3.zero && !grabbingBox && !pushingOut && resetMovement <= 0)
         {
             characterController.transform.LookAt(characterController.transform.position + p_input);

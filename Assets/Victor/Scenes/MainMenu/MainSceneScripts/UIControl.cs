@@ -323,7 +323,10 @@ public class UIControl : MonoBehaviour
     {
         currentLevel = int.Parse(gameObject.name.Substring(5));
         if (eSystemAbleToSelect)
+        {
+            SceneManager.LoadScene("FadeScene", LoadSceneMode.Additive);
             StartCoroutine(LoadYourAsyncScene(currentLevel));
+        }
         eSystemAbleToSelect = false;
     }
     public void SetSliders()
