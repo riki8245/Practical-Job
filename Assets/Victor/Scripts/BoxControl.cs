@@ -9,6 +9,7 @@ public class BoxControl : MonoBehaviour
     public bool showOutline;
     public GameObject outline;
     private bool imgettingMoved = false;
+
     private void Start()
     {
         StartCoroutine(FreezeConstrainsts());
@@ -130,6 +131,15 @@ public class BoxControl : MonoBehaviour
         this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX;
         this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ;
         this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
-
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag.Equals("Floor"))
+            this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag.Equals("Floor"))
+            this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
     }
 }

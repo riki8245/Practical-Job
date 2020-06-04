@@ -43,7 +43,7 @@ public class CanvasFadeOut : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
-        Destroy(this);
+        Destroy(this.gameObject);
         yield return null;
     }
 }
