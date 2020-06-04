@@ -138,7 +138,6 @@ public class Portal : MonoBehaviour
                 }
                 //boxcopy.transform.parent = null;
                 boxcopy.layer = layerPassable;
-                print(auxDir);
                 boxcopy.GetComponent<Rigidbody>().AddForce(auxDir * 100f); 
                 teleported = true;
             }

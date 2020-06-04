@@ -46,9 +46,6 @@ public class AudioController : MonoBehaviour
 
     void Start()
     {
-        MusicVolume = GameManager.instance.MusicVolume;
-        SfxVolume = GameManager.instance.SfxVolume;
-
         emitter = GetComponents<AudioSource>();
         emitter[0].clip = menuMusic;
         emitter[0].loop = true;
@@ -74,8 +71,8 @@ public class AudioController : MonoBehaviour
         emitter[10].loop = false;
         emitter[11].clip = invalidSelection;
         emitter[11].loop = false;
-        for (int i = 0; i < 2; i++) emitter[i].volume = MusicVolume;
-        for (int i = 2; i <= 11; i++) emitter[i].volume = SfxVolume;
+        for (int i = 0; i < 2; i++) emitter[i].volume = GameManager.instance.MusicVolume;
+        for (int i = 2; i <= 11; i++) emitter[i].volume = GameManager.instance.SfxVolume;
         if (SceneManager.GetActiveScene().buildIndex == 0) GameObject.Find("UIController").GetComponent<UIControl>().SetSliders();
     }
 
@@ -222,35 +219,20 @@ public class AudioController : MonoBehaviour
 
     public void SetMusicVolume(Slider slider)
     {
+        for (int i = 0; i < 2; i++) emitter[i].volume = slider.value;
         GameManager.instance.MusicVolume = slider.value;
-        for (int i = 0; i <= 11; i++) print("volume " + i + " " + emitter[i].volume);
-        try
-        {
-            for (int i = 0; i < 2; i++) emitter[i].volume = slider.value;
-        }
-        catch(NullReferenceException ex){
-
-        }
     }
 
     public void SetSfxVolume(Slider slider)
     {
         GameManager.instance.SfxVolume = slider.value;
-        try
-        {
-
-            for (int i = 2; i <= 11; i++) emitter[i].volume = slider.value;
-        }
-        catch(NullReferenceException ex)
-        {
-            //Invoke("SfxVolume(slider)", 1f);
-        }
+        for (int i = 2; i <= 11; i++) emitter[i].volume = slider.value;
     }
 
     private IEnumerator showSign(AudioSource emisor)
     {
         float init = menu == (emisor == emitter[0]) ? 0: 1;
-        float target = init == 0 ? 1:0;
+        float target = init == 0 ? GameManager.instance.MusicVolume:0;
         float duration = 1.0f;
         float time = 0.0f;
         while(time <= duration){
