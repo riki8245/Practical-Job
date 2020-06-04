@@ -18,6 +18,9 @@ public class UIControl : MonoBehaviour
     public GameObject mainCamera;
     public MS_enemyMove mS_EnemyMove;
 
+    public Slider MusicSlider;
+    public Slider SfxSlider;
+
     public GameObject character;
     public Transform[] characterPath;
     public GameObject[] toDisableObjects;
@@ -76,6 +79,10 @@ public class UIControl : MonoBehaviour
                     break;
             }
         }
+        MusicSlider.value = GameManager.instance.MusicVolume;
+        SfxSlider.value   = GameManager.instance.SfxVolume;
+        print("Ms : " + MusicSlider.value);
+        print("Ss : " + SfxSlider.value);
     }
 
     private void StartMovingButtons()

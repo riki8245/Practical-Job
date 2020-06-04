@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public bool c_enableShadows;
     public int c_Antialising;
     public int  currentLevel;
+    public float SfxVolume;
+    public float MusicVolume;
     public float[] FOVs;
     int sceneN;
 
@@ -24,6 +26,8 @@ public class GameManager : MonoBehaviour
         c_enableShadows = true;
         c_Antialising = 4;
         currentLevel = 1;
+        SfxVolume = 0.5f;
+        MusicVolume = 0.0f;
         MakeSingleton();
         _originalShadowSettings = QualitySettings.shadows;
         Cursor.lockState = CursorLockMode.Locked;
@@ -68,7 +72,8 @@ public class GameManager : MonoBehaviour
             this.c_enableShadows = data.c_enableShadows;
             this.currentLevel    = data.currentLevel;
             this.c_Antialising   = data.c_Antialising;
-
+            this.SfxVolume       = data.a_SfxVolume;
+            this.MusicVolume     = data.a_MusicVolume;
         }
     }
 

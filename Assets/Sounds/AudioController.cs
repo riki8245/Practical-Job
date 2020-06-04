@@ -1,7 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class AudioController : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class AudioController : MonoBehaviour
     public AudioClip menuPop;
     public AudioClip confirmSelection;
     public AudioClip invalidSelection;
+    public float MusicVolume;
+    public float SfxVolume;
 
     bool menu = false;
 
@@ -43,44 +46,37 @@ public class AudioController : MonoBehaviour
 
     void Start()
     {
+        MusicVolume = GameManager.instance.MusicVolume;
+        SfxVolume = GameManager.instance.SfxVolume;
+
         emitter = GetComponents<AudioSource>();
         emitter[0].clip = menuMusic;
-        emitter[0].volume = 0;
         emitter[0].loop = true;
         emitter[1].clip = gameMusic;
-        emitter[1].volume = 0;
         emitter[1].loop = true;
         emitter[2].clip = playerSteps;
-        emitter[2].volume = 1;
         emitter[2].loop = true;
         emitter[3].clip = enemySteps;
-        emitter[3].volume = 1;
         emitter[3].loop = true;
         emitter[4].clip = pressurePlateClanks;
-        emitter[4].volume = 1;
         emitter[4].loop = false;
         emitter[5].clip = selectButton;
-        emitter[5].volume = 1;
         emitter[5].loop = false;
         emitter[6].clip = trespassPortal;
-        emitter[6].volume = 1;
         emitter[6].loop = false;
         emitter[7].clip = doorOpen;
-        emitter[7].volume = 1;
         emitter[7].loop = false;
         emitter[8].clip = doorClose;
-        emitter[8].volume = 1;
         emitter[8].loop = false;
         emitter[9].clip = menuPop;
-        emitter[9].volume = 1;
         emitter[9].loop = false;
         emitter[10].clip = confirmSelection;
-        emitter[10].volume = 1;
         emitter[10].loop = false;
         emitter[11].clip = invalidSelection;
-        emitter[11].volume = 1;
         emitter[11].loop = false;
-
+        for (int i = 0; i < 2; i++) emitter[i].volume = MusicVolume;
+        for (int i = 2; i <= 11; i++) emitter[i].volume = SfxVolume;
+        for (int i = 0; i <= 11; i++) print("volume " + i + " " + emitter[i].volume);
     }
 
     void Update()
@@ -223,14 +219,33 @@ public class AudioController : MonoBehaviour
         }
     }
 
-    public void SetVolume(float volume)
+
+    public void SetMusicVolume(Slider slider)
     {
-        for (int i = 0; i <= 11; i++)
+        GameManager.instance.MusicVolume = slider.value;
+        for (int i = 0; i <= 11; i++) print("volume " + i + " " + emitter[i].volume);
+        try
         {
-            emitter[i].volume = volume;
+            for (int i = 0; i < 2; i++) emitter[i].volume = slider.value;
+        }
+        catch(NullReferenceException ex){
+
         }
     }
-    
+
+    public void SetSfxVolume(Slider slider)
+    {
+        GameManager.instance.SfxVolume = slider.value;
+        try
+        {
+
+            for (int i = 2; i <= 11; i++) emitter[i].volume = slider.value;
+        }
+        catch(NullReferenceException ex)
+        {
+            //Invoke("SfxVolume(slider)", 1f);
+        }
+    }
 
     private IEnumerator showSign(AudioSource emisor)
     {
