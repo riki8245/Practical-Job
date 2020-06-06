@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2080531248329794542}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: OjoDerecho_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8694130047551063914}
   - component: {fileID: 923408385252348723}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: OjoDerecho
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3469816210891323315}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Llave 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3277817119053112935}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Boca_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +197,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3262516491918209438}
   - component: {fileID: 3875746587371980497}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Llave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,7 +292,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5880075599145413797}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Cabeza 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -326,7 +326,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4419327596911281358}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: PIBaja
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -357,7 +357,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1538927267076776085}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: PIAlta
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -388,7 +388,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 82987175225856005}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: PDFoot_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -424,7 +424,7 @@ GameObject:
   - component: {fileID: 436124280918136808}
   - component: {fileID: 197623602580391584}
   - component: {fileID: 2895274813812556628}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -501,7 +501,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.22
+  m_Radius: 1.2
   m_Height: 4.36
   m_Direction: 1
   m_Center: {x: 0, y: 2.13, z: 0}
@@ -541,6 +541,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nav: {fileID: 436124280918136808}
   Grounded: 0
+  itsounds: 0
 --- !u!135 &2895274813812556628
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -564,7 +565,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3345644170096533051}
   - component: {fileID: 6141928422800212250}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: OjoIzquierdo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -659,7 +660,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3301522597028353253}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: OjoIzquierdo_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -689,7 +690,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4788894580063600526}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: PDFoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -720,7 +721,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8230814774023577115}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: PDBaja
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -751,7 +752,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7698768649385847952}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Manivela 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -782,7 +783,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8545552327010485294}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: PIFoot_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -812,7 +813,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3220854655329483964}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Puerta 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -843,7 +844,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1424806076029212679}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Llave_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -874,7 +875,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8547903785752223852}
   - component: {fileID: 8492502265700391307}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Manivela
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -971,7 +972,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7361412510496664338}
   - component: {fileID: 4276573096947671320}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Torso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1068,7 +1069,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5790549458560823392}
   - component: {fileID: 4090388616568771651}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: PiernaIzquerda
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1164,7 +1165,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9185751536197790247}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: PDAlta
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1196,7 +1197,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6611098410685944583}
   - component: {fileID: 3987518513042052403}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Cabeza
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1293,7 +1294,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1296249573200333275}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: OjoDerecho 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1325,7 +1326,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6616763981335989216}
   - component: {fileID: 1340439603763487670}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Puerta
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1421,7 +1422,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8448312098119590648}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Boca 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1452,7 +1453,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 590767677641295870}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: OjoIzquierdo 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1483,7 +1484,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6622249716812515757}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Torso 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1516,7 +1517,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 591288099527624955}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Manivela_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1546,7 +1547,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1580655992629841424}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1580,7 +1581,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8804416510347019828}
   - component: {fileID: 1340463473253383004}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Boca
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1676,7 +1677,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4567617376318367646}
   - component: {fileID: 3006597112139197610}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: PiernaDerecha
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1772,7 +1773,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9006684514050511981}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Puerta_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1802,7 +1803,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6244367083713739598}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: PIFoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

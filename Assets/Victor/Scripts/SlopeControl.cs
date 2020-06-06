@@ -39,7 +39,7 @@ public class SlopeControl : MonoBehaviour
         if (other.CompareTag("BoxSlopeInteraction"))
             other.GetComponentInParent<BoxControl>().RotateBox(this.slopeAngle, ry);
         if (other.CompareTag("Player"))
-            other.GetComponentInParent<PlayerControl>().canMoveBox = false;
+            other.GetComponentInParent<PlayerControl>().onSlope = true;
 
     }
     private void OnTriggerExit(Collider other)
@@ -47,6 +47,6 @@ public class SlopeControl : MonoBehaviour
         if (other.CompareTag("BoxSlopeInteraction"))
             other.GetComponentInParent<BoxControl>().RotateBox(0f, -1);
         if (other.CompareTag("Player"))
-            other.GetComponentInParent<PlayerControl>().canMoveBox = true;
+            other.GetComponentInParent<PlayerControl>().onSlope = false;
     }
 }

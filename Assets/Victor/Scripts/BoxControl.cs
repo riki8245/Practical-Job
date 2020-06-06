@@ -10,12 +10,12 @@ public class BoxControl : MonoBehaviour
     public GameObject outline;
     private bool imgettingMoved = false;
     public Transform groundCheck;
-    private int whatIsbox = 8;
     const float groundRadius = .1f;
+    public Transform [] rayCasts = new Transform[4];
 
     private void Start()
     {
-        StartCoroutine(FreezeConstrainsts());
+        StartCoroutine(BoxIsMoving());
     }
     public void RotateBox(float slopeAngle, float orientation)
     {
@@ -32,29 +32,30 @@ public class BoxControl : MonoBehaviour
     }
     private void Update()
     {
+        if (checkPlayerPosition)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(rayCasts[3].position, transform.forward, out hit, 100f, LayerMask.GetMask("Player")))
+                playerSide = "inFront";
+            else if (Physics.Raycast(rayCasts[2].position, -transform.forward, out hit, 100f, LayerMask.GetMask("Player")))
+                playerSide = "inBack";
+            else if (Physics.Raycast(rayCasts[1].position, -transform.right, out hit, 100f, LayerMask.GetMask("Player")))
+                playerSide = "inLeft";
+            else if (Physics.Raycast(rayCasts[0].position, transform.right, out hit, 100f, LayerMask.GetMask("Player")))
+                playerSide = "inRight";
+            else
+                playerSide = "";
+            /*Debug.DrawRay(rayCasts[3].position, transform.forward * 100, Color.blue);
+            Debug.DrawRay(rayCasts[2].position, -transform.forward * 100, Color.black);
+            Debug.DrawRay(rayCasts[0].position, -transform.right * 100, Color.yellow);
+            Debug.DrawRay(rayCasts[1].position, transform.right * 100, Color.red);*/
+        }
         if (this.gameObject.layer == 8 && !imgettingMoved)
         {
             Collider[] hitColliders = Physics.OverlapSphere(groundCheck.position, groundRadius);
             this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
             foreach (Collider item in hitColliders) if (item.gameObject.layer == 9) this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         }
- 
-        if (checkPlayerPosition)
-        {
-            Vector3 rayPoint = this.transform.position + Vector3.up;
-            RaycastHit hit;
-            if (Physics.Raycast(rayPoint, transform.forward, out hit, 100f, LayerMask.GetMask("Player")))
-                playerSide = "inFront";
-            else if (Physics.Raycast(rayPoint, -transform.forward, out hit, 100f, LayerMask.GetMask("Player")))
-                playerSide = "inBack";
-            else if (Physics.Raycast(rayPoint, -transform.right, out hit, 100f, LayerMask.GetMask("Player")))
-                playerSide = "inLeft";
-            else if (Physics.Raycast(rayPoint, transform.right, out hit, 100f, LayerMask.GetMask("Player")))
-                playerSide = "inRight";
-            else
-                playerSide = "";
-        }
-        if (imgettingMoved) imgettingMoved = !(this.GetComponent<Rigidbody>().velocity.Equals(Vector3.zero));
         outline.SetActive(showOutline && !imgettingMoved);
     }
     private void OnTriggerEnter(Collider other)
@@ -64,6 +65,7 @@ public class BoxControl : MonoBehaviour
             other.GetComponent<PlayerControl>().box = this.gameObject;
             checkPlayerPosition = true;
             playerSide = "";
+            showOutline = true;
         }
     }
     private void OnTriggerExit(Collider other)
@@ -74,7 +76,8 @@ public class BoxControl : MonoBehaviour
             this.transform.parent = null;
             playerSide = "";
             checkPlayerPosition = false;
-            if (outline) outline.SetActive(false);
+            showOutline = false;
+
         }
     }
 
@@ -130,16 +133,9 @@ public class BoxControl : MonoBehaviour
         this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX;
         this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ;
         this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+        imgettingMoved = false;
 
-    }
-    private IEnumerator FreezeConstrainsts()
-    {
-        yield return new WaitForSeconds(1);
-        while (this.GetComponent<Rigidbody>().velocity.magnitude != 0f)
-            yield return new WaitForEndOfFrame();
-        this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX;
-        this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ;
-        this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+
     }
 }
     

@@ -32,7 +32,7 @@ public class PlayerControl : MonoBehaviour
     public GameObject p_Head;
 
     float resetMovement;
-
+    public bool onSlope;
 
     private void Awake()
     {
@@ -41,6 +41,7 @@ public class PlayerControl : MonoBehaviour
         inFrontBox = false;
         canMoveBox = true;
         pushingOut = false;
+        onSlope = false;
         box = null;
         enableUpdate = false;
         forceToPushBox = 0f;
@@ -65,6 +66,7 @@ public class PlayerControl : MonoBehaviour
         if (enableUpdate) MovePlayer(p_horizontalMove, p_verticalMove);
         else MovePlayer(0f, 0f);
         inFrontBox = Physics.Raycast(transform.position, transform.forward, 50f, LayerMask.GetMask("Boxes"));
+        //Debug.DrawRay(transform.position, transform.forward * 100, Color.green);
         Physics.IgnoreLayerCollision(playerLayer, slopeLayer, !grabbingBox);
         if(enableUpdate)ChangeFaceTexture();
         contToResetMove();
@@ -131,11 +133,12 @@ public class PlayerControl : MonoBehaviour
     {
         if (box != null)
         {
-            canMoveBox = true;
             if (inFrontBox && !box.GetComponent<BoxControl>().playerSide.Equals("")) //Dentro del trigger + delante de la caja
             {
+                canMoveBox = true;
+
                 playerPosRelativeBox = box.GetComponent<BoxControl>().playerSide;
-                if (canMoveBox)
+                if (canMoveBox && !onSlope)
                 {
                     if (Input.GetButtonDown("Fire1"))
                     {
