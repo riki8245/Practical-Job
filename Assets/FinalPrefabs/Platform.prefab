@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5125059897436792254}
   - component: {fileID: 5125059897436792252}
   - component: {fileID: 5125059897436792255}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Platform
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -142,6 +142,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 5125059897068409316}
+  speed: 0
+  ThingsInPlatform: []
   start: {x: 5.96, y: 2.02, z: 0.7}
   end: {x: 31.17, y: 2.02, z: 0.7}
 --- !u!114 &5125059897436792255
@@ -168,7 +170,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5125059897068409316}
   - component: {fileID: 5125059897068409319}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}

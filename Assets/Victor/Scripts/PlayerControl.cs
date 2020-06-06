@@ -131,6 +131,7 @@ public class PlayerControl : MonoBehaviour
     {
         if (box != null)
         {
+            canMoveBox = true;
             if (inFrontBox && !box.GetComponent<BoxControl>().playerSide.Equals("")) //Dentro del trigger + delante de la caja
             {
                 playerPosRelativeBox = box.GetComponent<BoxControl>().playerSide;
