@@ -37,7 +37,6 @@ public class AnimationScript : MonoBehaviour
                     else if (Input.GetButtonUp("Fire3"))
                     {
                         bt.SetActive(false);
-                        ch_anim.SetTrigger("pushAway");
                         ch_anim.SetBool("preparingPushAway", false);
                     }
                 }
