@@ -24,10 +24,10 @@ public class PlayerControl : MonoBehaviour
     public bool canMoveBox;
     public bool grabbingBox;
 
-    public Transform movingBoxRayPosition;
     public GameObject box;
     private bool enableUpdate;
     private Material[] mats;
+    public bool collisionWhileGrabbing;
 
     public GameObject p_Head;
 
@@ -111,8 +111,7 @@ public class PlayerControl : MonoBehaviour
             else if (axisToUseWhileBox == 2)
                 p_input.x = 0f;
             p_input *= Mathf.Clamp(p_Speed, .1f, p_Speed);
-            RaycastHit hit;
-            if (Physics.Raycast(movingBoxRayPosition.position, this.transform.forward,out hit, .2f,LayerMask.GetMask("Floor")) || Physics.Raycast(movingBoxRayPosition.position, this.transform.forward, out hit, .2f, LayerMask.GetMask("Walls")))
+            if (collisionWhileGrabbing /*Physics.Raycast(movingBoxRayPosition.position, this.transform.forward,out hit, .2f,LayerMask.GetMask("Floor")) || Physics.Raycast(movingBoxRayPosition.position, this.transform.forward, out hit, .2f, LayerMask.GetMask("Walls"))*/)
             {
                 if ((playerPosRelativeBox.Equals("inRight") && p_input.x < 0f) || (playerPosRelativeBox.Equals("inBack") && p_input.z > 0f)) p_input = Vector3.zero;
                 else if ((playerPosRelativeBox.Equals("inLeft") && p_input.x > 0f) || (playerPosRelativeBox.Equals("inFront") && p_input.z < 0f)) p_input = Vector3.zero;
@@ -141,7 +140,7 @@ public class PlayerControl : MonoBehaviour
                         box.transform.parent = this.transform;
                         grabbingBox = true;
                     }
-                
+
                 }
                 if (Input.GetButtonUp("Fire1"))
                 {
@@ -170,7 +169,7 @@ public class PlayerControl : MonoBehaviour
                     }
                 }
             }
-            box.GetComponent<BoxControl>().showOutline = inFrontBox &&  (!grabbingBox && !pushingOut) && box.GetComponent<Rigidbody>().velocity == Vector3.zero;
+            box.GetComponent<BoxControl>().showOutline = inFrontBox && (!grabbingBox && !pushingOut) && box.GetComponent<Rigidbody>().velocity == Vector3.zero;
         }
         else
         {

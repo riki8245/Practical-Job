@@ -12,6 +12,7 @@ TagManager:
   - Floor
   - Slope
   - BoxSlopeInteraction
+  - walls
   layers:
   - Default
   - TransparentFX

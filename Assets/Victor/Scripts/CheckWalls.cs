@@ -4,21 +4,31 @@ using UnityEngine;
 
 public class CheckWalls : MonoBehaviour
 {
-    // Start is called before the first frame update
-    private void OnColiison(Collider other)
+    public Transform transformC;
+    private void Awake()
     {
-        print("colisiona");
+        this.transform.position = transformC.position;
+        this.transform.rotation = transformC.rotation;
+    }
+    private void Update()
+    {
+        this.transform.position = new Vector3(transformC.position.x,transformC.position.y + 1.5f, transformC.position.z) + transformC.forward * 1.75f;
+        this.transform.rotation = transformC.rotation;
+
+    }
+    // Start is called before the first frame update
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Floor") || other.CompareTag("walls"))
+            transformC.gameObject.GetComponent<PlayerControl>().collisionWhileGrabbing = true;
+
     }
     private void OnTriggerExit(Collider other)
     {
-        print("Sale");
+        if (other.CompareTag("Floor") || other.CompareTag("walls"))
+            transformC.gameObject.GetComponent<PlayerControl>().collisionWhileGrabbing = false;
+
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        print("colisiona");
-    }
-    private void OnCollisionExit(Collision collision)
-    {
-        print("Sale");
-    }
+
 }
