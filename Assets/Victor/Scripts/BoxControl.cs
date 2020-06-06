@@ -9,6 +9,9 @@ public class BoxControl : MonoBehaviour
     public bool showOutline;
     public GameObject outline;
     private bool imgettingMoved = false;
+    public Transform groundCheck;
+    private int whatIsbox = 8;
+    const float groundRadius = .1f;
 
     private void Start()
     {
@@ -16,7 +19,6 @@ public class BoxControl : MonoBehaviour
     }
     public void RotateBox(float slopeAngle, float orientation)
     {
-        print("entra");
         if (orientation == 90f)
             StartCoroutine(RotateToPosition(Quaternion.Euler(this.transform.localRotation.x, this.transform.localRotation.y, this.transform.localRotation.z - slopeAngle), .2f));
         else if (orientation == -90f)
@@ -30,6 +32,13 @@ public class BoxControl : MonoBehaviour
     }
     private void Update()
     {
+        if (this.gameObject.layer == 8)
+        {
+            Collider[] hitColliders = Physics.OverlapSphere(groundCheck.position, groundRadius);
+            this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+            foreach (Collider item in hitColliders) if (item.gameObject.layer == 9) this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        }
+ 
         if (checkPlayerPosition)
         {
             Vector3 rayPoint = this.transform.position + Vector3.up;
@@ -45,7 +54,7 @@ public class BoxControl : MonoBehaviour
             else
                 playerSide = "";
         }
-        if(imgettingMoved)imgettingMoved = !(this.GetComponent<Rigidbody>().velocity.Equals(Vector3.zero));
+        if (imgettingMoved) imgettingMoved = !(this.GetComponent<Rigidbody>().velocity.Equals(Vector3.zero));
         outline.SetActive(showOutline && !imgettingMoved);
     }
     private void OnTriggerEnter(Collider other)
@@ -132,14 +141,5 @@ public class BoxControl : MonoBehaviour
         this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ;
         this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag.Equals("Floor"))
-            this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-    }
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.tag.Equals("Floor"))
-            this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
-    }
 }
+    

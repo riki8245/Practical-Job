@@ -174,7 +174,10 @@ public class PlayerControl : MonoBehaviour
         else
         {
             grabbingBox = false;
+            canMoveBox = false;
+            pushingOut = false;
             axisToUseWhileBox = 0;
+            playerPosRelativeBox = "";
         }
     }
 
