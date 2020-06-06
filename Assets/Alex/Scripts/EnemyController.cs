@@ -32,11 +32,11 @@ public class EnemyController : MonoBehaviour
         e_anim.SetFloat("Speed", nav.velocity.magnitude);
         if (nav.velocity.magnitude > 0.1 && !itsounds)
         {
-            AudioController.AudioInstance.soundEnemySteps(true); itsounds = true;
+            if (AudioController.AudioInstance) AudioController.AudioInstance.soundEnemySteps(true); itsounds = true;
         }
         else if (nav.velocity.magnitude < 0.1 && itsounds)
         {
-            AudioController.AudioInstance.soundEnemySteps(false); itsounds = false;
+            if (AudioController.AudioInstance) AudioController.AudioInstance.soundEnemySteps(false); itsounds = false;
         }
     }
 

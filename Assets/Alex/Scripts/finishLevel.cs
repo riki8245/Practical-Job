@@ -16,8 +16,8 @@ public class finishLevel : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 11) SceneManager.LoadSceneAsync(0);
         else
         {
-            GameManager.instance.currentLevel = SceneManager.GetActiveScene().buildIndex + 1;
-            GameManager.instance.SaveGame();
+            if(GameManager.instance) GameManager.instance.currentLevel = SceneManager.GetActiveScene().buildIndex + 1;
+            if (GameManager.instance) GameManager.instance.SaveGame();
             SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1,LoadSceneMode.Single);
         }
     }
@@ -29,8 +29,8 @@ public class finishLevel : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
-        {            
-            AudioController.AudioInstance.StopAllSounds();
+        {
+            if (AudioController.AudioInstance) AudioController.AudioInstance.StopAllSounds();
             other.gameObject.GetComponent<PlayerControl>().enabled = false;
             door.SetBool("open", false);
             LoadFade();

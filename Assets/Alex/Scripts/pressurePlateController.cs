@@ -33,7 +33,7 @@ public class pressurePlateController : MonoBehaviour
             transform.localScale = scalePressed;
             if (!itsounds)
             {
-                AudioController.AudioInstance.soundPressurePlateClanks(true);
+                if (AudioController.AudioInstance) AudioController.AudioInstance.soundPressurePlateClanks(true);
                 itsounds = true;
             }
         }

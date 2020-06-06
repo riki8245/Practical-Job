@@ -29,7 +29,7 @@ public class PressurePlateManager : MonoBehaviour
                 door_anim.SetBool("open", true);
                 if (!itsounds)
                 {
-                    AudioController.AudioInstance.soundDoor(true);
+                    if (AudioController.AudioInstance) AudioController.AudioInstance.soundDoor(true);
                     itsounds = true;
                 }
                 door.GetComponent<CapsuleCollider>().enabled = false;
@@ -38,7 +38,7 @@ public class PressurePlateManager : MonoBehaviour
             {
                 if (itsounds)
                 {
-                    AudioController.AudioInstance.soundDoor(false);
+                    if (AudioController.AudioInstance) AudioController.AudioInstance.soundDoor(false);
                     itsounds = false;
                 }
                 door_anim.SetBool("open", false);

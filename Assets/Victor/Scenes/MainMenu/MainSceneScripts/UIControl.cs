@@ -103,7 +103,7 @@ public class UIControl : MonoBehaviour
     {
         if (eSystemAbleToSelect)
         {
-            AudioController.AudioInstance.soundConfirmSelection(true);
+            if (AudioController.AudioInstance) AudioController.AudioInstance.soundConfirmSelection(true);
             eSystemAbleToSelect = false;
             foreach (Transform transform in characterPath) transform.position = new Vector3(transform.position.x, character.transform.position.y, transform.position.z);
             iTween.RotateTo(character, iTween.Hash("y", -180f, "easeType", "easeInOutQuad", "time", 1f, "oncomplete", "MoveCharacter", "onCompleteTarget", this.gameObject));
@@ -131,7 +131,7 @@ public class UIControl : MonoBehaviour
     {
         if (eSystemAbleToSelect)
         {
-            AudioController.AudioInstance.soundConfirmSelection(true);
+            if (AudioController.AudioInstance) AudioController.AudioInstance.soundConfirmSelection(true);
             eSystemAbleToSelect = false;
             if (iTween.tweens.Contains(iTween.Hash("name", "buttonsLeft"))) iTween.StopByName("buttonsLeft");
             if (iTween.tweens.Contains(iTween.Hash("name", "buttonsRight"))) iTween.StopByName("buttonsRight");
@@ -149,7 +149,7 @@ public class UIControl : MonoBehaviour
                 if (lastSelected != eSystem_currentSelected)
                 {
                     lastSelected = eSystem_currentSelected;
-                    AudioController.AudioInstance.soundMenuPop(true);
+                    if (AudioController.AudioInstance) AudioController.AudioInstance.soundMenuPop(true);
                 }
                 if (eSystem_currentSelected.name.Equals("VolumeSlider"))
                 {
@@ -331,8 +331,8 @@ public class UIControl : MonoBehaviour
     }
     public void SetSliders()
     {
-        MusicSlider.onValueChanged.AddListener(delegate { AudioController.AudioInstance.SetMusicVolume(MusicSlider); });
-        SfxSlider.onValueChanged.AddListener(delegate { AudioController.AudioInstance.SetSfxVolume(SfxSlider); });
+        MusicSlider.onValueChanged.AddListener(delegate { if (AudioController.AudioInstance) AudioController.AudioInstance.SetMusicVolume(MusicSlider); });
+        SfxSlider.onValueChanged.AddListener(delegate { if (AudioController.AudioInstance) AudioController.AudioInstance.SetSfxVolume(SfxSlider); });
 
         MusicSlider.value = GameManager.instance.MusicVolume;
         SfxSlider.value = GameManager.instance.SfxVolume;

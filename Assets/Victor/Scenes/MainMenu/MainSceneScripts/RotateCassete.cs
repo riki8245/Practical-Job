@@ -71,13 +71,13 @@ public class RotateCassete : MonoBehaviour
     {
         if (eventSystemBool && !levelLock)
         {
-            AudioController.AudioInstance.soundSelectButton(true);
+            if (AudioController.AudioInstance) AudioController.AudioInstance.soundSelectButton(true);
             eventSystem.GetComponent<EventSystem>().enabled = false;
             iTween.MoveTo(this.gameObject, iTween.Hash("x", onSelectedPos.position.x, "y", onSelectedPos.position.y, "z", onSelectedPos.position.z, "time", .5f, "onComplete", "LoadLevel"));
             iTween.ScaleTo(this.gameObject, new Vector3(-.3f, -.3f, .3f), .5f);
             iTween.RotateTo(this.gameObject, new Vector3(133.4f, 90f, 0f), .5f);
         }
-        else if (levelLock) AudioController.AudioInstance.soundInvalidSelection(true);
+        else if (levelLock) if (AudioController.AudioInstance) AudioController.AudioInstance.soundInvalidSelection(true);
     }
     private void LoadLevel() {
         new WaitForSeconds(1f);

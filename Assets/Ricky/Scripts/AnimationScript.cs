@@ -50,11 +50,11 @@ public class AnimationScript : MonoBehaviour
 
         if (ch_speedXZ > 0.1 && !itsounds)
         {
-            AudioController.AudioInstance.soundPlayerSteps(true);
+            if(AudioController.AudioInstance) AudioController.AudioInstance.soundPlayerSteps(true);
             itsounds = true;
         }
-        else if (ch_speedXZ < 0.1 && itsounds) { 
-            AudioController.AudioInstance.soundPlayerSteps(false);
+        else if (ch_speedXZ < 0.1 && itsounds) {
+            if (AudioController.AudioInstance) AudioController.AudioInstance.soundPlayerSteps(false);
             itsounds = false;
         }
 
