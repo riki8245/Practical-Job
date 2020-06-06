@@ -32,7 +32,7 @@ public class BoxControl : MonoBehaviour
     }
     private void Update()
     {
-        if (this.gameObject.layer == 8)
+        if (this.gameObject.layer == 8 && !imgettingMoved)
         {
             Collider[] hitColliders = Physics.OverlapSphere(groundCheck.position, groundRadius);
             this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
