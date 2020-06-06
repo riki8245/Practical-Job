@@ -13,7 +13,7 @@ public class EnemyController : MonoBehaviour
     private Rigidbody rb;
     private Animator e_anim;
     public bool Grounded;
-    bool itsounds;
+    public bool itsounds;
     // Start is called before the first frame update
     void Start()
     {

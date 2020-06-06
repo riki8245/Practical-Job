@@ -9,7 +9,7 @@ public class AnimationScript : MonoBehaviour
     private Animator ch_anim;
     [SerializeField] private GameObject bt;
 
-    bool itsounds;
+    public bool itsounds;
     float ch_speedXZ;
     // Start is called before the first frame update
     void Start()
