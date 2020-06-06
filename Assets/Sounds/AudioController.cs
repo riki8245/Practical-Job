@@ -26,7 +26,7 @@ public class AudioController : MonoBehaviour
 
     private IEnumerator coroutine;
 
-    AudioSource [] emitter;
+    public AudioSource [] emitter;
 
     void Awake(){
         MakeSingleton();

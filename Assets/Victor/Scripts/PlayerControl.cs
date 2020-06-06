@@ -160,7 +160,10 @@ public class PlayerControl : MonoBehaviour
                         forceToPushBox = 0f;
                     }
                     else if (Input.GetButton("Fire3") && !grabbingBox)
+                    {
+                        AudioController.AudioInstance.emitter[2].Stop();
                         forceToPushBox += Time.deltaTime;
+                    }
                     else if (Input.GetButtonUp("Fire3"))
                     {
                         resetMovement = 0.7f;
