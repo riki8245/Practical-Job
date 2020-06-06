@@ -14,6 +14,7 @@ public class EnemyController : MonoBehaviour
     private Animator e_anim;
     public bool Grounded;
     public bool itsounds;
+    int PlayerFaceState;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,15 +43,18 @@ public class EnemyController : MonoBehaviour
 
     void Move()
     {
-        int PlayerFaceState = Player.gameObject.GetComponent<PlayerControl>().FaceState;
+        PlayerFaceState = Player.gameObject.GetComponent<PlayerControl>().FaceState;
         e_anim.SetInteger("Behaviour", PlayerFaceState);
         if(PlayerFaceState == 0)
         {
             nav.enabled = false;
             rb.velocity = new Vector3(0, 0, 0);
+            rb.constraints = RigidbodyConstraints.FreezeAll;
         }
         else if (PlayerFaceState == 1)
         {
+            rb.constraints = RigidbodyConstraints.None;
+            rb.constraints = RigidbodyConstraints.FreezeRotation;
             nav.enabled = true;
             if (Vector3.Distance(transform.position, Player.position) > 2) { nav.SetDestination(Player.position); }
             else
@@ -60,6 +64,8 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
+            rb.constraints = RigidbodyConstraints.None;
+            rb.constraints = RigidbodyConstraints.FreezeRotation;
             nav.enabled = true;
             RunFrom();
         }
@@ -78,6 +84,7 @@ public class EnemyController : MonoBehaviour
         //Then we'll get the position on that rotation that's multiplyBy down the path (you could set a Random.range
         // for this if you want variable results) and store it in a new Vector3 called runTo
         Vector3 runTo = transform.position + (transform.position - Player.position) * multiplyBy;
+        runTo = new Vector3(runTo.x,transform.position.y,runTo.z);
         //Debug.Log("runTo = " + runTo);
 
         //So now we've got a Vector3 to run to and we can transfer that to a location on the NavMesh with samplePosition.

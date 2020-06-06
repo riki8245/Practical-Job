@@ -68,7 +68,7 @@ public class PlayerControl : MonoBehaviour
         inFrontBox = Physics.Raycast(transform.position, transform.forward, 50f, LayerMask.GetMask("Boxes"));
         //Debug.DrawRay(transform.position, transform.forward * 100, Color.green);
         Physics.IgnoreLayerCollision(playerLayer, slopeLayer, !grabbingBox);
-        if(enableUpdate)ChangeFaceTexture();
+        if(enableUpdate) ChangeFaceTexture();
         contToResetMove();
     }
 
@@ -77,23 +77,17 @@ public class PlayerControl : MonoBehaviour
     {
         if (Input.GetButtonUp("Fire2"))
         {
-            ChangeFaceState();
             switch (mats[1].name.ToString())
             {
-                case "Face_neutral": mats[1] = vulnerable; emission.SetColor("_EmissionColor", blue); break;
-                case "Face_scary": mats[1] = neutral; emission.SetColor("_EmissionColor", green); break;
-                case "Face_vulnerable": mats[1] = scary; emission.SetColor("_EmissionColor", red); break;
+                case "Face_neutral": mats[1] = vulnerable; emission.SetColor("_EmissionColor", blue); FaceState = 1; break;
+                case "Face_vulnerable": mats[1] = scary; emission.SetColor("_EmissionColor", red); FaceState = 2; break;
+                case "Face_scary": mats[1] = neutral; emission.SetColor("_EmissionColor", green); FaceState = 0; break;
                 default: break;
             }
             p_Head.GetComponent<SkinnedMeshRenderer>().materials = mats;
         }
     }
 
-    void ChangeFaceState()
-    {
-        if (FaceState == 2) FaceState = 0;
-        else FaceState++;
-    }
 
     private void MovePlayer(float p_horizontalMove, float p_verticalMove)
     {
