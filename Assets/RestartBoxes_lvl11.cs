@@ -35,6 +35,7 @@ public class RestartBoxes_lvl11 : MonoBehaviour
                 CanDeleteBox = false;
                 timerToDelete = 0;
                 Instantiate(BoxPrefab, BoxSpawnPoint.position, box.transform.rotation);
+                iTween.ScaleTo(box, iTween.Hash("x", 0, "y", 0, "z", 0, "time", .5f));
                 Destroy(box);
                 Invoke("resetDeleting", 2f);
             }

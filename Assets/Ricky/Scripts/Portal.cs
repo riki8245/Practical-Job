@@ -126,12 +126,15 @@ public class Portal : MonoBehaviour
             {
                 calculateDestinationBoxPos();
                 boxcopy = objectTeleporting.CompareTag("Box")? Instantiate(BoxPrefab, InstantiateBoxPos, originalBoxrotation) : Instantiate(EnemyPrefab, InstantiateBoxPos, originalBoxrotation);
+                Vector3 scales = boxcopy.transform.localScale;
+                boxcopy.transform.localScale = Vector3.zero;
+                iTween.ScaleTo(boxcopy, iTween.Hash("x", scales.x, "y", scales.y, "z", scales.z, "time", .25f));
                 if (objectTeleporting.CompareTag("Enemy"))
                 {
                     boxcopy.GetComponent<EnemyController>().Grounded = false;
                     boxcopy.GetComponent<EnemyController>().nav.enabled = false;
-                    boxcopy.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-                    boxcopy.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+                    boxcopy.GetComponent<Rigidbody>().mass = 1;
+                    //boxcopy.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
 
                     //boxcopy.GetComponent<Rigidbody>().isKinematic = false;
                 }
@@ -169,7 +172,6 @@ public class Portal : MonoBehaviour
         if (objectTeleporting.CompareTag("Enemy"))
         {
             boxcopy.GetComponent<EnemyController>().nav.enabled = true;
-            boxcopy.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         }
 
         passingTrough = false;
@@ -198,8 +200,8 @@ public class Portal : MonoBehaviour
                     {
                         objectTeleporting.GetComponent<EnemyController>().Grounded = false;
                         //objectTeleporting.GetComponent<Rigidbody>().isKinematic = false;
-                        objectTeleporting.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-                        objectTeleporting.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+                        //objectTeleporting.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+                        //objectTeleporting.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                         if (objectTeleporting.GetComponent<EnemyController>().nav.enabled == true) objectTeleporting.GetComponent<EnemyController>().nav.enabled = false;
                     }
 
@@ -225,6 +227,7 @@ public class Portal : MonoBehaviour
                     }
 
                     passingTrough = true;
+                    iTween.ScaleTo(other.gameObject, iTween.Hash("x", 0, "y", 0, "z", 0, "time", .25f));
                 }
             }
             catch (MissingComponentException e)

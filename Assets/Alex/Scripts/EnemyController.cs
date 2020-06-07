@@ -28,7 +28,7 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Grounded) Move();
+        if (Grounded) { Move(); rb.mass = 600; }
 
         e_anim.SetFloat("Speed", nav.velocity.magnitude);
         if (nav.velocity.magnitude > 0.1 && !itsounds)
