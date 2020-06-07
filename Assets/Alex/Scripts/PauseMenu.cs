@@ -60,7 +60,7 @@ public class PauseMenu : MonoBehaviour
             item.GetComponent<AnimationScript>().itsounds = false;
             item.GetComponent<AnimationScript>().enabled = false;
         }
-        AudioController.AudioInstance.StopAllSounds();
+        if(AudioController.AudioInstance) AudioController.AudioInstance.StopAllSounds();
         GameIsPaused = true;
         Time.timeScale = 0f;
         iTween.ScaleTo(pauseMenuIU,iTween.Hash("x",1f,"y",1f,"z",1f,"time",.2f,"onComplete","OnAnimationEnded","onCompleteTarget",this.gameObject,"ignoretimescale",true));
