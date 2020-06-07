@@ -16,7 +16,7 @@ public class finishLevel : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 11) SceneManager.LoadSceneAsync(0);
         else
         {
-            if(GameManager.instance) GameManager.instance.currentLevel = SceneManager.GetActiveScene().buildIndex + 1;
+            if(GameManager.instance && GameManager.instance.currentLevel < SceneManager.GetActiveScene().buildIndex + 1) GameManager.instance.currentLevel = SceneManager.GetActiveScene().buildIndex + 1;
             if (GameManager.instance) GameManager.instance.SaveGame();
             playerReachFinish = false;
             SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1,LoadSceneMode.Single);

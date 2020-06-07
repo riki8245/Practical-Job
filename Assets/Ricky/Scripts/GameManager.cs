@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if(currentLevel != SceneManager.GetActiveScene().buildIndex) currentLevel = SceneManager.GetActiveScene().buildIndex;
+        //if(currentLevel != SceneManager.GetActiveScene().buildIndex) currentLevel = SceneManager.GetActiveScene().buildIndex;
         if (!SceneManager.GetActiveScene().name.Equals("PLAY") && !SceneManager.GetSceneByName("PauseMenu").isLoaded) SceneManager.LoadScene("PauseMenu", LoadSceneMode.Additive);
         if (!SceneManager.GetActiveScene().name.Equals("PLAY")) {
             if (SceneManager.GetActiveScene().buildIndex != sceneN)
