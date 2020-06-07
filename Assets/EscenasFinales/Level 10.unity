@@ -11506,6 +11506,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Planes_Character
       objectReference: {fileID: 0}
+    - target: {fileID: 8927881050281934384, guid: 29b4bf241b6ed5c449180c11f78f6249,
+        type: 3}
+      propertyPath: m_TagString
+      value: forceFields
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29b4bf241b6ed5c449180c11f78f6249, type: 3}
 --- !u!4 &8425228702816772288

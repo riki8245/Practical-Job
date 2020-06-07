@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 22d1634e3ee8246f4b5be62f4d5dc988,
     type: 2}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -8570,7 +8570,7 @@ GameObject:
   - component: {fileID: 8869422088552914993}
   m_Layer: 14
   m_Name: ForceField_Planes
-  m_TagString: Untagged
+  m_TagString: forceFields
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8658,7 +8658,7 @@ GameObject:
   - component: {fileID: 3936192074129913449}
   m_Layer: 15
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: forceFields
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8

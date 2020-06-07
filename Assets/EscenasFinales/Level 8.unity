@@ -8452,6 +8452,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sphere_Boxes
       objectReference: {fileID: 0}
+    - target: {fileID: 3272422727744187661, guid: addefc03bdc03c24aadcbc38effad204,
+        type: 3}
+      propertyPath: m_TagString
+      value: forceFields
+      objectReference: {fileID: 0}
     - target: {fileID: 3358315208424374511, guid: addefc03bdc03c24aadcbc38effad204,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8536,7 +8541,7 @@ GameObject:
   - component: {fileID: 8425228702816772288}
   m_Layer: 14
   m_Name: ForceField_Planes (1)
-  m_TagString: Untagged
+  m_TagString: forceFields
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

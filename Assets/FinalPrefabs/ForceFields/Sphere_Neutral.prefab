@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 8866054042533281819}
   - component: {fileID: 8866054042533281818}
   m_Layer: 14
-  m_Name: ForceFiled_Sphere
-  m_TagString: Untagged
+  m_Name: Sphere_Neutral
+  m_TagString: forceFields
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

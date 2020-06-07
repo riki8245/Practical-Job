@@ -6840,6 +6840,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 16
       objectReference: {fileID: 0}
+    - target: {fileID: 1081890193877100291, guid: 07e8b8f7804073d40bbde7987b30239d,
+        type: 3}
+      propertyPath: m_TagString
+      value: forceFields
+      objectReference: {fileID: 0}
     - target: {fileID: 1081890194395546621, guid: 07e8b8f7804073d40bbde7987b30239d,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -6850,10 +6855,20 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 16
       objectReference: {fileID: 0}
+    - target: {fileID: 1081890194395546623, guid: 07e8b8f7804073d40bbde7987b30239d,
+        type: 3}
+      propertyPath: m_TagString
+      value: forceFields
+      objectReference: {fileID: 0}
     - target: {fileID: 1830312451379608336, guid: 07e8b8f7804073d40bbde7987b30239d,
         type: 3}
       propertyPath: m_Name
       value: ForceField_Planes
+      objectReference: {fileID: 0}
+    - target: {fileID: 1830312451379608336, guid: 07e8b8f7804073d40bbde7987b30239d,
+        type: 3}
+      propertyPath: m_TagString
+      value: forceFields
       objectReference: {fileID: 0}
     - target: {fileID: 4806757891045224794, guid: 07e8b8f7804073d40bbde7987b30239d,
         type: 3}

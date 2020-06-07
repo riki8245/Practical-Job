@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3065948534720178865}
   m_Layer: 15
   m_Name: Plane_Boxes
-  m_TagString: Untagged
+  m_TagString: forceFields
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
