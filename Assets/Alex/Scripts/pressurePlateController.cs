@@ -50,7 +50,7 @@ public class pressurePlateController : MonoBehaviour
         {
             pressed = true;
             transform.gameObject.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", red_on);
-            door_anim.SetBool("open",true);
+            door_anim.SetBool("open", true);
             door.GetComponent<CapsuleCollider>().enabled = false;
             /*if (other.gameObject.CompareTag("Box"))
                 other.GetComponent<BoxController>().b_moveDirection = Vector3.zero;*/
@@ -79,7 +79,6 @@ public class pressurePlateController : MonoBehaviour
             door.GetComponent<CapsuleCollider>().enabled = false;
             transform.gameObject.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", red_on);
             pressed = true;
-            door_anim.SetBool("open", true);
         }
     }
 

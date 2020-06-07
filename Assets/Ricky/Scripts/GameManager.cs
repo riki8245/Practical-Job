@@ -107,7 +107,6 @@ public class GameManager : MonoBehaviour
             }
             if (Input.GetButton("Fire4"))
             {
-                print("a");
                 if(resetTimer >= 2f)
                 {
                     LoadFade();

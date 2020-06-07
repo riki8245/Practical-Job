@@ -18,6 +18,7 @@ public class finishLevel : MonoBehaviour
         {
             if(GameManager.instance) GameManager.instance.currentLevel = SceneManager.GetActiveScene().buildIndex + 1;
             if (GameManager.instance) GameManager.instance.SaveGame();
+            playerReachFinish = false;
             SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1,LoadSceneMode.Single);
         }
     }
@@ -32,6 +33,7 @@ public class finishLevel : MonoBehaviour
         {
             if (AudioController.AudioInstance) AudioController.AudioInstance.StopAllSounds();
             other.gameObject.GetComponent<PlayerControl>().enabled = false;
+            playerReachFinish = true;
             door.SetBool("open", false);
             LoadFade();
             Invoke("LoadNextLevel", 1f);

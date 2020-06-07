@@ -5,7 +5,7 @@ public class PlayerControl : MonoBehaviour
 {
     private CharacterController characterController;
     private Vector3 p_input;
-    [SerializeField]private Material neutral, scary, vulnerable, emission;
+    [SerializeField] private Material neutral, scary, vulnerable, emission;
     [ColorUsage(true, true)]
     public Color blue, red, green;
 
@@ -53,7 +53,7 @@ public class PlayerControl : MonoBehaviour
         emission.SetColor("_EmissionColor", green);
         FaceState = 0;
         resetMovement = 0;
-        Invoke("EnableUpdate",1f);
+        Invoke("EnableUpdate", 1f);
     }
     void EnableUpdate()
     {
@@ -68,7 +68,7 @@ public class PlayerControl : MonoBehaviour
         inFrontBox = Physics.Raycast(transform.position, transform.forward, 50f, LayerMask.GetMask("Boxes"));
         //Debug.DrawRay(transform.position, transform.forward * 100, Color.green);
         Physics.IgnoreLayerCollision(playerLayer, slopeLayer, !grabbingBox);
-        if(enableUpdate) ChangeFaceTexture();
+        if (enableUpdate) ChangeFaceTexture();
         contToResetMove();
     }
 
@@ -119,7 +119,7 @@ public class PlayerControl : MonoBehaviour
         }
 
         SetGravity();
-        if (!pushingOut && resetMovement <= 0) 
+        if (!pushingOut && resetMovement <= 0)
             characterController.Move(p_input * Time.deltaTime);
     }
     void ManageInputs()
@@ -158,7 +158,7 @@ public class PlayerControl : MonoBehaviour
                     }
                     else if (Input.GetButton("Fire3") && !grabbingBox)
                     {
-                        if(AudioController.AudioInstance) AudioController.AudioInstance.emitter[2].Stop();
+                        if (AudioController.AudioInstance) AudioController.AudioInstance.emitter[2].Stop();
                         forceToPushBox += Time.deltaTime;
                     }
                     else if (Input.GetButtonUp("Fire3"))
@@ -181,7 +181,7 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    private void contToResetMove() 
+    private void contToResetMove()
     {
         if (resetMovement < 0) resetMovement = 0;
         else resetMovement -= Time.deltaTime;
@@ -228,13 +228,6 @@ public class PlayerControl : MonoBehaviour
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         if (hit.collider.CompareTag("Enemy"))
-        {
-            print(-transform.forward);
             p_input = Vector3.zero;
-            //characterController.Move(new Vector3(0f,transform.position.y);
-        }
     }
-
-
-
 }
