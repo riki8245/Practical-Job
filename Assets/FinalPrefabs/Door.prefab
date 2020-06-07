@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5265710264111926019}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: RightDoor_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8249634580936181204}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: LeftDoor 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8969146593558590881}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: LeftDoor_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6881607622158548735}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,9 +144,9 @@ GameObject:
   - component: {fileID: 3961029018192599153}
   - component: {fileID: 1927446520}
   - component: {fileID: 1927446519}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Door
-  m_TagString: Untagged
+  m_TagString: walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -356,7 +356,7 @@ GameObject:
   - component: {fileID: 7121949380362361680}
   - component: {fileID: 5093075366759509334}
   - component: {fileID: 9086998037167803321}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -447,7 +447,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5772851425307915608}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: RightDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -480,7 +480,7 @@ GameObject:
   - component: {fileID: 2853871614377773713}
   - component: {fileID: 5969034089016615097}
   - component: {fileID: 5348852034754633083}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: LeftDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -587,7 +587,7 @@ GameObject:
   - component: {fileID: 5569234057390568382}
   - component: {fileID: 6157883945310979937}
   - component: {fileID: 2604734077225603450}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: DoorModule
   m_TagString: Untagged
   m_Icon: {fileID: 0}

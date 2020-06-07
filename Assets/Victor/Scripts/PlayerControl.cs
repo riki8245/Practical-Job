@@ -225,7 +225,16 @@ public class PlayerControl : MonoBehaviour
                 break;
         }
     }
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.collider.CompareTag("Enemy"))
+        {
+            print(-transform.forward);
+            p_input = Vector3.zero;
+            //characterController.Move(new Vector3(0f,transform.position.y);
+        }
+    }
 
-  
-  
+
+
 }
