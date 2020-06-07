@@ -49,12 +49,12 @@ public class EnemyController : MonoBehaviour
         {
             nav.enabled = false;
             rb.velocity = new Vector3(0, 0, 0);
-            rb.constraints = RigidbodyConstraints.FreezeAll;
+            //rb.constraints = RigidbodyConstraints.FreezeAll;
         }
         else if (PlayerFaceState == 1)
         {
-            rb.constraints = RigidbodyConstraints.None;
-            rb.constraints = RigidbodyConstraints.FreezeRotation;
+            //rb.constraints = RigidbodyConstraints.None;
+            //rb.constraints = RigidbodyConstraints.FreezeRotation;
             nav.enabled = true;
             if (Vector3.Distance(transform.position, Player.position) > 2) { nav.SetDestination(Player.position); }
             else
@@ -64,8 +64,8 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            rb.constraints = RigidbodyConstraints.None;
-            rb.constraints = RigidbodyConstraints.FreezeRotation;
+            //rb.constraints = RigidbodyConstraints.None;
+            //rb.constraints = RigidbodyConstraints.FreezeRotation;
             nav.enabled = true;
             RunFrom();
         }

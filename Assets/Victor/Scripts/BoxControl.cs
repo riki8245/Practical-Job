@@ -105,7 +105,7 @@ public class BoxControl : MonoBehaviour
         }
         imgettingMoved = true;
         float force = 1;
-        switch (Mathf.Floor(Mathf.Clamp(timePressed, 0f, 2f)))
+        switch (Mathf.Clamp(timePressed, 0f, 2.5f))
         {
             case 0: force = 1.5f; break;
             case 1: force = 2.75f; break;

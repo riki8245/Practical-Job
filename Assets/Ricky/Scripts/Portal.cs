@@ -130,6 +130,10 @@ public class Portal : MonoBehaviour
                 {
                     boxcopy.GetComponent<EnemyController>().Grounded = false;
                     boxcopy.GetComponent<EnemyController>().nav.enabled = false;
+                    boxcopy.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+                    boxcopy.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+
+                    //boxcopy.GetComponent<Rigidbody>().isKinematic = false;
                 }
                 if (objectTeleporting.CompareTag("Box"))
                 {
@@ -164,13 +168,13 @@ public class Portal : MonoBehaviour
     {
         if (objectTeleporting.CompareTag("Enemy"))
         {
-            objectTeleporting.GetComponent<EnemyController>().nav.enabled = true;
-            objectTeleporting.GetComponent<Rigidbody>().isKinematic = true;
+            boxcopy.GetComponent<EnemyController>().nav.enabled = true;
+            boxcopy.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         }
 
         passingTrough = false;
         teleported = false;
-        boxcopy.layer = objectTeleporting.CompareTag("Box") ? layerBoxes : 0;
+        boxcopy.layer = objectTeleporting.CompareTag("Box") ? layerBoxes : 19;
         Destroy(objectTeleporting);
     }
 
@@ -193,7 +197,9 @@ public class Portal : MonoBehaviour
                     if (objectTeleporting.CompareTag("Enemy"))
                     {
                         objectTeleporting.GetComponent<EnemyController>().Grounded = false;
-                        objectTeleporting.GetComponent<Rigidbody>().isKinematic = false;
+                        //objectTeleporting.GetComponent<Rigidbody>().isKinematic = false;
+                        objectTeleporting.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+                        objectTeleporting.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                         if (objectTeleporting.GetComponent<EnemyController>().nav.enabled == true) objectTeleporting.GetComponent<EnemyController>().nav.enabled = false;
                     }
 
