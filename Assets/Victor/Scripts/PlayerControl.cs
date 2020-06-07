@@ -158,7 +158,7 @@ public class PlayerControl : MonoBehaviour
                     }
                     else if (Input.GetButton("Fire3") && !grabbingBox)
                     {
-                        AudioController.AudioInstance.emitter[2].Stop();
+                        if(AudioController.AudioInstance) AudioController.AudioInstance.emitter[2].Stop();
                         forceToPushBox += Time.deltaTime;
                     }
                     else if (Input.GetButtonUp("Fire3"))

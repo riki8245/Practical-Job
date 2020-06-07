@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: d187d4a5c89d84e03bbe685b9073ef43,
     type: 2}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -312,17 +312,17 @@ PrefabInstance:
     - target: {fileID: 1453826597484704120, guid: 0c46227b8d78b4aaab9a5fadcbe8d46a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.38
+      value: -14.55
       objectReference: {fileID: 0}
     - target: {fileID: 1453826597484704120, guid: 0c46227b8d78b4aaab9a5fadcbe8d46a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.02
+      value: 9.73
       objectReference: {fileID: 0}
     - target: {fileID: 1453826597484704120, guid: 0c46227b8d78b4aaab9a5fadcbe8d46a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.9
+      value: 3.55
       objectReference: {fileID: 0}
     - target: {fileID: 1453826597484704120, guid: 0c46227b8d78b4aaab9a5fadcbe8d46a,
         type: 3}
@@ -9814,6 +9814,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Planes_Character
+      objectReference: {fileID: 0}
+    - target: {fileID: 8927881050281934384, guid: 29b4bf241b6ed5c449180c11f78f6249,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7553887407527576117, guid: 29b4bf241b6ed5c449180c11f78f6249, type: 3}

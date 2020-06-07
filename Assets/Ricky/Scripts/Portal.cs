@@ -45,7 +45,7 @@ public class Portal : MonoBehaviour
     void Start()                                  
     {
         calculatePortalPosition();
-        dis_to_reset_col = 2.4f;
+        dis_to_reset_col = 2.35f;
         passingTrough = false;
         teleported = false;
         destination.gameObject.GetComponent<Portal>().calculateDestinationBoxPos();
@@ -162,7 +162,11 @@ public class Portal : MonoBehaviour
 
     private void Reset()
     {
-        if(objectTeleporting.CompareTag("Enemy")) objectTeleporting.GetComponent<EnemyController>().nav.enabled = true;
+        if (objectTeleporting.CompareTag("Enemy"))
+        {
+            objectTeleporting.GetComponent<EnemyController>().nav.enabled = true;
+            objectTeleporting.GetComponent<Rigidbody>().isKinematic = true;
+        }
 
         passingTrough = false;
         teleported = false;
@@ -189,6 +193,7 @@ public class Portal : MonoBehaviour
                     if (objectTeleporting.CompareTag("Enemy"))
                     {
                         objectTeleporting.GetComponent<EnemyController>().Grounded = false;
+                        objectTeleporting.GetComponent<Rigidbody>().isKinematic = false;
                         if (objectTeleporting.GetComponent<EnemyController>().nav.enabled == true) objectTeleporting.GetComponent<EnemyController>().nav.enabled = false;
                     }
 
