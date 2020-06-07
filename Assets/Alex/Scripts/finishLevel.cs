@@ -35,6 +35,7 @@ public class finishLevel : MonoBehaviour
             other.gameObject.GetComponent<PlayerControl>().enabled = false;
             playerReachFinish = true;
             door.SetBool("open", false);
+            if (AudioController.AudioInstance) AudioController.AudioInstance.soundDoor(true);
             LoadFade();
             Invoke("LoadNextLevel", 1f);
         }

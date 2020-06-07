@@ -12,7 +12,7 @@ public class CheckWalls : MonoBehaviour
     }
     private void Update()
     {
-        this.transform.position = new Vector3(transformC.position.x,transformC.position.y + 1.5f, transformC.position.z) + transformC.forward * 1.75f;
+        this.transform.position = new Vector3(transformC.position.x,transformC.position.y + 2f, transformC.position.z) + transformC.forward * 1.75f;
         this.transform.rotation = transformC.rotation;
 
     }
@@ -20,15 +20,14 @@ public class CheckWalls : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Floor") || other.CompareTag("walls"))
+        if (other.CompareTag("Floor") || other.CompareTag("walls") || other.CompareTag("forceFields"))
             transformC.gameObject.GetComponent<PlayerControl>().collisionWhileGrabbing = true;
 
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Floor") || other.CompareTag("walls"))
+        if (other.CompareTag("Floor") || other.CompareTag("walls") || other.CompareTag("forceFields"))
             transformC.gameObject.GetComponent<PlayerControl>().collisionWhileGrabbing = false;
-
     }
 
 }
