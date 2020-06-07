@@ -105,7 +105,7 @@ public class BoxControl : MonoBehaviour
         }
         imgettingMoved = true;
         float force = Mathf.Clamp(timePressed, 0f, 2.5f) < 0.35f ? 0.4f : Mathf.Clamp(timePressed, 0f, 2.5f) < 1 ? 1.5f : Mathf.Clamp(timePressed, 0f, 2.5f) < 2 ? 1.8f : 5f; ;
-        if (GameManager.instance.currentLevel == 11) force = Mathf.Clamp(timePressed, 0f, 2.5f) < 0.35f? 0.4f: Mathf.Clamp(timePressed, 0f, 2.5f) < 1 ? 1.1f : Mathf.Clamp(timePressed, 0f, 2.5f) < 2 ? 1.8f : 2.4f;
+        if (GameManager.instance && GameManager.instance.currentLevel == 11) force = Mathf.Clamp(timePressed, 0f, 2.5f) < 0.35f? 0.4f: Mathf.Clamp(timePressed, 0f, 2.5f) < 1 ? 1.1f : Mathf.Clamp(timePressed, 0f, 2.5f) < 2 ? 1.8f : 2.4f;
         this.GetComponent<Rigidbody>().AddForce(direction * 300f * force);
         StartCoroutine(BoxIsMoving());
     }
