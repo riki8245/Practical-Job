@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public float MusicVolume;
     public float[] FOVs;
     int sceneN;
+    float resetTimer = 0f;
 
     private ShadowQuality _originalShadowSettings;
 
@@ -82,10 +83,19 @@ public class GameManager : MonoBehaviour
         SaveGame();
     }
 
+    private void ReloadLevel()
+    {
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
+    }
+    private void LoadFade()
+    {
+        SceneManager.LoadScene("FadeScene", LoadSceneMode.Additive);
+    }
+
     void Update()
     {
-        if (!SceneManager.GetActiveScene().name.Equals("MainMenu") && !SceneManager.GetSceneByName("PauseMenu").isLoaded) SceneManager.LoadScene("PauseMenu", LoadSceneMode.Additive);
-        if (!SceneManager.GetActiveScene().name.Equals("MainMenu")) {
+        if (!SceneManager.GetActiveScene().name.Equals("PLAY") && !SceneManager.GetSceneByName("PauseMenu").isLoaded) SceneManager.LoadScene("PauseMenu", LoadSceneMode.Additive);
+        if (!SceneManager.GetActiveScene().name.Equals("PLAY")) {
             if (SceneManager.GetActiveScene().buildIndex != sceneN)
             {
                 sceneN = SceneManager.GetActiveScene().buildIndex;
@@ -94,6 +104,22 @@ public class GameManager : MonoBehaviour
                 if (c_enableShadows) QualitySettings.shadows = _originalShadowSettings;
                 else QualitySettings.shadows = ShadowQuality.Disable;
                 QualitySettings.antiAliasing = c_Antialising;
+            }
+            if (Input.GetButton("Fire4"))
+            {
+                print("a");
+                if(resetTimer >= 2f)
+                {
+                    LoadFade();
+                    Invoke("ReloadLevel", 1f);
+                    if (AudioController.AudioInstance) AudioController.AudioInstance.StopAllSounds();
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>().enabled = false;
+                    resetTimer = 0f;
+                }
+                else
+                {
+                    resetTimer += Time.deltaTime;
+                }
             }
         }
     }

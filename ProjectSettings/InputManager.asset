@@ -55,7 +55,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Fire1
-    descriptiveName: 
+    descriptiveName: A XBOX [] Ps4 COGER
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: left ctrl
@@ -71,7 +71,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Fire2
-    descriptiveName: 
+    descriptiveName: B XBOX X Ps4 CARA
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: left alt
@@ -87,7 +87,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Fire3
-    descriptiveName: 
+    descriptiveName: X XBOX O Ps4 Lanzar
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: left shift
@@ -102,8 +102,8 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Jump
-    descriptiveName: 
+    m_Name: Fire4
+    descriptiveName: Resetear lvl
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: space
@@ -198,8 +198,8 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Jump
-    descriptiveName: 
+    m_Name: Fire4
+    descriptiveName: Resetear lvl
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: joystick button 3
