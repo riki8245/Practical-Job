@@ -5,7 +5,7 @@ using UnityEngine;
 public class BoxSpawn : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] private GameObject BoxPrefab;
+    public GameObject BoxPrefab;
     private GameObject box;
     void Start()
     {

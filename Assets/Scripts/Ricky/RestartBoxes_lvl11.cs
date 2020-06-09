@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class RestartBoxes_lvl11 : MonoBehaviour
 {
-    [SerializeField] Transform BoxSpawnPoint;
+    public Transform BoxSpawnPoint;
     bool CanDeleteBox;
     bool Deleting;
     GameObject box;
     float timerToDelete;
-    [SerializeField] GameObject BoxPrefab;
+    public GameObject BoxPrefab;
     // Start is called before the first frame update
     private void Awake()
     {

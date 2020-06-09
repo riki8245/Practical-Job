@@ -7,7 +7,7 @@ public class AnimationScript : MonoBehaviour
     private PlayerControl controller;
     private CharacterController ch_controller;
     private Animator ch_anim;
-    [SerializeField] private GameObject bt;
+    public GameObject bt;
 
     public bool itsounds;
     float ch_speedXZ;

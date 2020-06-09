@@ -5,7 +5,7 @@ public class PlayerControl : MonoBehaviour
 {
     private CharacterController characterController;
     private Vector3 p_input;
-    [SerializeField] private Material neutral, scary, vulnerable, emission;
+    public Material neutral, scary, vulnerable, emission;
     [ColorUsage(true, true)]
     public Color blue, red, green;
 

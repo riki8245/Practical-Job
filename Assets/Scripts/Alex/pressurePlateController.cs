@@ -16,7 +16,7 @@ public class pressurePlateController : MonoBehaviour
     public Color red_on, red_off;
 
     [Header("Change type")]
-    [SerializeField] private bool justOneStep;
+    public bool justOneStep;
 
 
     // Start is called before the first frame update

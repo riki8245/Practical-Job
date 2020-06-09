@@ -60,7 +60,6 @@ public class MovingPlatform : MonoBehaviour
         if (ThingsInPlatform.Contains(other.gameObject))
         {
             other.gameObject.transform.parent = transform;
-            print(other.gameObject.tag);
         }
 
     }

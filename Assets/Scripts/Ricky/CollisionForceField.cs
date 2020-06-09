@@ -5,7 +5,7 @@ using UnityEngine;
 public class CollisionForceField : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] private GameObject Forbbidden;
+    public GameObject Forbbidden;
     private bool showing;
     void Start()
     {

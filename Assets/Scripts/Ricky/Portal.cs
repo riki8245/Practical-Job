@@ -16,19 +16,19 @@ public class Portal : MonoBehaviour
     private int layerBoxes, layerPassable;
 
     //Parameters needed;
-    [SerializeField] private GameObject BoxPrefab, EnemyPrefab, directionObject;
-    [SerializeField] private LayerMask LayersToCast;
+    public GameObject BoxPrefab, EnemyPrefab, directionObject;
+    public LayerMask LayersToCast;
 
     [HideInInspector] public string portal_face = "";
 
 
     //Modify Exit of the destination portal
-    [SerializeField] private float dis_to_reset_col, ForceAddedForExit, PercentForce;
+    public float dis_to_reset_col, ForceAddedForExit, PercentForce;
     [Header("Only if the Exit portal is facing Y+ (Between 0-1)")]
-    [SerializeField] private float AmountForceOnY;
-    [SerializeField] private float AmountForceOnZ;
-    [SerializeField] private float AmountForceOnX;
-    [SerializeField] private bool ControlForceManually;
+    public float AmountForceOnY;
+    public float AmountForceOnZ;
+    public float AmountForceOnX;
+    public bool ControlForceManually;
 
     public bool isPortal_1;
 
