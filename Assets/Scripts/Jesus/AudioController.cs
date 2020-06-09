@@ -19,6 +19,7 @@ public class AudioController : MonoBehaviour
     public AudioClip menuPop;
     public AudioClip confirmSelection;
     public AudioClip invalidSelection;
+    public AudioClip chargePushStart;
     public float MusicVolume;
     public float SfxVolume;
 
@@ -71,8 +72,10 @@ public class AudioController : MonoBehaviour
         emitter[10].loop = false;
         emitter[11].clip = invalidSelection;
         emitter[11].loop = false;
+        emitter[12].clip = chargePushStart;
+        emitter[12].loop = false;
         for (int i = 0; i < 2; i++) emitter[i].volume = GameManager.instance.MusicVolume;
-        for (int i = 2; i <= 11; i++) emitter[i].volume = GameManager.instance.SfxVolume;
+        for (int i = 2; i <= 12; i++) emitter[i].volume = GameManager.instance.SfxVolume;
         GameObject.Find("UIController").GetComponent<UIControl>().SetSliders();
 
         emitter[0].Play();
@@ -210,6 +213,17 @@ public class AudioController : MonoBehaviour
             emitter[11].Stop();
         }*/
     }
+    public void soundChargeStart(bool play)
+    {
+        if (play == true)
+        {
+            emitter[12].Play();
+        }
+        else 
+        {
+            emitter[12].Stop();
+        }
+    }
 
     public void StopAllSounds()
     {
@@ -229,7 +243,7 @@ public class AudioController : MonoBehaviour
     public void SetSfxVolume(Slider slider)
     {
         GameManager.instance.SfxVolume = slider.value;
-        for (int i = 2; i <= 11; i++) emitter[i].volume = slider.value;
+        for (int i = 2; i <= 12; i++) emitter[i].volume = slider.value;
     }
 
     private IEnumerator FadeIn_Out(AudioSource emisor)

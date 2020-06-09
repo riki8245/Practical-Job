@@ -152,17 +152,19 @@ public class PlayerControl : MonoBehaviour
                 {
                     if (Input.GetButtonDown("Fire3"))
                     {
+                        if (AudioController.AudioInstance) AudioController.AudioInstance.soundChargeStart(true);
                         LookAtBox();
                         pushingOut = true;
                         forceToPushBox = 0f;
                     }
-                    else if (Input.GetButton("Fire3") && !grabbingBox)
+                    else if (Input.GetButton("Fire3"))
                     {
                         if (AudioController.AudioInstance) AudioController.AudioInstance.emitter[2].Stop();
                         forceToPushBox += Time.deltaTime;
                     }
                     else if (Input.GetButtonUp("Fire3"))
                     {
+                        if (AudioController.AudioInstance) AudioController.AudioInstance.soundChargeStart(false);
                         resetMovement = 0.7f;
                         box.GetComponent<BoxControl>().PushBox(forceToPushBox);
                         pushingOut = false;
