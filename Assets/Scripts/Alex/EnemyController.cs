@@ -43,32 +43,32 @@ public class EnemyController : MonoBehaviour
 
     void Move()
     {
-        PlayerFaceState = Player.gameObject.GetComponent<PlayerControl>().FaceState;
-        e_anim.SetInteger("Behaviour", PlayerFaceState);
-        if(PlayerFaceState == 0)
-        {
-            nav.enabled = false;
-            rb.velocity = new Vector3(0, 0, 0);
-            //rb.constraints = RigidbodyConstraints.FreezeAll;
-        }
-        else if (PlayerFaceState == 1)
-        {
-            //rb.constraints = RigidbodyConstraints.None;
-            //rb.constraints = RigidbodyConstraints.FreezeRotation;
-            nav.enabled = true;
-            if (Vector3.Distance(transform.position, Player.position) > 2) { nav.SetDestination(Player.position); }
-            else
+            PlayerFaceState = Player.gameObject.GetComponent<PlayerControl>().FaceState;
+            e_anim.SetInteger("Behaviour", PlayerFaceState);
+            if(PlayerFaceState == 0)
             {
                 nav.enabled = false;
+                rb.velocity = new Vector3(0, 0, 0);
+                //rb.constraints = RigidbodyConstraints.FreezeAll;
             }
-        }
-        else
-        {
-            //rb.constraints = RigidbodyConstraints.None;
-            //rb.constraints = RigidbodyConstraints.FreezeRotation;
-            nav.enabled = true;
-            RunFrom();
-        }
+            else if (PlayerFaceState == 1)
+            {
+                //rb.constraints = RigidbodyConstraints.None;
+                //rb.constraints = RigidbodyConstraints.FreezeRotation;
+                nav.enabled = true;
+                if (Vector3.Distance(transform.position, Player.position) > 2) { nav.SetDestination(Player.position); }
+                else
+                {
+                    nav.enabled = false;
+                }
+            }
+            else
+            {
+                //rb.constraints = RigidbodyConstraints.None;
+                //rb.constraints = RigidbodyConstraints.FreezeRotation;
+                nav.enabled = true;
+                RunFrom();
+            }
     }
 
 
@@ -107,8 +107,8 @@ public class EnemyController : MonoBehaviour
     }
 
     private void OnTriggerStay(Collider other)
-    {
-        Grounded = gameObject.layer != 11 ? /*other.gameObject.layer == 9 || other.gameObject.layer == 17 || other.gameObject.layer == 8 || other.gameObject.layer == 14 || other.gameObject.layer == 15 ?*/ true : false /* : false*/;
+    {        
+        Grounded = gameObject.layer != 11 ? other.gameObject.layer == 9 ? true : false :  other.gameObject.layer == 16? false : true;
     }
 }
 

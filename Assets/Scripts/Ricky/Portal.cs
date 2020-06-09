@@ -171,7 +171,7 @@ public class Portal : MonoBehaviour
     {
         if (objectTeleporting.CompareTag("Enemy"))
         {
-            boxcopy.GetComponent<EnemyController>().nav.enabled = true;
+            //boxcopy.GetComponent<EnemyController>().nav.enabled = true;
         }
 
         passingTrough = false;
@@ -186,7 +186,7 @@ public class Portal : MonoBehaviour
         {
             try
             {
-                if (!destination.GetComponent<Portal>().passingTrough && !destination.GetComponent<Portal>().teleported)
+                if (!destination.GetComponent<Portal>().passingTrough && !destination.GetComponent<Portal>().teleported && !passingTrough && !teleported)
                 {
                     if (AudioController.AudioInstance) AudioController.AudioInstance.soundTrespassPortal(true);
                     objectTeleporting = other.gameObject;
@@ -207,7 +207,7 @@ public class Portal : MonoBehaviour
 
                     originalBoxrotation = objectTeleporting.transform.rotation;
                     auxDir = objectTeleporting.GetComponent<Rigidbody>().velocity;
-                    float FastestAxis = !ControlForceManually ? auxDir.magnitude : 1f;
+                    float FastestAxis = !ControlForceManually ? auxDir.magnitude : 1f;                    
 
                     switch (portal_face)
                     {
