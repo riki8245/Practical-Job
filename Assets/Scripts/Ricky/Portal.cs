@@ -232,7 +232,7 @@ public class Portal : MonoBehaviour
             }
             catch (MissingComponentException e)
             {
-
+                print(e);
             }
 
         }

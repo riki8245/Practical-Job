@@ -31,8 +31,16 @@ public class AnimationScript : MonoBehaviour
                 {
                     if (Input.GetButtonDown("Fire3"))
                     {
-                        bt.SetActive(true);
-                        ch_anim.SetBool("preparingPushAway", true);
+                        if (ch_anim.GetBool("preparingPushAway"))
+                        {
+                            bt.SetActive(false);
+                            ch_anim.SetBool("preparingPushAway", false);
+                        }
+                        else
+                        {
+                            bt.SetActive(true);
+                            ch_anim.SetBool("preparingPushAway", true);
+                        }
                     }
                     else if (Input.GetButtonUp("Fire3"))
                     {
