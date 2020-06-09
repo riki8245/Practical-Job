@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 2483275936250839916}
   - component: {fileID: 2483275936250839917}
   - component: {fileID: 2483275936250839914}
+  - component: {fileID: 1806521949626100349}
   m_Layer: 8
   m_Name: FinalBox
   m_TagString: Box
@@ -280,6 +281,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 2
+--- !u!208 &1806521949626100349
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2483275936250839915}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1, y: 1, z: 1}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 1, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &4555104993395011232
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,7 +417,7 @@ GameObject:
   - component: {fileID: 6183208889734086970}
   - component: {fileID: 6183208889734086973}
   m_Layer: 8
-  m_Name: GameObject
+  m_Name: SlopeTrigger
   m_TagString: BoxSlopeInteraction
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

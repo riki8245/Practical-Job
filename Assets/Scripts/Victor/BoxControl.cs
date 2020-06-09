@@ -61,7 +61,7 @@ public class BoxControl : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag.Equals("Player"))
+        if (other.tag.Equals("Player") && other.GetComponent<PlayerControl>().box == null)
         {
             other.GetComponent<PlayerControl>().box = this.gameObject;
             checkPlayerPosition = true;
@@ -71,7 +71,7 @@ public class BoxControl : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag.Equals("Player"))
+        if (other.tag.Equals("Player") && other.GetComponent<PlayerControl>().box.Equals(this.gameObject))
         {
             other.GetComponent<PlayerControl>().box = null;
             this.transform.parent = null;

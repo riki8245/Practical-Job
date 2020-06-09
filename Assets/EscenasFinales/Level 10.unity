@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 600cda93481c0443cb83e3ab6f928b52,
     type: 2}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -278,26 +278,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FinalBox
-      objectReference: {fileID: 0}
-    - target: {fileID: 2483275936250839915, guid: 0c46227b8d78b4aaab9a5fadcbe8d46a,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555104993395011232, guid: 0c46227b8d78b4aaab9a5fadcbe8d46a,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6183208889734086971, guid: 0c46227b8d78b4aaab9a5fadcbe8d46a,
-        type: 3}
-      propertyPath: m_TagString
-      value: Box
-      objectReference: {fileID: 0}
-    - target: {fileID: 6183208889734086971, guid: 0c46227b8d78b4aaab9a5fadcbe8d46a,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c46227b8d78b4aaab9a5fadcbe8d46a, type: 3}
@@ -10169,7 +10149,7 @@ PrefabInstance:
     - target: {fileID: 2673669106853718298, guid: 06b985f846e13487589158e47b0a188d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 4.17
       objectReference: {fileID: 0}
     - target: {fileID: 2673669106853718298, guid: 06b985f846e13487589158e47b0a188d,
         type: 3}
