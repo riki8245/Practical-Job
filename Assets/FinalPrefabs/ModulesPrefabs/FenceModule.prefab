@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4574004063286474347}
   - component: {fileID: 7802109348324952722}
   - component: {fileID: 135737620236714876}
+  - component: {fileID: 4039769120639264471}
   m_Layer: 18
   m_Name: FenceModule
   m_TagString: walls
@@ -94,3 +95,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.999998, y: 2.12775, z: 0.2000072}
   m_Center: {x: -0.0000025629997, y: 1.9310553, z: 1.9000002}
+--- !u!208 &4039769120639264471
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8393160570177322574}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2, y: 1.064, z: 0.1}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 1.9310001, z: 1.9000001}
+  m_TimeToStationary: 0.5
