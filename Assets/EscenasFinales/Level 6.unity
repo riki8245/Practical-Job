@@ -1009,6 +1009,21 @@ PrefabInstance:
       propertyPath: m_CollisionDetection
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4257349132885698503, guid: e607e36d8da0d2749958b50215fd8aa1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 4257349132885698503, guid: e607e36d8da0d2749958b50215fd8aa1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 4257349132885698503, guid: e607e36d8da0d2749958b50215fd8aa1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.05
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e607e36d8da0d2749958b50215fd8aa1, type: 3}
 --- !u!4 &261533469 stripped

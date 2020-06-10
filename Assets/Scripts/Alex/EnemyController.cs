@@ -108,7 +108,7 @@ public class EnemyController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {        
-        Grounded = gameObject.layer != 11 ? other.gameObject.layer == 9 || other.gameObject.layer == 17? true : false :  other.gameObject.layer == 16? false : true;
+        Grounded = gameObject.layer != 11 ? other.gameObject.layer == 9 || other.gameObject.layer == 17 || other.gameObject.layer == 20 || other.gameObject.layer == 13 || other.gameObject.layer == 16 || other.gameObject.layer == 14 || other.gameObject.layer == 15? true : false : false;
     }
 }
 

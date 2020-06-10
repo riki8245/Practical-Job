@@ -29,7 +29,7 @@ public class RestartBoxes_lvl11 : MonoBehaviour
         if (CanDeleteBox)
         {
             timerToDelete += Time.deltaTime;
-            if(timerToDelete > 3f)
+            if(timerToDelete > 5f)
             {
                 Deleting = true;
                 CanDeleteBox = false;
