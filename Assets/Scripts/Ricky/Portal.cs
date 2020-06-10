@@ -16,7 +16,7 @@ public class Portal : MonoBehaviour
     private int layerBoxes, layerPassable;
 
     //Parameters needed;
-    public GameObject BoxPrefab, EnemyPrefab, directionObject;
+    public GameObject BoxPrefab, EnemyPrefab, directionObject, particlesInEnter;
     public LayerMask LayersToCast;
 
     [HideInInspector] public string portal_face = "";
@@ -189,6 +189,8 @@ public class Portal : MonoBehaviour
                 if (!destination.GetComponent<Portal>().passingTrough && !destination.GetComponent<Portal>().teleported && !passingTrough && !teleported)
                 {
                     if (AudioController.AudioInstance) AudioController.AudioInstance.soundTrespassPortal(true);
+                    particlesInEnter.SetActive(true);
+                    Invoke("StopParticles", 0.62f);
                     objectTeleporting = other.gameObject;
                     if (other.gameObject.CompareTag("Box"))
                     {
@@ -227,7 +229,7 @@ public class Portal : MonoBehaviour
                     }
 
                     passingTrough = true;
-                    iTween.ScaleTo(other.gameObject, iTween.Hash("x", 0, "y", 0, "z", 0, "time", .25f));
+                    iTween.ScaleTo(other.gameObject, iTween.Hash("x", 0, "y", 0, "z", 0, "time", .6f));
                 }
             }
             catch (MissingComponentException e)
@@ -237,6 +239,11 @@ public class Portal : MonoBehaviour
 
         }
 
+    }
+
+    private void StopParticles()
+    {
+        particlesInEnter.SetActive(false);
     }
 
 

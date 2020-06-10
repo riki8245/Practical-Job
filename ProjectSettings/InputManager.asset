@@ -58,7 +58,7 @@ InputManager:
     descriptiveName: A XBOX [] Ps4 COGER
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: left ctrl
+    positiveButton: space
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
@@ -74,7 +74,7 @@ InputManager:
     descriptiveName: B XBOX X Ps4 CARA
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: left alt
+    positiveButton: o
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
@@ -90,7 +90,7 @@ InputManager:
     descriptiveName: X XBOX O Ps4 Lanzar
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: left shift
+    positiveButton: p
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
@@ -106,7 +106,7 @@ InputManager:
     descriptiveName: Resetear lvl
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: space
+    positiveButton: r
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000

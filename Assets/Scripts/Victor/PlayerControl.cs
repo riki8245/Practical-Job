@@ -5,7 +5,7 @@ public class PlayerControl : MonoBehaviour
 {
     private CharacterController characterController;
     private Vector3 p_input;
-    public Material neutral, scary, vulnerable, emission;
+    public Material neutral, scary, vulnerable, emission, smokeTrail;
     [ColorUsage(true, true)]
     public Color blue, red, green;
 
@@ -52,6 +52,7 @@ public class PlayerControl : MonoBehaviour
         mats[1] = neutral;
         emission.SetColor("_EmissionColor", green);
         FaceState = 0;
+        smokeTrail.SetColor("_EmissionColor", green);
         resetMovement = 0;
         Invoke("EnableUpdate", 1f);
     }
@@ -79,9 +80,9 @@ public class PlayerControl : MonoBehaviour
         {
             switch (mats[1].name.ToString())
             {
-                case "Face_neutral": mats[1] = vulnerable; emission.SetColor("_EmissionColor", blue); FaceState = 1; break;
-                case "Face_vulnerable": mats[1] = scary; emission.SetColor("_EmissionColor", red); FaceState = 2; break;
-                case "Face_scary": mats[1] = neutral; emission.SetColor("_EmissionColor", green); FaceState = 0; break;
+                case "Face_neutral": mats[1] = vulnerable; emission.SetColor("_EmissionColor", blue); smokeTrail.SetColor("_EmissionColor", blue); FaceState = 1; break;
+                case "Face_vulnerable": mats[1] = scary; emission.SetColor("_EmissionColor", red); smokeTrail.SetColor("_EmissionColor", red); break;
+                case "Face_scary": mats[1] = neutral; emission.SetColor("_EmissionColor", green); smokeTrail.SetColor("_EmissionColor", green); FaceState = 0; break;
                 default: break;
             }
             p_Head.GetComponent<SkinnedMeshRenderer>().materials = mats;
