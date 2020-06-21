@@ -14,7 +14,7 @@ public class CheckWalls : MonoBehaviour
     }
     private void Update()
     {
-        this.transform.position = new Vector3(transformC.position.x,transformC.position.y + 1.5f, transformC.position.z) + transformC.forward * 2f;
+        this.transform.position = new Vector3(transformC.position.x,transformC.position.y + .6f, transformC.position.z) + transformC.forward * 2.5f;
         this.transform.rotation = transformC.rotation;
 
     }
